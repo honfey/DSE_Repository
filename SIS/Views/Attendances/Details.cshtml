@@ -1,0 +1,58 @@
+﻿@model SIS.Models.Attendance
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Attendance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MorningIn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MorningIn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MorningOut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MorningOut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AfternoonIn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AfternoonIn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AfternoonOut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AfternoonOut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClassStudent.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClassStudent.Id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
