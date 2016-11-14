@@ -1,0 +1,62 @@
+﻿@model IEnumerable<SIS.Models.ModuleStandard>
+
+@{
+    ViewBag.Title = "EditList";
+}
+
+<h2>EditList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm("EditList", "ModuleStandards", FormMethod.Post))
+{
+
+    <table class="table">
+        <tr>
+            <th>
+                ModuleStandardId
+            </th>
+            <th>
+                CourseModuleId
+            </th>
+            <th>
+                MarkType
+            </th>
+            <th>
+                Mark
+            </th>
+        </tr>
+
+        @for (var i = 0; i < Model.Count(); i++)
+        {
+            <tr>
+                <td>
+                    @Html.Hidden("moduleStandard[" + (@i) + "].Id", Model.ElementAtOrDefault(i).Id)
+                    @Html.DisplayFor(p => Model.ElementAt(i).Id)
+                </td>
+                <td>
+                    @Html.TextBox("moduleStandard[" + (@i) + "].ClassStudentId", Model.ElementAtOrDefault(i).ClassStudent.Course_ModuleId, new { @class = "form-control" })
+                </td>
+                @*<td>
+                        @Html.TextBox("moduleStandard[" + (@i) + "].MarkTypeId", Model.ElementAtOrDefault(i).MarkTypeId, new { @class = "form-control" })
+                    </td>*@
+                <td>
+                    @Html.Hidden("moduleStandard[" + (@i) + "].MarkTypeId", Model.ElementAtOrDefault(i).MarkTypeId)
+                    @Html.DropDownListFor(m => Model.ElementAt(i).MarkTypeId, (SelectList)ViewBag.mat, new { @class = "form-control" })
+                </td>
+                <td>
+                    @Html.TextBox("moduleStandard[" + (@i) + "].Marks", Model.ElementAtOrDefault(i).Marks, new { @class = "form-control" })
+                </td>
+
+                <td>
+                    @Html.ActionLink("X", "Delete", new { id = Model.ElementAtOrDefault(i).Id }, new { @class = "btn btn-danger" })
+                </td>
+
+            </tr>
+
+        }
+
+    </table>
+    <input type="submit" value="Submit" class="btn btn-primary" />
+}

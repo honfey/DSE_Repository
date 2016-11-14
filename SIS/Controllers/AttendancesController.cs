@@ -20,7 +20,7 @@ namespace WebApplication1.Controllers
         public ActionResult MarkAttendance(Attendance att, int id)
         {
             var getClassStudentID = db.ClassStudents.Where(x => x.Course_ModuleId == id);
-            DateTime? TodayDate = DateTime.Now;
+            DateTime? TodayDate = DateTime.Now.Date;
             var list = new List<Attendance>();
 
 
@@ -29,53 +29,30 @@ namespace WebApplication1.Controllers
             {
                 int ClassId = Convert.ToInt32(item.Id);
 
-                if (db.Attendances.Any(x => x.ClassStudentId == ClassId && EntityFunctions.TruncateTime(x.MorningIn) == null && EntityFunctions.TruncateTime(x.MorningOut) == null && EntityFunctions.TruncateTime(x.AfternoonIn) == null && EntityFunctions.TruncateTime(x.AfternoonOut) == null))
+                if (db.Attendances.Any(x => x.ClassStudentId == ClassId && x.TodayDate == TodayDate))
                 {
-
-                }
-                else if (db.Attendances.Any(x => x.ClassStudentId == ClassId && (EntityFunctions.TruncateTime(x.MorningIn) == null || EntityFunctions.TruncateTime(x.MorningOut) == null || EntityFunctions.TruncateTime(x.AfternoonIn) == null || EntityFunctions.TruncateTime(x.AfternoonOut) == null)))
-                {
-                    if (db.Attendances.Any(x => x.ClassStudentId == ClassId && ((EntityFunctions.TruncateTime(x.MorningIn) != EntityFunctions.TruncateTime(TodayDate) && EntityFunctions.TruncateTime(x.MorningOut) != EntityFunctions.TruncateTime(TodayDate) && EntityFunctions.TruncateTime(x.AfternoonIn) == null && EntityFunctions.TruncateTime(x.AfternoonOut) == null) || (EntityFunctions.TruncateTime(x.MorningIn) == null && EntityFunctions.TruncateTime(x.MorningOut) == null && EntityFunctions.TruncateTime(x.AfternoonIn) != EntityFunctions.TruncateTime(TodayDate) && EntityFunctions.TruncateTime(x.AfternoonOut) != EntityFunctions.TruncateTime(TodayDate)))))
-                    {
-                        if (db.Attendances.Any(x => x.ClassStudentId == ClassId && (EntityFunctions.TruncateTime(x.MorningIn) == EntityFunctions.TruncateTime(TodayDate) || EntityFunctions.TruncateTime(x.MorningOut) == EntityFunctions.TruncateTime(TodayDate) || EntityFunctions.TruncateTime(x.AfternoonIn) == EntityFunctions.TruncateTime(TodayDate) || EntityFunctions.TruncateTime(x.AfternoonOut) == EntityFunctions.TruncateTime(TodayDate))))
-                        {
-
-                        }
-                        else
-                        {
-                            att.ClassStudentId = ClassId;
-                            db.Attendances.Add(att);
-                            db.SaveChanges();
-                        }
-
-                    }
-                    else
-                    {
-
-                    }
-                }
-                else if (db.Attendances.Any(x => x.ClassStudentId == ClassId && (EntityFunctions.TruncateTime(x.MorningIn) == EntityFunctions.TruncateTime(TodayDate) && EntityFunctions.TruncateTime(x.MorningOut) == EntityFunctions.TruncateTime(TodayDate) && EntityFunctions.TruncateTime(x.AfternoonIn) == EntityFunctions.TruncateTime(TodayDate) && EntityFunctions.TruncateTime(x.AfternoonOut) == EntityFunctions.TruncateTime(TodayDate))))
-                {
-
-                }
-                else if (db.Attendances.Any(x => x.ClassStudentId == ClassId && (EntityFunctions.TruncateTime(x.MorningIn) != EntityFunctions.TruncateTime(TodayDate) && EntityFunctions.TruncateTime(x.MorningOut) != EntityFunctions.TruncateTime(TodayDate) && EntityFunctions.TruncateTime(x.AfternoonIn) != EntityFunctions.TruncateTime(TodayDate) && EntityFunctions.TruncateTime(x.AfternoonOut) != EntityFunctions.TruncateTime(TodayDate))))
-                {
-                    att.ClassStudentId = ClassId;
-                    db.Attendances.Add(att);
-                    db.SaveChanges();
+                    
                 }
                 else
                 {
                     att.ClassStudentId = ClassId;
+                    att.TodayDate = DateTime.Now.Date;
                     db.Attendances.Add(att);
                     db.SaveChanges();
+                    
                 }
-                var TodayAttendance = db.Attendances.Where(x => x.ClassStudentId == ClassId && ((EntityFunctions.TruncateTime(x.MorningIn) == EntityFunctions.TruncateTime(TodayDate) || EntityFunctions.TruncateTime(x.MorningIn) == null) && (EntityFunctions.TruncateTime(x.MorningOut) == EntityFunctions.TruncateTime(TodayDate) || EntityFunctions.TruncateTime(x.MorningOut) == null) && (EntityFunctions.TruncateTime(x.AfternoonIn) == EntityFunctions.TruncateTime(TodayDate) || EntityFunctions.TruncateTime(x.AfternoonIn) == null) && (EntityFunctions.TruncateTime(x.AfternoonOut) == EntityFunctions.TruncateTime(TodayDate) || EntityFunctions.TruncateTime(x.AfternoonOut) == null))).ToList();
 
-                list.AddRange(TodayAttendance);
+
             }
 
+            foreach (var items in getClassStudentID.ToList())
+            {
+                int ClassIDs = Convert.ToInt32(items.Id);
+                
+                var TodayAttendance = db.Attendances.Where(x => x.ClassStudentId == ClassIDs && x.TodayDate == TodayDate);
+                list.AddRange(TodayAttendance);
 
+            }
             return View(list);
 
         }
@@ -99,11 +76,15 @@ namespace WebApplication1.Controllers
         // GET: Attendances
         public ActionResult CheckAttendance(int id)
         {
-            var attendances = db.Attendances.Include(a => a.ClassStudent);
+            var haha = db.Attendances.OrderBy(x => x.TodayDate).Select(x => x.TodayDate).Distinct().ToList();
+            ViewData["DateList"] = haha;
+
             if (id > 0)
             {
 
                 var resultStudentID = db.Attendances.OrderBy(x => x.ClassStudent.Student.Name).Where(a => a.ClassStudent.Course_ModuleId == id);
+
+                
 
                 return View(resultStudentID);
             }
@@ -115,18 +96,64 @@ namespace WebApplication1.Controllers
 
         }
 
-        public ActionResult ClassAvailable()
+        public ActionResult ClassAvailable(int? Search)
         {
+            //ViewBag.Status = new SelectList(db.Course_Module, "Id", "Status").Distinct();
+            //ViewBag.TrueFalse = (from r in db.Course_Module
+            //                select r.Status != null).Distinct().ToList();
             var course_Module = db.Course_Module.Include(c => c.Course).Include(c => c.Module).Include(c => c.Trainer);
             return View(course_Module.ToList());
+
+            var cm = db.Course_Module;
+
+            if (Search < 0)
+            {
+                return View(new List<Course_Module>());
+            }
+            else
+            {
+                var resultName = cm.Where(x => Convert.ToInt32(x.Status) == Search);
+                return View(resultName);
+            }
+
+
+
+
+        }
+
+
+
+        public ActionResult CheckChoise()
+        {
+            var Example = db.Course_Module;
+            return View(Example);
+        }
+
+        public ActionResult CheckIndividual(int id)
+        {
+            var classStudent = db.ClassStudents.Where(c => c.Course_ModuleId == id);
+
+            return View(classStudent);
+        }
+
+        public ActionResult CheckIndividualAttendance(int id)
+        {
+            DateTime TodayDate = DateTime.Now;
+            //var TodayAttendance = db.Attendances.Where(x => x.ClassStudentId == id && ((EntityFunctions.TruncateTime(x.MorningIn) != EntityFunctions.TruncateTime(TodayDate) || EntityFunctions.TruncateTime(x.MorningIn) != null) && (EntityFunctions.TruncateTime(x.MorningOut) != EntityFunctions.TruncateTime(TodayDate) || EntityFunctions.TruncateTime(x.MorningOut) != null) && (EntityFunctions.TruncateTime(x.AfternoonIn) != EntityFunctions.TruncateTime(TodayDate) || EntityFunctions.TruncateTime(x.AfternoonIn) != null) && (EntityFunctions.TruncateTime(x.AfternoonOut) != EntityFunctions.TruncateTime(TodayDate) || EntityFunctions.TruncateTime(x.AfternoonOut) != null))).ToList();
+
+            var attendance = db.Attendances.Where(a => a.ClassStudentId == id && (a.MorningIn != null || a.MorningOut != null || a.AfternoonIn != null || a.AfternoonOut != null));
+            return View(attendance);
         }
 
 
 
 
 
-        //    return View(attendances.ToList());
-        //}
+
+
+
+
+
 
         // GET: Attendances/Details/5
         public ActionResult Details(int? id)

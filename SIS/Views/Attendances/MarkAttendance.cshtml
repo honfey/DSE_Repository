@@ -24,15 +24,27 @@
 
     function CheckMIN()
     {
+        //var x = document.getElementsByClassName("MorningInInput");
+
+        //if (document.getElementById("MI").checked) {
+        //    x[0].Value = "9:30"
+        //}
+        //else
+        //{
+        //    x[0].Value = ""
+        //}
+
+        var checkBoxMI = $('#MI');
         $(document).ready(function () {
-            var checkBoxMI = $('#MI');
             $('input').on('click', function () {
                 if (checkBoxMI.is(':checked')) {
-                    $(".MorningInInput").val("09:30");
+                    $(".MorningInInput").attr('value', '9:30');
                 }
                 else {
-                    $(".MorningInInput").val("");
+                    $(".MorningInInput").attr('value', '');
                 }
+
+
 
             });
         });
@@ -44,10 +56,10 @@
             var checkBoxMI = $('#MO');
             $('input').on('click', function () {
                 if (checkBoxMI.is(':checked')) {
-                    $(".MorningOutInput").val("12:15");
+                    $(".MorningOutInput").attr('value', '12:15');
                 }
                 else {
-                    $(".MorningOutInput").val("");
+                    $(".MorningOutInput").attr('value', '');
                 }
 
             });
@@ -55,14 +67,14 @@
     }
 
     function CheckAIN() {
+        var checkBoxMI = $('#AI');
         $(document).ready(function () {
-            var checkBoxMI = $('#AI');
             $('input').on('click', function () {
                 if (checkBoxMI.is(':checked')) {
-                    $(".AfternoonInInput").val("13:15");
+                    $(".AfternoonInInput").attr('value', '13:15');
                 }
                 else {
-                    $(".AfternoonInInput").val("");
+                    $(".AfternoonInInput").attr('value', '');
                 }
 
             });
@@ -70,14 +82,14 @@
     }
 
     function CheckAOUT() {
+        var checkBoxMI = $('#AO');
         $(document).ready(function () {
-            var checkBoxMI = $('#AO');
             $('input').on('click', function () {
                 if (checkBoxMI.is(':checked')) {
-                    $(".AfternoonOutInput").val("16:00");
+                    $(".AfternoonOutInput").attr('value', '16:00');
                 }
                 else {
-                    $(".AfternoonOutInput").val("");
+                    $(".AfternoonOutInput").attr('value', '');
                 }
 
             });
@@ -95,9 +107,9 @@
 {
     <table class="table">
         <tr>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.ClassStudent.Id)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.ClassStudent.StudentId)
 
@@ -129,9 +141,9 @@
                         @Html.DisplayFor(modelItem => item.ClassStudent.ClassStudentId)
 
                     </td>*@
-                <td>
+                @*<td>
                     @Html.DisplayFor(x => x.ElementAt(i).ClassStudentId)
-                </td>
+                </td>*@
 
                 <td>
                     @Html.DisplayFor(x => x.ElementAt(i).ClassStudent.StudentId)
@@ -141,15 +153,30 @@
                     @Html.DisplayFor(x => x.ElementAt(i).ClassStudent.Student.Name)
                 </td>
 
-                <td>
-                    @Html.Hidden("att[" + (@i) + "].Id", Model.ElementAtOrDefault(i).Id)
+                <td>                     
+                            @Html.Hidden("att[" + (@i) + "].Id", Model.ElementAtOrDefault(i).Id)
+                            @Html.Hidden("att[" + (@i) + "].ClassStudentID", Model.ElementAtOrDefault(i).ClassStudentId)
+                            @Html.Hidden("att[" + (@i) + "].TodayDate", Model.ElementAtOrDefault(i).TodayDate)
+                            @Html.Hidden("att[" + (@i) + "].Status", Model.ElementAtOrDefault(i).Status )
 
-                    @Html.Hidden("att[" + (@i) + "].ClassStudentID", Model.ElementAtOrDefault(i).ClassStudentId)
-
-
-                    @Html.TextBox("att[" + (@i) + "].MorningIn", Model.ElementAtOrDefault(i).MorningIn, new { @class = "MorningInInput" })
+                            @Html.TextBox("att[" + (@i) + "].MorningIn", Model.ElementAtOrDefault(i).MorningIn, new { @class = "MorningInInput" })                       
                 </td>
+
                 <td>
+                            @Html.TextBox("att[" + (@i) + "].MorningOut", Model.ElementAtOrDefault(i).MorningOut, new { @class = "MorningOutInput" })
+                </td>
+
+
+                <td>
+                            @Html.TextBox("att[" + (@i) + "].AfternoonIn", Model.ElementAtOrDefault(i).AfternoonIn, new { @class = "AfternoonInInput" })
+                </td>
+
+                <td>
+                            @Html.TextBox("att[" + (@i) + "].AfternoonOut", Model.ElementAtOrDefault(i).AfternoonOut, new { @class = "AfternoonOutInput" })
+                </td>
+
+
+                @*<td>
                     @Html.TextBox("att[" + (@i) + "].MorningOut", Model.ElementAtOrDefault(i).MorningOut, new { @class = "MorningOutInput" })
                 </td>
                 <td>
@@ -157,7 +184,7 @@
                 </td>
                 <td>
                     @Html.TextBox("att[" + (@i) + "].AfternoonOut", Model.ElementAtOrDefault(i).AfternoonOut, new { @class = "AfternoonOutInput" })
-                </td>
+                </td>*@
 
 
 

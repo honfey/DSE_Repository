@@ -20,8 +20,7 @@ namespace SIS.Models
             this.Students = new HashSet<Student>();
         }
     
-        public int ID { get; set; }
-        public Nullable<int> StudentId { get; set; }
+        public int Id { get; set; }
         public Nullable<int> Year { get; set; }
         public Nullable<int> SubjectId { get; set; }
     

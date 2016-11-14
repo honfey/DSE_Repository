@@ -32,8 +32,9 @@ namespace SIS.Models
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<Course_Module> Course_Module { get; set; }
         public virtual DbSet<CourseWork> CourseWorks { get; set; }
-        public virtual DbSet<Family> Families { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Intake> Intakes { get; set; }
+        public virtual DbSet<MarkType> MarkTypes { get; set; }
         public virtual DbSet<Module> Modules { get; set; }
         public virtual DbSet<ModuleStandard> ModuleStandards { get; set; }
         public virtual DbSet<Month> Months { get; set; }
@@ -43,6 +44,7 @@ namespace SIS.Models
         public virtual DbSet<SPMResult> SPMResults { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
+        public virtual DbSet<TestType> TestTypes { get; set; }
         public virtual DbSet<Trainer> Trainers { get; set; }
         public virtual DbSet<Year> Years { get; set; }
     }

@@ -19,6 +19,7 @@ namespace SIS.Models
         {
             this.Attendances = new HashSet<Attendance>();
             this.CourseWorks = new HashSet<CourseWork>();
+            this.ModuleStandards = new HashSet<ModuleStandard>();
         }
     
         public int Id { get; set; }
@@ -31,5 +32,7 @@ namespace SIS.Models
         public virtual Student Student { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CourseWork> CourseWorks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ModuleStandard> ModuleStandards { get; set; }
     }
 }

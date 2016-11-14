@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\EddieLok\Google Drive\SBIT\DSE\DSE (Joshua)\Final Project\Final\DSE_Repository\SIS\Models\SIS.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\goget\OneDrive\Documents\Visual Studio 2015\MvcProjects\DSE_Repository\SIS\Models\SIS.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

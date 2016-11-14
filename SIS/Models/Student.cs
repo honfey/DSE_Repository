@@ -19,12 +19,12 @@ namespace SIS.Models
         {
             this.ClassStudents = new HashSet<ClassStudent>();
             this.Families = new HashSet<Family>();
+            this.Package_Course = new HashSet<Package_Course>();
         }
     
         public int ID { get; set; }
         public Nullable<int> StudentId { get; set; }
         public Nullable<int> AddressId { get; set; }
-        public Nullable<int> PackageId { get; set; }
         public Nullable<int> IntakeId { get; set; }
         public Nullable<int> SPMResultId { get; set; }
         public bool insurence { get; set; }
@@ -46,7 +46,8 @@ namespace SIS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Family> Families { get; set; }
         public virtual Intake Intake { get; set; }
-        public virtual Package_Course Package_Course { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Package_Course> Package_Course { get; set; }
         public virtual SPMResult SPMResult { get; set; }
     }
 }

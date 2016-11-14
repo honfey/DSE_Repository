@@ -1,0 +1,26 @@
+﻿@model IEnumerable<SIS.Models.ClassStudent>
+
+@{
+    ViewBag.Title = "Check Individual Attendance";
+}
+
+<h2>Check Individual Attendance</h2>
+
+<br>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Student.Name)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.Student.Name, "CheckIndividualAttendance", new { id = item.Id })            
+        </td>
+    </tr>
+}
+
+</table>

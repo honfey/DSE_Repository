@@ -14,21 +14,15 @@ namespace SIS.Models
     
     public partial class Address
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Address()
-        {
-            this.Students = new HashSet<Student>();
-        }
-    
-        public int AddressId { get; set; }
+        public int Id { get; set; }
+        public Nullable<int> StudentId { get; set; }
         public string StreetLine1 { get; set; }
-        public string SteetLine2 { get; set; }
-        public int PostCode { get; set; }
+        public string StreetLine2 { get; set; }
+        public string PostCode { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string Country { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Student> Students { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

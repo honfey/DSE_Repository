@@ -14,13 +14,7 @@ namespace SIS.Models
     
     public partial class Package_Course
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Package_Course()
-        {
-            this.Students = new HashSet<Student>();
-        }
-    
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string CourseId { get; set; }
         public Nullable<int> StudentId { get; set; }
         public Nullable<decimal> TotalPrice { get; set; }
@@ -30,7 +24,6 @@ namespace SIS.Models
         public Nullable<decimal> MonthlyPayment { get; set; }
     
         public virtual Course Course { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Student> Students { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

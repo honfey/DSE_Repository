@@ -1,0 +1,14 @@
+﻿
+    <div class="">
+        
+    @Html.DropDownList("Gender", new List<SelectListItem>
+
+                    {
+                        new SelectListItem{ Text="--Select--", Value = "" },
+                        new SelectListItem{ Text="True", Value = "1" },
+                        new SelectListItem{ Text="False", Value = "0" },
+                    }, htmlAttributes: new { @class = "form-control" })
+    
+        <input type="submit" value="Search" class="btn btn-default" />
+    </div>
+
