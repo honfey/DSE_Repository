@@ -33,12 +33,10 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClassStudentId" Type="int" />
-          <Property Name="MorningIn" Type="time" Precision="7" />
-          <Property Name="MorningOut" Type="time" Precision="7" />
-          <Property Name="AfternoonIn" Type="time" Precision="7" />
-          <Property Name="AfternoonOut" Type="time" Precision="7" />
-          <Property Name="TodayDate" Type="date" />
-          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="MorningIn" Type="datetime" />
+          <Property Name="MorningOut" Type="datetime" />
+          <Property Name="AfternoonIn" Type="datetime" />
+          <Property Name="AfternoonOut" Type="datetime" />
         </EntityType>
         <EntityType Name="ClassStudent">
           <Key>
@@ -151,11 +149,11 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CourseId" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="StudentId" Type="int" />
-          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="FirstPay" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FirstPay" Type="decimal" Precision="18" Scale="2" />
           <Property Name="MonthlyInterest" Type="int" />
           <Property Name="InterestRate" Type="int" />
-          <Property Name="MonthlyPayment" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="MonthlyPayment" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="ReportCard">
           <Key>
@@ -197,7 +195,6 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StudentId" Type="int" />
           <Property Name="AddressId" Type="int" />
-          <Property Name="PackageId" Type="int" />
           <Property Name="IntakeId" Type="int" />
           <Property Name="SPMResultId" Type="int" />
           <Property Name="insurence" Type="bit" Nullable="false" />
@@ -431,6 +428,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Package_Course_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Package_Course" Type="Self.Package_Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Package_Course">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Sibling_Family">
           <End Role="Family" Type="Self.Family" Multiplicity="1" />
           <End Role="Sibling" Type="Self.Sibling" Multiplicity="*" />
@@ -476,18 +485,6 @@
             </Principal>
             <Dependent Role="Student">
               <PropertyRef Name="IntakeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Student_Package_Course">
-          <End Role="Package_Course" Type="Self.Package_Course" Multiplicity="0..1" />
-          <End Role="Student" Type="Self.Student" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Package_Course">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Student">
-              <PropertyRef Name="PackageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -581,6 +578,10 @@
             <End Role="Course" EntitySet="Course" />
             <End Role="Package_Course" EntitySet="Package_Course" />
           </AssociationSet>
+          <AssociationSet Name="FK_Package_Course_Student" Association="Self.FK_Package_Course_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Package_Course" EntitySet="Package_Course" />
+          </AssociationSet>
           <AssociationSet Name="FK_Sibling_Family" Association="Self.FK_Sibling_Family">
             <End Role="Family" EntitySet="Family" />
             <End Role="Sibling" EntitySet="Sibling" />
@@ -595,10 +596,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Student_Intake" Association="Self.FK_Student_Intake">
             <End Role="Intake" EntitySet="Intake" />
-            <End Role="Student" EntitySet="Student" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Student_Package_Course" Association="Self.FK_Student_Package_Course">
-            <End Role="Package_Course" EntitySet="Package_Course" />
             <End Role="Student" EntitySet="Student" />
           </AssociationSet>
           <AssociationSet Name="FK_Student_SPMResult" Association="Self.FK_Student_SPMResult">
@@ -700,9 +697,9 @@
             <End Role="Intake" EntitySet="Intakes" />
             <End Role="Student" EntitySet="Students" />
           </AssociationSet>
-          <AssociationSet Name="FK_Student_Package_Course" Association="SISModel.FK_Student_Package_Course">
-            <End Role="Package_Course" EntitySet="Package_Course" />
+          <AssociationSet Name="FK_Package_Course_Student" Association="SISModel.FK_Package_Course_Student">
             <End Role="Student" EntitySet="Students" />
+            <End Role="Package_Course" EntitySet="Package_Course" />
           </AssociationSet>
           <AssociationSet Name="FK_SPMResult_Subject" Association="SISModel.FK_SPMResult_Subject">
             <End Role="Subject" EntitySet="Subjects" />
@@ -742,12 +739,10 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ClassStudentId" Type="Int32" />
-          <Property Name="MorningIn" Type="Time" Precision="7" />
-          <Property Name="MorningOut" Type="Time" Precision="7" />
-          <Property Name="AfternoonIn" Type="Time" Precision="7" />
-          <Property Name="AfternoonOut" Type="Time" Precision="7" />
-          <Property Name="TodayDate" Type="DateTime" Precision="0" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MorningIn" Type="DateTime" Precision="3" />
+          <Property Name="MorningOut" Type="DateTime" Precision="3" />
+          <Property Name="AfternoonIn" Type="DateTime" Precision="3" />
+          <Property Name="AfternoonOut" Type="DateTime" Precision="3" />
           <NavigationProperty Name="ClassStudent" Relationship="SISModel.FK_Attendance_ClassStudent" FromRole="Attendance" ToRole="ClassStudent" />
         </EntityType>
         <EntityType Name="ClassStudent">
@@ -884,13 +879,13 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CourseId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="StudentId" Type="Int32" />
-          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="FirstPay" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FirstPay" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="MonthlyInterest" Type="Int32" />
           <Property Name="InterestRate" Type="Int32" />
-          <Property Name="MonthlyPayment" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MonthlyPayment" Type="Decimal" Precision="18" Scale="2" />
           <NavigationProperty Name="Course" Relationship="SISModel.FK_Package_Course_Course" FromRole="Package_Course" ToRole="Course" />
-          <NavigationProperty Name="Students" Relationship="SISModel.FK_Student_Package_Course" FromRole="Package_Course" ToRole="Student" />
+          <NavigationProperty Name="Student" Relationship="SISModel.FK_Package_Course_Student" FromRole="Package_Course" ToRole="Student" />
         </EntityType>
         <EntityType Name="ReportCard">
           <Key>
@@ -935,7 +930,6 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StudentId" Type="Int32" />
           <Property Name="AddressId" Type="Int32" />
-          <Property Name="PackageId" Type="Int32" />
           <Property Name="IntakeId" Type="Int32" />
           <Property Name="SPMResultId" Type="Int32" />
           <Property Name="insurence" Type="Boolean" Nullable="false" />
@@ -954,7 +948,7 @@
           <NavigationProperty Name="ClassStudents" Relationship="SISModel.FK_ClassStudent_Student" FromRole="Student" ToRole="ClassStudent" />
           <NavigationProperty Name="Families" Relationship="SISModel.FK_Family_Student" FromRole="Student" ToRole="Family" />
           <NavigationProperty Name="Intake" Relationship="SISModel.FK_Student_Intake" FromRole="Student" ToRole="Intake" />
-          <NavigationProperty Name="Package_Course" Relationship="SISModel.FK_Student_Package_Course" FromRole="Student" ToRole="Package_Course" />
+          <NavigationProperty Name="Package_Course" Relationship="SISModel.FK_Package_Course_Student" FromRole="Student" ToRole="Package_Course" />
           <NavigationProperty Name="SPMResult" Relationship="SISModel.FK_Student_SPMResult" FromRole="Student" ToRole="SPMResult" />
         </EntityType>
         <EntityType Name="Subject">
@@ -1215,15 +1209,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Student_Package_Course">
-          <End Type="SISModel.Package_Course" Role="Package_Course" Multiplicity="0..1" />
-          <End Type="SISModel.Student" Role="Student" Multiplicity="*" />
+        <Association Name="FK_Package_Course_Student">
+          <End Type="SISModel.Student" Role="Student" Multiplicity="0..1" />
+          <End Type="SISModel.Package_Course" Role="Package_Course" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Package_Course">
+            <Principal Role="Student">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Student">
-              <PropertyRef Name="PackageId" />
+            <Dependent Role="Package_Course">
+              <PropertyRef Name="StudentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1284,8 +1278,6 @@
           <EntitySetMapping Name="Attendances">
             <EntityTypeMapping TypeName="SISModel.Attendance">
               <MappingFragment StoreEntitySet="Attendance">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="TodayDate" ColumnName="TodayDate" />
                 <ScalarProperty Name="AfternoonOut" ColumnName="AfternoonOut" />
                 <ScalarProperty Name="AfternoonIn" ColumnName="AfternoonIn" />
                 <ScalarProperty Name="MorningOut" ColumnName="MorningOut" />
@@ -1475,7 +1467,6 @@
                 <ScalarProperty Name="insurence" ColumnName="insurence" />
                 <ScalarProperty Name="SPMResultId" ColumnName="SPMResultId" />
                 <ScalarProperty Name="IntakeId" ColumnName="IntakeId" />
-                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
                 <ScalarProperty Name="AddressId" ColumnName="AddressId" />
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
