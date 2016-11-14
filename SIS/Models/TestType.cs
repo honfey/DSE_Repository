@@ -12,26 +12,18 @@ namespace SIS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Course
+    public partial class TestType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Course()
+        public TestType()
         {
-            this.Course_Module = new HashSet<Course_Module>();
-            this.Intakes = new HashSet<Intake>();
-            this.Package_Course = new HashSet<Package_Course>();
+            this.CourseWorks = new HashSet<CourseWork>();
         }
     
         public int Id { get; set; }
-        public string CourseCode { get; set; }
-        public Nullable<int> PackageId { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Course_Module> Course_Module { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Intake> Intakes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Package_Course> Package_Course { get; set; }
+        public virtual ICollection<CourseWork> CourseWorks { get; set; }
     }
 }

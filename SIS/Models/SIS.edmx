@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Package">
           <Key>
             <PropertyRef Name="PackageId" />
@@ -120,7 +120,6 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ModuleCode" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="TrainerId" Type="int" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Day" Type="int" />
         </EntityType>
@@ -140,7 +139,7 @@
           <Key>
             <PropertyRef Name="MonthId" />
           </Key>
-          <Property Name="MonthId" Type="int" Nullable="false" />
+          <Property Name="MonthId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Month" Type="varchar" MaxLength="4" />
         </EntityType>
         <EntityType Name="Package_Course">
@@ -150,11 +149,11 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CourseId" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="StudentId" Type="int" />
-          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="FirstPay" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FirstPay" Type="decimal" Precision="18" Scale="2" />
           <Property Name="MonthlyInterest" Type="int" />
           <Property Name="InterestRate" Type="int" />
-          <Property Name="MonthlyPayment" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="MonthlyPayment" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="ReportCard">
           <Key>
@@ -196,7 +195,6 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StudentId" Type="int" />
           <Property Name="AddressId" Type="int" />
-          <Property Name="PackageId" Type="int" />
           <Property Name="IntakeId" Type="int" />
           <Property Name="SPMResultId" Type="int" />
           <Property Name="insurence" Type="bit" Nullable="false" />
@@ -228,11 +226,18 @@
           <Property Name="Bio" Type="nchar" MaxLength="10" />
           <Property Name="Art" Type="nchar" MaxLength="10" />
         </EntityType>
-        <EntityType Name="Trainer">
+        <EntityType Name="TestType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Trainer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IC" Type="bigint" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="FirstName" Type="varchar" MaxLength="50" />
@@ -252,7 +257,7 @@
           <Key>
             <PropertyRef Name="YearId" />
           </Key>
-          <Property Name="YearId" Type="int" Nullable="false" />
+          <Property Name="YearId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Year" Type="varchar" MaxLength="4" />
         </EntityType>
         <Association Name="FK_Attendance_ClassStudent">
@@ -351,6 +356,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CourseWork_TestType">
+          <End Role="TestType" Type="Self.TestType" Multiplicity="0..1" />
+          <End Role="CourseWork" Type="Self.CourseWork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseWork">
+              <PropertyRef Name="TestType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Family_Student">
           <End Role="Student" Type="Self.Student" Multiplicity="1" />
           <End Role="Family" Type="Self.Family" Multiplicity="*" />
@@ -360,6 +377,18 @@
             </Principal>
             <Dependent Role="Family">
               <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Intake_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+          <End Role="Intake" Type="Self.Intake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseCode" />
+            </Principal>
+            <Dependent Role="Intake">
+              <PropertyRef Name="CourseCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -396,6 +425,18 @@
             </Principal>
             <Dependent Role="Package_Course">
               <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Package_Course_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Package_Course" Type="Self.Package_Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Package_Course">
+              <PropertyRef Name="StudentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -444,18 +485,6 @@
             </Principal>
             <Dependent Role="Student">
               <PropertyRef Name="IntakeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Student_Package_Course">
-          <End Role="Package_Course" Type="Self.Package_Course" Multiplicity="0..1" />
-          <End Role="Student" Type="Self.Student" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Package_Course">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Student">
-              <PropertyRef Name="PackageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -490,6 +519,7 @@
           <EntitySet Name="SPMResult" EntityType="Self.SPMResult" Schema="Training" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="Training" store:Type="Tables" />
           <EntitySet Name="Subject" EntityType="Self.Subject" Schema="Training" store:Type="Tables" />
+          <EntitySet Name="TestType" EntityType="Self.TestType" Schema="Training" store:Type="Tables" />
           <EntitySet Name="Trainer" EntityType="Self.Trainer" Schema="Training" store:Type="Tables" />
           <EntitySet Name="Year" EntityType="Self.Year" Schema="Training" store:Type="Tables" />
           <AssociationSet Name="FK_Attendance_ClassStudent" Association="Self.FK_Attendance_ClassStudent">
@@ -524,9 +554,17 @@
             <End Role="ClassStudent" EntitySet="ClassStudent" />
             <End Role="CourseWork" EntitySet="CourseWork" />
           </AssociationSet>
+          <AssociationSet Name="FK_CourseWork_TestType" Association="Self.FK_CourseWork_TestType">
+            <End Role="TestType" EntitySet="TestType" />
+            <End Role="CourseWork" EntitySet="CourseWork" />
+          </AssociationSet>
           <AssociationSet Name="FK_Family_Student" Association="Self.FK_Family_Student">
             <End Role="Student" EntitySet="Student" />
             <End Role="Family" EntitySet="Family" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Intake_Course" Association="Self.FK_Intake_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Intake" EntitySet="Intake" />
           </AssociationSet>
           <AssociationSet Name="FK_Intake_Month" Association="Self.FK_Intake_Month">
             <End Role="Month" EntitySet="Month" />
@@ -538,6 +576,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Package_Course_Course" Association="Self.FK_Package_Course_Course">
             <End Role="Course" EntitySet="Course" />
+            <End Role="Package_Course" EntitySet="Package_Course" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Package_Course_Student" Association="Self.FK_Package_Course_Student">
+            <End Role="Student" EntitySet="Student" />
             <End Role="Package_Course" EntitySet="Package_Course" />
           </AssociationSet>
           <AssociationSet Name="FK_Sibling_Family" Association="Self.FK_Sibling_Family">
@@ -556,20 +598,118 @@
             <End Role="Intake" EntitySet="Intake" />
             <End Role="Student" EntitySet="Student" />
           </AssociationSet>
-          <AssociationSet Name="FK_Student_Package_Course" Association="Self.FK_Student_Package_Course">
-            <End Role="Package_Course" EntitySet="Package_Course" />
-            <End Role="Student" EntitySet="Student" />
-          </AssociationSet>
           <AssociationSet Name="FK_Student_SPMResult" Association="Self.FK_Student_SPMResult">
             <End Role="SPMResult" EntitySet="SPMResult" />
             <End Role="Student" EntitySet="Student" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SISModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SISEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Packages" EntityType="SISModel.Package" />
+          <EntitySet Name="Addresses" EntityType="SISModel.Address" />
+          <EntitySet Name="Attendances" EntityType="SISModel.Attendance" />
+          <EntitySet Name="ClassStudents" EntityType="SISModel.ClassStudent" />
+          <EntitySet Name="Courses" EntityType="SISModel.Course" />
+          <EntitySet Name="Course_Module" EntityType="SISModel.Course_Module" />
+          <EntitySet Name="CourseWorks" EntityType="SISModel.CourseWork" />
+          <EntitySet Name="Families" EntityType="SISModel.Family" />
+          <EntitySet Name="Intakes" EntityType="SISModel.Intake" />
+          <EntitySet Name="Modules" EntityType="SISModel.Module" />
+          <EntitySet Name="ModuleStandards" EntityType="SISModel.ModuleStandard" />
+          <EntitySet Name="Months" EntityType="SISModel.Month" />
+          <EntitySet Name="Package_Course" EntityType="SISModel.Package_Course" />
+          <EntitySet Name="ReportCards" EntityType="SISModel.ReportCard" />
+          <EntitySet Name="Siblings" EntityType="SISModel.Sibling" />
+          <EntitySet Name="SPMResults" EntityType="SISModel.SPMResult" />
+          <EntitySet Name="Students" EntityType="SISModel.Student" />
+          <EntitySet Name="Subjects" EntityType="SISModel.Subject" />
+          <EntitySet Name="TestTypes" EntityType="SISModel.TestType" />
+          <EntitySet Name="Trainers" EntityType="SISModel.Trainer" />
+          <EntitySet Name="Years" EntityType="SISModel.Year" />
+          <AssociationSet Name="FK_Student_Address" Association="SISModel.FK_Student_Address">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attendance_ClassStudent" Association="SISModel.FK_Attendance_ClassStudent">
+            <End Role="ClassStudent" EntitySet="ClassStudents" />
+            <End Role="Attendance" EntitySet="Attendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassStudent_Course_Module1" Association="SISModel.FK_ClassStudent_Course_Module1">
+            <End Role="Course_Module" EntitySet="Course_Module" />
+            <End Role="ClassStudent" EntitySet="ClassStudents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClassStudent_Student" Association="SISModel.FK_ClassStudent_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="ClassStudent" EntitySet="ClassStudents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseWork_ClassStudent" Association="SISModel.FK_CourseWork_ClassStudent">
+            <End Role="ClassStudent" EntitySet="ClassStudents" />
+            <End Role="CourseWork" EntitySet="CourseWorks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_Module_Course" Association="SISModel.FK_Course_Module_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Course_Module" EntitySet="Course_Module" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Intake_Course" Association="SISModel.FK_Intake_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Intake" EntitySet="Intakes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Package_Course_Course" Association="SISModel.FK_Package_Course_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Package_Course" EntitySet="Package_Course" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_Module_Module1" Association="SISModel.FK_Course_Module_Module1">
+            <End Role="Module" EntitySet="Modules" />
+            <End Role="Course_Module" EntitySet="Course_Module" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_Module_ModuleStandard" Association="SISModel.FK_Course_Module_ModuleStandard">
+            <End Role="ModuleStandard" EntitySet="ModuleStandards" />
+            <End Role="Course_Module" EntitySet="Course_Module" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_Module_Trainer" Association="SISModel.FK_Course_Module_Trainer">
+            <End Role="Trainer" EntitySet="Trainers" />
+            <End Role="Course_Module" EntitySet="Course_Module" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseWork_TestType" Association="SISModel.FK_CourseWork_TestType">
+            <End Role="TestType" EntitySet="TestTypes" />
+            <End Role="CourseWork" EntitySet="CourseWorks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Family_Student" Association="SISModel.FK_Family_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Family" EntitySet="Families" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sibling_Family" Association="SISModel.FK_Sibling_Family">
+            <End Role="Family" EntitySet="Families" />
+            <End Role="Sibling" EntitySet="Siblings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Intake_Month" Association="SISModel.FK_Intake_Month">
+            <End Role="Month" EntitySet="Months" />
+            <End Role="Intake" EntitySet="Intakes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Intake_Year" Association="SISModel.FK_Intake_Year">
+            <End Role="Year" EntitySet="Years" />
+            <End Role="Intake" EntitySet="Intakes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Intake" Association="SISModel.FK_Student_Intake">
+            <End Role="Intake" EntitySet="Intakes" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Package_Course_Student" Association="SISModel.FK_Package_Course_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Package_Course" EntitySet="Package_Course" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SPMResult_Subject" Association="SISModel.FK_SPMResult_Subject">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="SPMResult" EntitySet="SPMResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_SPMResult" Association="SISModel.FK_Student_SPMResult">
+            <End Role="SPMResult" EntitySet="SPMResults" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Package">
           <Key>
             <PropertyRef Name="PackageId" />
@@ -585,13 +725,13 @@
             <PropertyRef Name="AddressId" />
           </Key>
           <Property Name="AddressId" Type="Int32" Nullable="false" />
-          <Property Name="StreetLine1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SteetLine2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StreetLine1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SteetLine2" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PostCode" Type="Int32" Nullable="false" />
-          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="State" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Country" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Students" Relationship="Self.FK_Student_Address" FromRole="Address" ToRole="Student" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Students" Relationship="SISModel.FK_Student_Address" FromRole="Address" ToRole="Student" />
         </EntityType>
         <EntityType Name="Attendance">
           <Key>
@@ -603,7 +743,7 @@
           <Property Name="MorningOut" Type="DateTime" Precision="3" />
           <Property Name="AfternoonIn" Type="DateTime" Precision="3" />
           <Property Name="AfternoonOut" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ClassStudent" Relationship="Self.FK_Attendance_ClassStudent" FromRole="Attendance" ToRole="ClassStudent" />
+          <NavigationProperty Name="ClassStudent" Relationship="SISModel.FK_Attendance_ClassStudent" FromRole="Attendance" ToRole="ClassStudent" />
         </EntityType>
         <EntityType Name="ClassStudent">
           <Key>
@@ -612,21 +752,22 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Course_ModuleId" Type="Int32" />
           <Property Name="StudentId" Type="Int32" />
-          <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendance_ClassStudent" FromRole="ClassStudent" ToRole="Attendance" />
-          <NavigationProperty Name="Course_Module" Relationship="Self.FK_ClassStudent_Course_Module1" FromRole="ClassStudent" ToRole="Course_Module" />
-          <NavigationProperty Name="Student" Relationship="Self.FK_ClassStudent_Student" FromRole="ClassStudent" ToRole="Student" />
-          <NavigationProperty Name="CourseWorks" Relationship="Self.FK_CourseWork_ClassStudent" FromRole="ClassStudent" ToRole="CourseWork" />
+          <NavigationProperty Name="Attendances" Relationship="SISModel.FK_Attendance_ClassStudent" FromRole="ClassStudent" ToRole="Attendance" />
+          <NavigationProperty Name="Course_Module" Relationship="SISModel.FK_ClassStudent_Course_Module1" FromRole="ClassStudent" ToRole="Course_Module" />
+          <NavigationProperty Name="Student" Relationship="SISModel.FK_ClassStudent_Student" FromRole="ClassStudent" ToRole="Student" />
+          <NavigationProperty Name="CourseWorks" Relationship="SISModel.FK_CourseWork_ClassStudent" FromRole="ClassStudent" ToRole="CourseWork" />
         </EntityType>
         <EntityType Name="Course">
           <Key>
             <PropertyRef Name="CourseCode" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CourseCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CourseCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PackageId" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Course_Module" Relationship="Self.FK_Course_Module_Course" FromRole="Course" ToRole="Course_Module" />
-          <NavigationProperty Name="Package_Course" Relationship="Self.FK_Package_Course_Course" FromRole="Course" ToRole="Package_Course" />
+          <NavigationProperty Name="Course_Module" Relationship="SISModel.FK_Course_Module_Course" FromRole="Course" ToRole="Course_Module" />
+          <NavigationProperty Name="Intakes" Relationship="SISModel.FK_Intake_Course" FromRole="Course" ToRole="Intake" />
+          <NavigationProperty Name="Package_Course" Relationship="SISModel.FK_Package_Course_Course" FromRole="Course" ToRole="Package_Course" />
         </EntityType>
         <EntityType Name="Course_Module">
           <Key>
@@ -638,11 +779,11 @@
           <Property Name="Status" Type="Boolean" />
           <Property Name="TrainerId" Type="Int32" />
           <Property Name="ModuleStandardId" Type="Int32" />
-          <NavigationProperty Name="ClassStudents" Relationship="Self.FK_ClassStudent_Course_Module1" FromRole="Course_Module" ToRole="ClassStudent" />
-          <NavigationProperty Name="Course" Relationship="Self.FK_Course_Module_Course" FromRole="Course_Module" ToRole="Course" />
-          <NavigationProperty Name="Module" Relationship="Self.FK_Course_Module_Module1" FromRole="Course_Module" ToRole="Module" />
-          <NavigationProperty Name="ModuleStandard" Relationship="Self.FK_Course_Module_ModuleStandard" FromRole="Course_Module" ToRole="ModuleStandard" />
-          <NavigationProperty Name="Trainer" Relationship="Self.FK_Course_Module_Trainer" FromRole="Course_Module" ToRole="Trainer" />
+          <NavigationProperty Name="ClassStudents" Relationship="SISModel.FK_ClassStudent_Course_Module1" FromRole="Course_Module" ToRole="ClassStudent" />
+          <NavigationProperty Name="Course" Relationship="SISModel.FK_Course_Module_Course" FromRole="Course_Module" ToRole="Course" />
+          <NavigationProperty Name="Module" Relationship="SISModel.FK_Course_Module_Module1" FromRole="Course_Module" ToRole="Module" />
+          <NavigationProperty Name="ModuleStandard" Relationship="SISModel.FK_Course_Module_ModuleStandard" FromRole="Course_Module" ToRole="ModuleStandard" />
+          <NavigationProperty Name="Trainer" Relationship="SISModel.FK_Course_Module_Trainer" FromRole="Course_Module" ToRole="Trainer" />
         </EntityType>
         <EntityType Name="CourseWork">
           <Key>
@@ -658,7 +799,8 @@
           <Property Name="Project" Type="Int32" />
           <Property Name="Total" Type="Int32" />
           <Property Name="Lab" Type="Boolean" />
-          <NavigationProperty Name="ClassStudent" Relationship="Self.FK_CourseWork_ClassStudent" FromRole="CourseWork" ToRole="ClassStudent" />
+          <NavigationProperty Name="ClassStudent" Relationship="SISModel.FK_CourseWork_ClassStudent" FromRole="CourseWork" ToRole="ClassStudent" />
+          <NavigationProperty Name="TestType1" Relationship="SISModel.FK_CourseWork_TestType" FromRole="CourseWork" ToRole="TestType" />
         </EntityType>
         <EntityType Name="Family">
           <Key>
@@ -683,8 +825,8 @@
           <Property Name="FatherSalary" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="NoSibling" Type="Int32" />
           <Property Name="BirthOrd" Type="Int32" />
-          <NavigationProperty Name="Student" Relationship="Self.FK_Family_Student" FromRole="Family" ToRole="Student" />
-          <NavigationProperty Name="Siblings" Relationship="Self.FK_Sibling_Family" FromRole="Family" ToRole="Sibling" />
+          <NavigationProperty Name="Student" Relationship="SISModel.FK_Family_Student" FromRole="Family" ToRole="Student" />
+          <NavigationProperty Name="Siblings" Relationship="SISModel.FK_Sibling_Family" FromRole="Family" ToRole="Sibling" />
         </EntityType>
         <EntityType Name="Intake">
           <Key>
@@ -694,20 +836,20 @@
           <Property Name="YearId" Type="Int32" Nullable="false" />
           <Property Name="MonthId" Type="Int32" Nullable="false" />
           <Property Name="CourseCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Month" Relationship="Self.FK_Intake_Month" FromRole="Intake" ToRole="Month" />
-          <NavigationProperty Name="Year" Relationship="Self.FK_Intake_Year" FromRole="Intake" ToRole="Year" />
-          <NavigationProperty Name="Students" Relationship="Self.FK_Student_Intake" FromRole="Intake" ToRole="Student" />
+          <NavigationProperty Name="Course" Relationship="SISModel.FK_Intake_Course" FromRole="Intake" ToRole="Course" />
+          <NavigationProperty Name="Month" Relationship="SISModel.FK_Intake_Month" FromRole="Intake" ToRole="Month" />
+          <NavigationProperty Name="Year" Relationship="SISModel.FK_Intake_Year" FromRole="Intake" ToRole="Year" />
+          <NavigationProperty Name="Students" Relationship="SISModel.FK_Student_Intake" FromRole="Intake" ToRole="Student" />
         </EntityType>
         <EntityType Name="Module">
           <Key>
             <PropertyRef Name="ModuleCode" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ModuleCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TrainerId" Type="Int32" />
+          <Property Name="ModuleCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Day" Type="Int32" />
-          <NavigationProperty Name="Course_Module" Relationship="Self.FK_Course_Module_Module1" FromRole="Module" ToRole="Course_Module" />
+          <NavigationProperty Name="Course_Module" Relationship="SISModel.FK_Course_Module_Module1" FromRole="Module" ToRole="Course_Module" />
         </EntityType>
         <EntityType Name="ModuleStandard">
           <Key>
@@ -720,30 +862,30 @@
           <Property Name="Assignment" Type="Int32" />
           <Property Name="Presentation" Type="Int32" />
           <Property Name="Project" Type="Int32" />
-          <NavigationProperty Name="Course_Module" Relationship="Self.FK_Course_Module_ModuleStandard" FromRole="ModuleStandard" ToRole="Course_Module" />
+          <NavigationProperty Name="Course_Module" Relationship="SISModel.FK_Course_Module_ModuleStandard" FromRole="ModuleStandard" ToRole="Course_Module" />
         </EntityType>
         <EntityType Name="Month">
           <Key>
             <PropertyRef Name="MonthId" />
           </Key>
-          <Property Name="MonthId" Type="Int32" Nullable="false" />
+          <Property Name="MonthId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Month1" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Intakes" Relationship="Self.FK_Intake_Month" FromRole="Month" ToRole="Intake" />
+          <NavigationProperty Name="Intakes" Relationship="SISModel.FK_Intake_Month" FromRole="Month" ToRole="Intake" />
         </EntityType>
         <EntityType Name="Package_Course">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CourseId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CourseId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="StudentId" Type="Int32" />
-          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="FirstPay" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FirstPay" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="MonthlyInterest" Type="Int32" />
           <Property Name="InterestRate" Type="Int32" />
-          <Property Name="MonthlyPayment" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Course" Relationship="Self.FK_Package_Course_Course" FromRole="Package_Course" ToRole="Course" />
-          <NavigationProperty Name="Students" Relationship="Self.FK_Student_Package_Course" FromRole="Package_Course" ToRole="Student" />
+          <Property Name="MonthlyPayment" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Course" Relationship="SISModel.FK_Package_Course_Course" FromRole="Package_Course" ToRole="Course" />
+          <NavigationProperty Name="Student" Relationship="SISModel.FK_Package_Course_Student" FromRole="Package_Course" ToRole="Student" />
         </EntityType>
         <EntityType Name="ReportCard">
           <Key>
@@ -768,7 +910,7 @@
           <Property Name="Relationship" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="HomePosition" Type="Int32" />
           <Property Name="Occupation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Family" Relationship="Self.FK_Sibling_Family" FromRole="Sibling" ToRole="Family" />
+          <NavigationProperty Name="Family" Relationship="SISModel.FK_Sibling_Family" FromRole="Sibling" ToRole="Family" />
         </EntityType>
         <EntityType Name="SPMResult">
           <Key>
@@ -778,8 +920,8 @@
           <Property Name="StudentId" Type="Int32" />
           <Property Name="Year" Type="Int32" />
           <Property Name="SubjectId" Type="Int32" />
-          <NavigationProperty Name="Subject" Relationship="Self.FK_SPMResult_Subject" FromRole="SPMResult" ToRole="Subject" />
-          <NavigationProperty Name="Students" Relationship="Self.FK_Student_SPMResult" FromRole="SPMResult" ToRole="Student" />
+          <NavigationProperty Name="Subject" Relationship="SISModel.FK_SPMResult_Subject" FromRole="SPMResult" ToRole="Subject" />
+          <NavigationProperty Name="Students" Relationship="SISModel.FK_Student_SPMResult" FromRole="SPMResult" ToRole="Student" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -788,27 +930,26 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StudentId" Type="Int32" />
           <Property Name="AddressId" Type="Int32" />
-          <Property Name="PackageId" Type="Int32" />
           <Property Name="IntakeId" Type="Int32" />
           <Property Name="SPMResultId" Type="Int32" />
           <Property Name="insurence" Type="Boolean" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="age" Type="Int32" Nullable="false" />
           <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IC" Type="Int32" Nullable="false" />
-          <Property Name="Nationality" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Gender" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PhoneNum" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nationality" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNum" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="OtherPhoneNum" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="EmailAddress" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Religion" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Address" Relationship="Self.FK_Student_Address" FromRole="Student" ToRole="Address" />
-          <NavigationProperty Name="ClassStudents" Relationship="Self.FK_ClassStudent_Student" FromRole="Student" ToRole="ClassStudent" />
-          <NavigationProperty Name="Families" Relationship="Self.FK_Family_Student" FromRole="Student" ToRole="Family" />
-          <NavigationProperty Name="Intake" Relationship="Self.FK_Student_Intake" FromRole="Student" ToRole="Intake" />
-          <NavigationProperty Name="Package_Course" Relationship="Self.FK_Student_Package_Course" FromRole="Student" ToRole="Package_Course" />
-          <NavigationProperty Name="SPMResult" Relationship="Self.FK_Student_SPMResult" FromRole="Student" ToRole="SPMResult" />
+          <NavigationProperty Name="Address" Relationship="SISModel.FK_Student_Address" FromRole="Student" ToRole="Address" />
+          <NavigationProperty Name="ClassStudents" Relationship="SISModel.FK_ClassStudent_Student" FromRole="Student" ToRole="ClassStudent" />
+          <NavigationProperty Name="Families" Relationship="SISModel.FK_Family_Student" FromRole="Student" ToRole="Family" />
+          <NavigationProperty Name="Intake" Relationship="SISModel.FK_Student_Intake" FromRole="Student" ToRole="Intake" />
+          <NavigationProperty Name="Package_Course" Relationship="SISModel.FK_Package_Course_Student" FromRole="Student" ToRole="Package_Course" />
+          <NavigationProperty Name="SPMResult" Relationship="SISModel.FK_Student_SPMResult" FromRole="Student" ToRole="SPMResult" />
         </EntityType>
         <EntityType Name="Subject">
           <Key>
@@ -825,13 +966,21 @@
           <Property Name="Physic" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Bio" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Art" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="SPMResults" Relationship="Self.FK_SPMResult_Subject" FromRole="Subject" ToRole="SPMResult" />
+          <NavigationProperty Name="SPMResults" Relationship="SISModel.FK_SPMResult_Subject" FromRole="Subject" ToRole="SPMResult" />
+        </EntityType>
+        <EntityType Name="TestType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CourseWorks" Relationship="SISModel.FK_CourseWork_TestType" FromRole="TestType" ToRole="CourseWork" />
         </EntityType>
         <EntityType Name="Trainer">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IC" Type="Int64" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -846,19 +995,19 @@
           <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Religion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Course_Module" Relationship="Self.FK_Course_Module_Trainer" FromRole="Trainer" ToRole="Course_Module" />
+          <NavigationProperty Name="Course_Module" Relationship="SISModel.FK_Course_Module_Trainer" FromRole="Trainer" ToRole="Course_Module" />
         </EntityType>
         <EntityType Name="Year">
           <Key>
             <PropertyRef Name="YearId" />
           </Key>
-          <Property Name="YearId" Type="Int32" Nullable="false" />
+          <Property Name="YearId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Year1" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Intakes" Relationship="Self.FK_Intake_Year" FromRole="Year" ToRole="Intake" />
+          <NavigationProperty Name="Intakes" Relationship="SISModel.FK_Intake_Year" FromRole="Year" ToRole="Intake" />
         </EntityType>
         <Association Name="FK_Student_Address">
-          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
-          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <End Type="SISModel.Address" Role="Address" Multiplicity="0..1" />
+          <End Type="SISModel.Student" Role="Student" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
               <PropertyRef Name="AddressId" />
@@ -869,8 +1018,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Attendance_ClassStudent">
-          <End Role="ClassStudent" Type="Self.ClassStudent" Multiplicity="0..1" />
-          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <End Type="SISModel.ClassStudent" Role="ClassStudent" Multiplicity="0..1" />
+          <End Type="SISModel.Attendance" Role="Attendance" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ClassStudent">
               <PropertyRef Name="Id" />
@@ -881,8 +1030,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ClassStudent_Course_Module1">
-          <End Role="Course_Module" Type="Self.Course_Module" Multiplicity="0..1" />
-          <End Role="ClassStudent" Type="Self.ClassStudent" Multiplicity="*" />
+          <End Type="SISModel.Course_Module" Role="Course_Module" Multiplicity="0..1" />
+          <End Type="SISModel.ClassStudent" Role="ClassStudent" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Course_Module">
               <PropertyRef Name="Id" />
@@ -893,8 +1042,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ClassStudent_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
-          <End Role="ClassStudent" Type="Self.ClassStudent" Multiplicity="*" />
+          <End Type="SISModel.Student" Role="Student" Multiplicity="0..1" />
+          <End Type="SISModel.ClassStudent" Role="ClassStudent" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
               <PropertyRef Name="ID" />
@@ -905,8 +1054,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CourseWork_ClassStudent">
-          <End Role="ClassStudent" Type="Self.ClassStudent" Multiplicity="0..1" />
-          <End Role="CourseWork" Type="Self.CourseWork" Multiplicity="*" />
+          <End Type="SISModel.ClassStudent" Role="ClassStudent" Multiplicity="0..1" />
+          <End Type="SISModel.CourseWork" Role="CourseWork" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ClassStudent">
               <PropertyRef Name="Id" />
@@ -917,8 +1066,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Course_Module_Course">
-          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
-          <End Role="Course_Module" Type="Self.Course_Module" Multiplicity="*" />
+          <End Type="SISModel.Course" Role="Course" Multiplicity="0..1" />
+          <End Type="SISModel.Course_Module" Role="Course_Module" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Course">
               <PropertyRef Name="CourseCode" />
@@ -928,9 +1077,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Intake_Course">
+          <End Type="SISModel.Course" Role="Course" Multiplicity="0..1" />
+          <End Type="SISModel.Intake" Role="Intake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseCode" />
+            </Principal>
+            <Dependent Role="Intake">
+              <PropertyRef Name="CourseCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Package_Course_Course">
-          <End Role="Course" Type="Self.Course" Multiplicity="1" />
-          <End Role="Package_Course" Type="Self.Package_Course" Multiplicity="*" />
+          <End Type="SISModel.Course" Role="Course" Multiplicity="1" />
+          <End Type="SISModel.Package_Course" Role="Package_Course" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Course">
               <PropertyRef Name="CourseCode" />
@@ -941,8 +1102,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Course_Module_Module1">
-          <End Role="Module" Type="Self.Module" Multiplicity="0..1" />
-          <End Role="Course_Module" Type="Self.Course_Module" Multiplicity="*" />
+          <End Type="SISModel.Module" Role="Module" Multiplicity="0..1" />
+          <End Type="SISModel.Course_Module" Role="Course_Module" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Module">
               <PropertyRef Name="ModuleCode" />
@@ -953,8 +1114,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Course_Module_ModuleStandard">
-          <End Role="ModuleStandard" Type="Self.ModuleStandard" Multiplicity="0..1" />
-          <End Role="Course_Module" Type="Self.Course_Module" Multiplicity="*" />
+          <End Type="SISModel.ModuleStandard" Role="ModuleStandard" Multiplicity="0..1" />
+          <End Type="SISModel.Course_Module" Role="Course_Module" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ModuleStandard">
               <PropertyRef Name="Id" />
@@ -965,8 +1126,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Course_Module_Trainer">
-          <End Role="Trainer" Type="Self.Trainer" Multiplicity="0..1" />
-          <End Role="Course_Module" Type="Self.Course_Module" Multiplicity="*" />
+          <End Type="SISModel.Trainer" Role="Trainer" Multiplicity="0..1" />
+          <End Type="SISModel.Course_Module" Role="Course_Module" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Trainer">
               <PropertyRef Name="Id" />
@@ -976,9 +1137,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CourseWork_TestType">
+          <End Type="SISModel.TestType" Role="TestType" Multiplicity="0..1" />
+          <End Type="SISModel.CourseWork" Role="CourseWork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseWork">
+              <PropertyRef Name="TestType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Family_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
-          <End Role="Family" Type="Self.Family" Multiplicity="*" />
+          <End Type="SISModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="SISModel.Family" Role="Family" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
               <PropertyRef Name="ID" />
@@ -989,8 +1162,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Sibling_Family">
-          <End Role="Family" Type="Self.Family" Multiplicity="1" />
-          <End Role="Sibling" Type="Self.Sibling" Multiplicity="*" />
+          <End Type="SISModel.Family" Role="Family" Multiplicity="1" />
+          <End Type="SISModel.Sibling" Role="Sibling" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Family">
               <PropertyRef Name="FamilyId" />
@@ -1001,8 +1174,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Intake_Month">
-          <End Role="Month" Type="Self.Month" Multiplicity="1" />
-          <End Role="Intake" Type="Self.Intake" Multiplicity="*" />
+          <End Type="SISModel.Month" Role="Month" Multiplicity="1" />
+          <End Type="SISModel.Intake" Role="Intake" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Month">
               <PropertyRef Name="MonthId" />
@@ -1013,8 +1186,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Intake_Year">
-          <End Role="Year" Type="Self.Year" Multiplicity="1" />
-          <End Role="Intake" Type="Self.Intake" Multiplicity="*" />
+          <End Type="SISModel.Year" Role="Year" Multiplicity="1" />
+          <End Type="SISModel.Intake" Role="Intake" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Year">
               <PropertyRef Name="YearId" />
@@ -1025,8 +1198,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Student_Intake">
-          <End Role="Intake" Type="Self.Intake" Multiplicity="0..1" />
-          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <End Type="SISModel.Intake" Role="Intake" Multiplicity="0..1" />
+          <End Type="SISModel.Student" Role="Student" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Intake">
               <PropertyRef Name="Id" />
@@ -1036,21 +1209,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Student_Package_Course">
-          <End Role="Package_Course" Type="Self.Package_Course" Multiplicity="0..1" />
-          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+        <Association Name="FK_Package_Course_Student">
+          <End Type="SISModel.Student" Role="Student" Multiplicity="0..1" />
+          <End Type="SISModel.Package_Course" Role="Package_Course" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Package_Course">
+            <Principal Role="Student">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Student">
-              <PropertyRef Name="PackageId" />
+            <Dependent Role="Package_Course">
+              <PropertyRef Name="StudentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SPMResult_Subject">
-          <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
-          <End Role="SPMResult" Type="Self.SPMResult" Multiplicity="*" />
+          <End Type="SISModel.Subject" Role="Subject" Multiplicity="0..1" />
+          <End Type="SISModel.SPMResult" Role="SPMResult" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subject">
               <PropertyRef Name="ID" />
@@ -1061,8 +1234,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Student_SPMResult">
-          <End Role="SPMResult" Type="Self.SPMResult" Multiplicity="0..1" />
-          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <End Type="SISModel.SPMResult" Role="SPMResult" Multiplicity="0..1" />
+          <End Type="SISModel.Student" Role="Student" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SPMResult">
               <PropertyRef Name="ID" />
@@ -1072,101 +1245,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SISEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Packages" EntityType="Self.Package" />
-          <EntitySet Name="Addresses" EntityType="Self.Address" />
-          <EntitySet Name="Attendances" EntityType="Self.Attendance" />
-          <EntitySet Name="ClassStudents" EntityType="Self.ClassStudent" />
-          <EntitySet Name="Courses" EntityType="Self.Course" />
-          <EntitySet Name="Course_Module" EntityType="Self.Course_Module" />
-          <EntitySet Name="CourseWorks" EntityType="Self.CourseWork" />
-          <EntitySet Name="Families" EntityType="Self.Family" />
-          <EntitySet Name="Intakes" EntityType="Self.Intake" />
-          <EntitySet Name="Modules" EntityType="Self.Module" />
-          <EntitySet Name="ModuleStandards" EntityType="Self.ModuleStandard" />
-          <EntitySet Name="Months" EntityType="Self.Month" />
-          <EntitySet Name="Package_Course" EntityType="Self.Package_Course" />
-          <EntitySet Name="ReportCards" EntityType="Self.ReportCard" />
-          <EntitySet Name="Siblings" EntityType="Self.Sibling" />
-          <EntitySet Name="SPMResults" EntityType="Self.SPMResult" />
-          <EntitySet Name="Students" EntityType="Self.Student" />
-          <EntitySet Name="Subjects" EntityType="Self.Subject" />
-          <EntitySet Name="Trainers" EntityType="Self.Trainer" />
-          <EntitySet Name="Years" EntityType="Self.Year" />
-          <AssociationSet Name="FK_Student_Address" Association="Self.FK_Student_Address">
-            <End Role="Address" EntitySet="Addresses" />
-            <End Role="Student" EntitySet="Students" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Attendance_ClassStudent" Association="Self.FK_Attendance_ClassStudent">
-            <End Role="ClassStudent" EntitySet="ClassStudents" />
-            <End Role="Attendance" EntitySet="Attendances" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClassStudent_Course_Module1" Association="Self.FK_ClassStudent_Course_Module1">
-            <End Role="Course_Module" EntitySet="Course_Module" />
-            <End Role="ClassStudent" EntitySet="ClassStudents" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClassStudent_Student" Association="Self.FK_ClassStudent_Student">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="ClassStudent" EntitySet="ClassStudents" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CourseWork_ClassStudent" Association="Self.FK_CourseWork_ClassStudent">
-            <End Role="ClassStudent" EntitySet="ClassStudents" />
-            <End Role="CourseWork" EntitySet="CourseWorks" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Course_Module_Course" Association="Self.FK_Course_Module_Course">
-            <End Role="Course" EntitySet="Courses" />
-            <End Role="Course_Module" EntitySet="Course_Module" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Package_Course_Course" Association="Self.FK_Package_Course_Course">
-            <End Role="Course" EntitySet="Courses" />
-            <End Role="Package_Course" EntitySet="Package_Course" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Course_Module_Module1" Association="Self.FK_Course_Module_Module1">
-            <End Role="Module" EntitySet="Modules" />
-            <End Role="Course_Module" EntitySet="Course_Module" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Course_Module_ModuleStandard" Association="Self.FK_Course_Module_ModuleStandard">
-            <End Role="ModuleStandard" EntitySet="ModuleStandards" />
-            <End Role="Course_Module" EntitySet="Course_Module" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Course_Module_Trainer" Association="Self.FK_Course_Module_Trainer">
-            <End Role="Trainer" EntitySet="Trainers" />
-            <End Role="Course_Module" EntitySet="Course_Module" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Family_Student" Association="Self.FK_Family_Student">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="Family" EntitySet="Families" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sibling_Family" Association="Self.FK_Sibling_Family">
-            <End Role="Family" EntitySet="Families" />
-            <End Role="Sibling" EntitySet="Siblings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Intake_Month" Association="Self.FK_Intake_Month">
-            <End Role="Month" EntitySet="Months" />
-            <End Role="Intake" EntitySet="Intakes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Intake_Year" Association="Self.FK_Intake_Year">
-            <End Role="Year" EntitySet="Years" />
-            <End Role="Intake" EntitySet="Intakes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Student_Intake" Association="Self.FK_Student_Intake">
-            <End Role="Intake" EntitySet="Intakes" />
-            <End Role="Student" EntitySet="Students" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Student_Package_Course" Association="Self.FK_Student_Package_Course">
-            <End Role="Package_Course" EntitySet="Package_Course" />
-            <End Role="Student" EntitySet="Students" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SPMResult_Subject" Association="Self.FK_SPMResult_Subject">
-            <End Role="Subject" EntitySet="Subjects" />
-            <End Role="SPMResult" EntitySet="SPMResults" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Student_SPMResult" Association="Self.FK_Student_SPMResult">
-            <End Role="SPMResult" EntitySet="SPMResults" />
-            <End Role="Student" EntitySet="Students" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1175,270 +1254,276 @@
           <EntitySetMapping Name="Packages">
             <EntityTypeMapping TypeName="SISModel.Package">
               <MappingFragment StoreEntitySet="Package">
-                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
-                <ScalarProperty Name="PaymentPlan" ColumnName="PaymentPlan" />
-                <ScalarProperty Name="LoanPercent" ColumnName="LoanPercent" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="SaleComfirmation" ColumnName="SaleComfirmation" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="LoanPercent" ColumnName="LoanPercent" />
+                <ScalarProperty Name="PaymentPlan" ColumnName="PaymentPlan" />
+                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Addresses">
             <EntityTypeMapping TypeName="SISModel.Address">
               <MappingFragment StoreEntitySet="Address">
-                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
-                <ScalarProperty Name="StreetLine1" ColumnName="StreetLine1" />
-                <ScalarProperty Name="SteetLine2" ColumnName="SteetLine2" />
-                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="SteetLine2" ColumnName="SteetLine2" />
+                <ScalarProperty Name="StreetLine1" ColumnName="StreetLine1" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Attendances">
             <EntityTypeMapping TypeName="SISModel.Attendance">
               <MappingFragment StoreEntitySet="Attendance">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ClassStudentId" ColumnName="ClassStudentId" />
-                <ScalarProperty Name="MorningIn" ColumnName="MorningIn" />
-                <ScalarProperty Name="MorningOut" ColumnName="MorningOut" />
-                <ScalarProperty Name="AfternoonIn" ColumnName="AfternoonIn" />
                 <ScalarProperty Name="AfternoonOut" ColumnName="AfternoonOut" />
+                <ScalarProperty Name="AfternoonIn" ColumnName="AfternoonIn" />
+                <ScalarProperty Name="MorningOut" ColumnName="MorningOut" />
+                <ScalarProperty Name="MorningIn" ColumnName="MorningIn" />
+                <ScalarProperty Name="ClassStudentId" ColumnName="ClassStudentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ClassStudents">
             <EntityTypeMapping TypeName="SISModel.ClassStudent">
               <MappingFragment StoreEntitySet="ClassStudent">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Course_ModuleId" ColumnName="Course_ModuleId" />
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Course_ModuleId" ColumnName="Course_ModuleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Courses">
             <EntityTypeMapping TypeName="SISModel.Course">
               <MappingFragment StoreEntitySet="Course">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CourseCode" ColumnName="CourseCode" />
-                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+                <ScalarProperty Name="CourseCode" ColumnName="CourseCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Course_Module">
             <EntityTypeMapping TypeName="SISModel.Course_Module">
               <MappingFragment StoreEntitySet="Course_Module">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
-                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="TrainerId" ColumnName="TrainerId" />
                 <ScalarProperty Name="ModuleStandardId" ColumnName="ModuleStandardId" />
+                <ScalarProperty Name="TrainerId" ColumnName="TrainerId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CourseWorks">
             <EntityTypeMapping TypeName="SISModel.CourseWork">
               <MappingFragment StoreEntitySet="CourseWork">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ClassStudentId" ColumnName="ClassStudentId" />
-                <ScalarProperty Name="TestType" ColumnName="TestType" />
-                <ScalarProperty Name="WrittenTest" ColumnName="WrittenTest" />
-                <ScalarProperty Name="OralTest" ColumnName="OralTest" />
-                <ScalarProperty Name="Presentation" ColumnName="Presentation" />
-                <ScalarProperty Name="Assignment" ColumnName="Assignment" />
-                <ScalarProperty Name="Project" ColumnName="Project" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="Lab" ColumnName="Lab" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Project" ColumnName="Project" />
+                <ScalarProperty Name="Assignment" ColumnName="Assignment" />
+                <ScalarProperty Name="Presentation" ColumnName="Presentation" />
+                <ScalarProperty Name="OralTest" ColumnName="OralTest" />
+                <ScalarProperty Name="WrittenTest" ColumnName="WrittenTest" />
+                <ScalarProperty Name="TestType" ColumnName="TestType" />
+                <ScalarProperty Name="ClassStudentId" ColumnName="ClassStudentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Families">
             <EntityTypeMapping TypeName="SISModel.Family">
               <MappingFragment StoreEntitySet="Family">
-                <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-                <ScalarProperty Name="SingleParent" ColumnName="SingleParent" />
-                <ScalarProperty Name="MomName" ColumnName="MomName" />
-                <ScalarProperty Name="MomEdu" ColumnName="MomEdu" />
-                <ScalarProperty Name="MomWorkStatus" ColumnName="MomWorkStatus" />
-                <ScalarProperty Name="MomJob" ColumnName="MomJob" />
-                <ScalarProperty Name="MomFeildWork" ColumnName="MomFeildWork" />
-                <ScalarProperty Name="MomSectorJob" ColumnName="MomSectorJob" />
-                <ScalarProperty Name="MomSalary" ColumnName="MomSalary" />
-                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
-                <ScalarProperty Name="FatherEdu" ColumnName="FatherEdu" />
-                <ScalarProperty Name="FatherWorkStatus" ColumnName="FatherWorkStatus" />
-                <ScalarProperty Name="FatherJob" ColumnName="FatherJob" />
-                <ScalarProperty Name="FatherFeildWork" ColumnName="FatherFeildWork" />
-                <ScalarProperty Name="FatherSectorJob" ColumnName="FatherSectorJob" />
-                <ScalarProperty Name="FatherSalary" ColumnName="FatherSalary" />
-                <ScalarProperty Name="NoSibling" ColumnName="NoSibling" />
                 <ScalarProperty Name="BirthOrd" ColumnName="BirthOrd" />
+                <ScalarProperty Name="NoSibling" ColumnName="NoSibling" />
+                <ScalarProperty Name="FatherSalary" ColumnName="FatherSalary" />
+                <ScalarProperty Name="FatherSectorJob" ColumnName="FatherSectorJob" />
+                <ScalarProperty Name="FatherFeildWork" ColumnName="FatherFeildWork" />
+                <ScalarProperty Name="FatherJob" ColumnName="FatherJob" />
+                <ScalarProperty Name="FatherWorkStatus" ColumnName="FatherWorkStatus" />
+                <ScalarProperty Name="FatherEdu" ColumnName="FatherEdu" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="MomSalary" ColumnName="MomSalary" />
+                <ScalarProperty Name="MomSectorJob" ColumnName="MomSectorJob" />
+                <ScalarProperty Name="MomFeildWork" ColumnName="MomFeildWork" />
+                <ScalarProperty Name="MomJob" ColumnName="MomJob" />
+                <ScalarProperty Name="MomWorkStatus" ColumnName="MomWorkStatus" />
+                <ScalarProperty Name="MomEdu" ColumnName="MomEdu" />
+                <ScalarProperty Name="MomName" ColumnName="MomName" />
+                <ScalarProperty Name="SingleParent" ColumnName="SingleParent" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Intakes">
             <EntityTypeMapping TypeName="SISModel.Intake">
               <MappingFragment StoreEntitySet="Intake">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="YearId" ColumnName="YearId" />
-                <ScalarProperty Name="MonthId" ColumnName="MonthId" />
                 <ScalarProperty Name="CourseCode" ColumnName="CourseCode" />
+                <ScalarProperty Name="MonthId" ColumnName="MonthId" />
+                <ScalarProperty Name="YearId" ColumnName="YearId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Modules">
             <EntityTypeMapping TypeName="SISModel.Module">
               <MappingFragment StoreEntitySet="Module">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ModuleCode" ColumnName="ModuleCode" />
-                <ScalarProperty Name="TrainerId" ColumnName="TrainerId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ModuleCode" ColumnName="ModuleCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ModuleStandards">
             <EntityTypeMapping TypeName="SISModel.ModuleStandard">
               <MappingFragment StoreEntitySet="ModuleStandard">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="WrittenTest" ColumnName="WrittenTest" />
-                <ScalarProperty Name="OralTest" ColumnName="OralTest" />
-                <ScalarProperty Name="Assignment" ColumnName="Assignment" />
-                <ScalarProperty Name="Presentation" ColumnName="Presentation" />
                 <ScalarProperty Name="Project" ColumnName="Project" />
+                <ScalarProperty Name="Presentation" ColumnName="Presentation" />
+                <ScalarProperty Name="Assignment" ColumnName="Assignment" />
+                <ScalarProperty Name="OralTest" ColumnName="OralTest" />
+                <ScalarProperty Name="WrittenTest" ColumnName="WrittenTest" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Months">
             <EntityTypeMapping TypeName="SISModel.Month">
               <MappingFragment StoreEntitySet="Month">
-                <ScalarProperty Name="MonthId" ColumnName="MonthId" />
                 <ScalarProperty Name="Month1" ColumnName="Month" />
+                <ScalarProperty Name="MonthId" ColumnName="MonthId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Package_Course">
             <EntityTypeMapping TypeName="SISModel.Package_Course">
               <MappingFragment StoreEntitySet="Package_Course">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
-                <ScalarProperty Name="FirstPay" ColumnName="FirstPay" />
-                <ScalarProperty Name="MonthlyInterest" ColumnName="MonthlyInterest" />
-                <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
                 <ScalarProperty Name="MonthlyPayment" ColumnName="MonthlyPayment" />
+                <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
+                <ScalarProperty Name="MonthlyInterest" ColumnName="MonthlyInterest" />
+                <ScalarProperty Name="FirstPay" ColumnName="FirstPay" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ReportCards">
             <EntityTypeMapping TypeName="SISModel.ReportCard">
               <MappingFragment StoreEntitySet="ReportCard">
-                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-                <ScalarProperty Name="ReportCardID" ColumnName="ReportCardID" />
-                <ScalarProperty Name="CourseCode" ColumnName="CourseCode" />
-                <ScalarProperty Name="ModuleCode" ColumnName="ModuleCode" />
-                <ScalarProperty Name="TrainerId" ColumnName="TrainerId" />
                 <ScalarProperty Name="CourseWorkId" ColumnName="CourseWorkId" />
+                <ScalarProperty Name="TrainerId" ColumnName="TrainerId" />
+                <ScalarProperty Name="ModuleCode" ColumnName="ModuleCode" />
+                <ScalarProperty Name="CourseCode" ColumnName="CourseCode" />
+                <ScalarProperty Name="ReportCardID" ColumnName="ReportCardID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Siblings">
             <EntityTypeMapping TypeName="SISModel.Sibling">
               <MappingFragment StoreEntitySet="Sibling">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
-                <ScalarProperty Name="HomePosition" ColumnName="HomePosition" />
                 <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+                <ScalarProperty Name="HomePosition" ColumnName="HomePosition" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SPMResults">
             <EntityTypeMapping TypeName="SISModel.SPMResult">
               <MappingFragment StoreEntitySet="SPMResult">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Students">
             <EntityTypeMapping TypeName="SISModel.Student">
               <MappingFragment StoreEntitySet="Student">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
-                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
-                <ScalarProperty Name="IntakeId" ColumnName="IntakeId" />
-                <ScalarProperty Name="SPMResultId" ColumnName="SPMResultId" />
-                <ScalarProperty Name="insurence" ColumnName="insurence" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="age" ColumnName="age" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="IC" ColumnName="IC" />
-                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="PhoneNum" ColumnName="PhoneNum" />
-                <ScalarProperty Name="OtherPhoneNum" ColumnName="OtherPhoneNum" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="Religion" ColumnName="Religion" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="OtherPhoneNum" ColumnName="OtherPhoneNum" />
+                <ScalarProperty Name="PhoneNum" ColumnName="PhoneNum" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="IC" ColumnName="IC" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="insurence" ColumnName="insurence" />
+                <ScalarProperty Name="SPMResultId" ColumnName="SPMResultId" />
+                <ScalarProperty Name="IntakeId" ColumnName="IntakeId" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Subjects">
             <EntityTypeMapping TypeName="SISModel.Subject">
               <MappingFragment StoreEntitySet="Subject">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="BM" ColumnName="BM" />
-                <ScalarProperty Name="BI" ColumnName="BI" />
-                <ScalarProperty Name="Math" ColumnName="Math" />
-                <ScalarProperty Name="Sejarah" ColumnName="Sejarah" />
-                <ScalarProperty Name="BC" ColumnName="BC" />
-                <ScalarProperty Name="Acc" ColumnName="Acc" />
-                <ScalarProperty Name="Chemistry" ColumnName="Chemistry" />
-                <ScalarProperty Name="Physic" ColumnName="Physic" />
-                <ScalarProperty Name="Bio" ColumnName="Bio" />
                 <ScalarProperty Name="Art" ColumnName="Art" />
+                <ScalarProperty Name="Bio" ColumnName="Bio" />
+                <ScalarProperty Name="Physic" ColumnName="Physic" />
+                <ScalarProperty Name="Chemistry" ColumnName="Chemistry" />
+                <ScalarProperty Name="Acc" ColumnName="Acc" />
+                <ScalarProperty Name="BC" ColumnName="BC" />
+                <ScalarProperty Name="Sejarah" ColumnName="Sejarah" />
+                <ScalarProperty Name="Math" ColumnName="Math" />
+                <ScalarProperty Name="BI" ColumnName="BI" />
+                <ScalarProperty Name="BM" ColumnName="BM" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestTypes">
+            <EntityTypeMapping TypeName="SISModel.TestType">
+              <MappingFragment StoreEntitySet="TestType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Trainers">
             <EntityTypeMapping TypeName="SISModel.Trainer">
               <MappingFragment StoreEntitySet="Trainer">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IC" ColumnName="IC" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="PhoneNum" ColumnName="PhoneNum" />
-                <ScalarProperty Name="Address1" ColumnName="Address1" />
-                <ScalarProperty Name="Address2" ColumnName="Address2" />
-                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="Religion" ColumnName="Religion" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="PhoneNum" ColumnName="PhoneNum" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IC" ColumnName="IC" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Years">
             <EntityTypeMapping TypeName="SISModel.Year">
               <MappingFragment StoreEntitySet="Year">
-                <ScalarProperty Name="YearId" ColumnName="YearId" />
                 <ScalarProperty Name="Year1" ColumnName="Year" />
+                <ScalarProperty Name="YearId" ColumnName="YearId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

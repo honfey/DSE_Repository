@@ -173,6 +173,7 @@
     <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\Package_CourseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -203,6 +204,7 @@
       <DependentUpon>SIS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MetaBeta.cs" />
     <Compile Include="Models\Module.cs">
       <DependentUpon>SIS.tt</DependentUpon>
     </Compile>
@@ -246,6 +248,9 @@
       <DependentUpon>SIS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Subject.cs">
+      <DependentUpon>SIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TestType.cs">
       <DependentUpon>SIS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Trainer.cs">
@@ -566,6 +571,11 @@
     <Content Include="Views\Attendances\MarkAttendance.cshtml" />
     <Content Include="Views\Attendances\CheckAttendance.cshtml" />
     <Content Include="Views\Attendances\ClassAvailable.cshtml" />
+    <Content Include="Views\Package_Course\Create.cshtml" />
+    <Content Include="Views\Package_Course\Delete.cshtml" />
+    <Content Include="Views\Package_Course\Details.cshtml" />
+    <Content Include="Views\Package_Course\Edit.cshtml" />
+    <Content Include="Views\Package_Course\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

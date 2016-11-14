@@ -26,5 +26,6 @@ namespace SIS.Models
         public Nullable<bool> Lab { get; set; }
     
         public virtual ClassStudent ClassStudent { get; set; }
+        public virtual TestType TestType1 { get; set; }
     }
 }
