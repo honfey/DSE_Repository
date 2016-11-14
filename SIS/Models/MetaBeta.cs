@@ -17,7 +17,7 @@ namespace SIS.Models
         [Display(Name = "Loan(%)")]
         public decimal InterestRate { get; set; }
 
-        [Display(Name = "MonthlyPln")]
+        [Display(Name = "MonthlyPlan")]
         public int MonthlyInterest { get; set; }
     }
 
