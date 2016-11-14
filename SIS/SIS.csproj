@@ -248,6 +248,9 @@
     <Compile Include="Models\Subject.cs">
       <DependentUpon>SIS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TestType.cs">
+      <DependentUpon>SIS.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Trainer.cs">
       <DependentUpon>SIS.tt</DependentUpon>
     </Compile>
@@ -340,6 +343,10 @@
     <Content Include="Views\Attendances\MarkAttendance.cshtml" />
     <Content Include="Views\Attendances\CheckAttendance.cshtml" />
     <Content Include="Views\Attendances\ClassAvailable.cshtml" />
+    <Content Include="Views\Attendances\CheckChoise.cshtml" />
+    <Content Include="Views\Attendances\CheckIndividual.cshtml" />
+    <Content Include="Views\Attendances\CheckIndividualAttendance.cshtml" />
+    <Content Include="Views\Shared\Status.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

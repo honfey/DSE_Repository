@@ -16,11 +16,15 @@ namespace SIS.Models
     {
         public int Id { get; set; }
         public Nullable<int> ClassStudentId { get; set; }
-        public Nullable<System.DateTime> MorningIn { get; set; }
-        public Nullable<System.DateTime> MorningOut { get; set; }
-        public Nullable<System.DateTime> AfternoonIn { get; set; }
-        public Nullable<System.DateTime> AfternoonOut { get; set; }
-    
+        public Nullable<System.TimeSpan> MorningIn { get; set; }
+        public Nullable<System.TimeSpan> MorningOut { get; set; }
+        public Nullable<System.TimeSpan> AfternoonIn { get; set; }
+        public Nullable<System.TimeSpan> AfternoonOut { get; set; }
+        public Nullable<System.DateTime> TodayDate { get; set; }
+        public string Status { get; set; }
+
+        public List<Nullable<System.DateTime>> DateList { get; set; }
+
         public virtual ClassStudent ClassStudent { get; set; }
     }
 }

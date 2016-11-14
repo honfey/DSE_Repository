@@ -43,6 +43,7 @@ namespace SIS.Models
         public virtual DbSet<SPMResult> SPMResults { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
+        public virtual DbSet<TestType> TestTypes { get; set; }
         public virtual DbSet<Trainer> Trainers { get; set; }
         public virtual DbSet<Year> Years { get; set; }
     }

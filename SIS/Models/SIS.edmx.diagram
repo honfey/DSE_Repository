@@ -5,44 +5,47 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="056b8353d22e42c5abd304b9a94aaf21" Name="Diagram1">
-        <EntityTypeShape EntityType="SISModel.Package" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SISModel.Address" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="SISModel.Attendance" Width="1.5" PointX="12.75" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SISModel.ClassStudent" Width="1.5" PointX="10.5" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SISModel.Course" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SISModel.Course_Module" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SISModel.CourseWork" Width="1.5" PointX="12.75" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SISModel.Family" Width="1.5" PointX="7.5" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SISModel.Intake" Width="1.5" PointX="3" PointY="20.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SISModel.Module" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SISModel.ModuleStandard" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SISModel.Month" Width="1.5" PointX="0.75" PointY="19.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SISModel.Package_Course" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SISModel.ReportCard" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SISModel.Sibling" Width="1.5" PointX="9.75" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SISModel.SPMResult" Width="1.5" PointX="3" PointY="24.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SISModel.Student" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SISModel.Subject" Width="1.5" PointX="0.75" PointY="24" IsExpanded="true" />
-        <EntityTypeShape EntityType="SISModel.Trainer" Width="1.5" PointX="0.75" PointY="13.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SISModel.Year" Width="1.5" PointX="0.75" PointY="21.625" IsExpanded="true" />
-        <AssociationConnector Association="SISModel.FK_Student_Address" ManuallyRouted="false" />
-        <AssociationConnector Association="SISModel.FK_Attendance_ClassStudent" ManuallyRouted="false" />
-        <AssociationConnector Association="SISModel.FK_ClassStudent_Course_Module1" ManuallyRouted="false" />
-        <AssociationConnector Association="SISModel.FK_ClassStudent_Student" ManuallyRouted="false" />
-        <AssociationConnector Association="SISModel.FK_CourseWork_ClassStudent" ManuallyRouted="false" />
-        <AssociationConnector Association="SISModel.FK_Course_Module_Course" ManuallyRouted="false" />
-        <AssociationConnector Association="SISModel.FK_Package_Course_Course" ManuallyRouted="false" />
-        <AssociationConnector Association="SISModel.FK_Course_Module_Module1" ManuallyRouted="false" />
-        <AssociationConnector Association="SISModel.FK_Course_Module_ModuleStandard" ManuallyRouted="false" />
-        <AssociationConnector Association="SISModel.FK_Course_Module_Trainer" ManuallyRouted="false" />
-        <AssociationConnector Association="SISModel.FK_Family_Student" ManuallyRouted="false" />
-        <AssociationConnector Association="SISModel.FK_Sibling_Family" ManuallyRouted="false" />
-        <AssociationConnector Association="SISModel.FK_Intake_Month" ManuallyRouted="false" />
-        <AssociationConnector Association="SISModel.FK_Intake_Year" ManuallyRouted="false" />
-        <AssociationConnector Association="SISModel.FK_Student_Intake" ManuallyRouted="false" />
-        <AssociationConnector Association="SISModel.FK_Student_Package_Course" ManuallyRouted="false" />
-        <AssociationConnector Association="SISModel.FK_SPMResult_Subject" ManuallyRouted="false" />
-        <AssociationConnector Association="SISModel.FK_Student_SPMResult" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SISModel.Package" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SISModel.Address" Width="1.5" PointX="6" PointY="14.25" />
+        <EntityTypeShape EntityType="SISModel.Attendance" Width="1.5" PointX="10.5" PointY="12.875" />
+        <EntityTypeShape EntityType="SISModel.ClassStudent" Width="1.5" PointX="8.25" PointY="9" />
+        <EntityTypeShape EntityType="SISModel.Course" Width="1.5" PointX="0.75" PointY="9" />
+        <EntityTypeShape EntityType="SISModel.Course_Module" Width="1.5" PointX="3" PointY="8.5" />
+        <EntityTypeShape EntityType="SISModel.CourseWork" Width="1.5" PointX="10.5" PointY="8.5" />
+        <EntityTypeShape EntityType="SISModel.Family" Width="1.5" PointX="10.5" PointY="17.25" />
+        <EntityTypeShape EntityType="SISModel.Intake" Width="1.5" PointX="6" PointY="8.875" />
+        <EntityTypeShape EntityType="SISModel.Module" Width="1.5" PointX="0.75" PointY="17.25" />
+        <EntityTypeShape EntityType="SISModel.ModuleStandard" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="SISModel.Month" Width="1.5" PointX="3.75" PointY="1.5" />
+        <EntityTypeShape EntityType="SISModel.Package_Course" Width="1.5" PointX="3" PointY="15.875" />
+        <EntityTypeShape EntityType="SISModel.ReportCard" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SISModel.Sibling" Width="1.5" PointX="12.75" PointY="18.5" />
+        <EntityTypeShape EntityType="SISModel.SPMResult" Width="1.5" PointX="6" PointY="4.75" />
+        <EntityTypeShape EntityType="SISModel.Student" Width="1.5" PointX="8.25" PointY="13" />
+        <EntityTypeShape EntityType="SISModel.Subject" Width="1.5" PointX="3.75" PointY="4.125" />
+        <EntityTypeShape EntityType="SISModel.TestType" Width="1.5" PointX="8.25" PointY="6.375" />
+        <EntityTypeShape EntityType="SISModel.Trainer" Width="1.5" PointX="0.75" PointY="12.375" />
+        <EntityTypeShape EntityType="SISModel.Year" Width="1.5" PointX="3.75" PointY="13.125" />
+        <AssociationConnector Association="SISModel.FK_Student_Address" />
+        <AssociationConnector Association="SISModel.FK_Attendance_ClassStudent" />
+        <AssociationConnector Association="SISModel.FK_ClassStudent_Course_Module1" />
+        <AssociationConnector Association="SISModel.FK_ClassStudent_Student" />
+        <AssociationConnector Association="SISModel.FK_CourseWork_ClassStudent" />
+        <AssociationConnector Association="SISModel.FK_Course_Module_Course" />
+        <AssociationConnector Association="SISModel.FK_Intake_Course" />
+        <AssociationConnector Association="SISModel.FK_Package_Course_Course" />
+        <AssociationConnector Association="SISModel.FK_Course_Module_Module1" />
+        <AssociationConnector Association="SISModel.FK_Course_Module_ModuleStandard" />
+        <AssociationConnector Association="SISModel.FK_Course_Module_Trainer" />
+        <AssociationConnector Association="SISModel.FK_CourseWork_TestType" />
+        <AssociationConnector Association="SISModel.FK_Family_Student" />
+        <AssociationConnector Association="SISModel.FK_Sibling_Family" />
+        <AssociationConnector Association="SISModel.FK_Intake_Month" />
+        <AssociationConnector Association="SISModel.FK_Intake_Year" />
+        <AssociationConnector Association="SISModel.FK_Student_Intake" />
+        <AssociationConnector Association="SISModel.FK_Student_Package_Course" />
+        <AssociationConnector Association="SISModel.FK_SPMResult_Subject" />
+        <AssociationConnector Association="SISModel.FK_Student_SPMResult" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
