@@ -1,0 +1,33 @@
+﻿@model IEnumerable<SIS.Models.Course_Module>
+
+@{
+    ViewBag.Title = "Check Attendance Choices";
+}
+
+<h2>Check Attendance Choices</h2>
+
+<br>
+
+<table class="table">
+    <tr>
+        <th>
+            <bold>Selection</bold>
+        </th>
+        
+    </tr>
+
+    <tr>
+        <td>
+            @Html.ActionLink("Check Individual Attendance", "CheckIndividual", new { id = Url.RequestContext.RouteData.Values["id"] })
+        </td>
+</tr>
+
+
+    <tr>
+        <td>
+            @Html.ActionLink("Check All Attendance", "CheckAttendance", new { id = Url.RequestContext.RouteData.Values["id"] })
+        </td>
+    </tr>
+
+
+</table>
