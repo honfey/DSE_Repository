@@ -14,8 +14,8 @@ namespace SIS.Models
     
     public partial class Sibling
     {
-        public int ID { get; set; }
-        public int FamilyId { get; set; }
+        public int Id { get; set; }
+        public int StudentId { get; set; }
         public string Name { get; set; }
         public Nullable<int> Age { get; set; }
         public string Gender { get; set; }
@@ -23,6 +23,6 @@ namespace SIS.Models
         public Nullable<int> HomePosition { get; set; }
         public string Occupation { get; set; }
     
-        public virtual Family Family { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

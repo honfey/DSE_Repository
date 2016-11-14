@@ -20,7 +20,7 @@ namespace SIS.Models
             this.Intakes = new HashSet<Intake>();
         }
     
-        public int MonthId { get; set; }
+        public int Id { get; set; }
         public string Month1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

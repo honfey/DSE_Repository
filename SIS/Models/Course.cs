@@ -18,6 +18,7 @@ namespace SIS.Models
         public Course()
         {
             this.Course_Module = new HashSet<Course_Module>();
+            this.Intakes = new HashSet<Intake>();
             this.Package_Course = new HashSet<Package_Course>();
         }
     
@@ -28,6 +29,8 @@ namespace SIS.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Course_Module> Course_Module { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Intake> Intakes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Package_Course> Package_Course { get; set; }
     }

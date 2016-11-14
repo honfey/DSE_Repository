@@ -20,7 +20,7 @@ namespace SIS.Models
             this.SPMResults = new HashSet<SPMResult>();
         }
     
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string BM { get; set; }
         public string BI { get; set; }
         public string Math { get; set; }

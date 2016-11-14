@@ -25,6 +25,7 @@ namespace SIS.Models
         public int MonthId { get; set; }
         public string CourseCode { get; set; }
     
+        public virtual Course Course { get; set; }
         public virtual Month Month { get; set; }
         public virtual Year Year { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

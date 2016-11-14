@@ -22,7 +22,6 @@ namespace SIS.Models
     
         public int Id { get; set; }
         public string ModuleCode { get; set; }
-        public Nullable<int> TrainerId { get; set; }
         public string Name { get; set; }
         public Nullable<int> Day { get; set; }
     

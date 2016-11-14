@@ -17,21 +17,21 @@ namespace SIS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Student()
         {
+            this.Addresses = new HashSet<Address>();
             this.ClassStudents = new HashSet<ClassStudent>();
-            this.Families = new HashSet<Family>();
+            this.Package_Course = new HashSet<Package_Course>();
+            this.Siblings = new HashSet<Sibling>();
         }
     
-        public int ID { get; set; }
+        public int Id { get; set; }
         public Nullable<int> StudentId { get; set; }
-        public Nullable<int> AddressId { get; set; }
-        public Nullable<int> PackageId { get; set; }
         public Nullable<int> IntakeId { get; set; }
         public Nullable<int> SPMResultId { get; set; }
-        public bool insurence { get; set; }
+        public bool Insurence { get; set; }
         public string Name { get; set; }
-        public int age { get; set; }
+        public int Age { get; set; }
         public System.DateTime DOB { get; set; }
-        public int IC { get; set; }
+        public long IC { get; set; }
         public string Nationality { get; set; }
         public string Gender { get; set; }
         public string Status { get; set; }
@@ -39,14 +39,33 @@ namespace SIS.Models
         public string OtherPhoneNum { get; set; }
         public string EmailAddress { get; set; }
         public string Religion { get; set; }
+        public Nullable<bool> SingleParent { get; set; }
+        public string MomName { get; set; }
+        public string MomEdu { get; set; }
+        public Nullable<bool> MomWorkStatus { get; set; }
+        public string MomJob { get; set; }
+        public string MomFeildWork { get; set; }
+        public string MomSectorJob { get; set; }
+        public Nullable<decimal> MomSalary { get; set; }
+        public string FatherName { get; set; }
+        public string FatherEdu { get; set; }
+        public Nullable<bool> FatherWorkStatus { get; set; }
+        public string FatherJob { get; set; }
+        public string FatherFeildWork { get; set; }
+        public string FatherSectorJob { get; set; }
+        public Nullable<decimal> FatherSalary { get; set; }
+        public Nullable<int> NumSibling { get; set; }
+        public Nullable<int> BirthOrd { get; set; }
     
-        public virtual Address Address { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Address> Addresses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClassStudent> ClassStudents { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Family> Families { get; set; }
         public virtual Intake Intake { get; set; }
-        public virtual Package_Course Package_Course { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Package_Course> Package_Course { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sibling> Siblings { get; set; }
         public virtual SPMResult SPMResult { get; set; }
     }
 }

@@ -14,8 +14,8 @@ namespace SIS.Models
     
     public partial class ReportCard
     {
-        public Nullable<int> StudentID { get; set; }
-        public int ReportCardID { get; set; }
+        public int Id { get; set; }
+        public int StudentId { get; set; }
         public string CourseCode { get; set; }
         public string ModuleCode { get; set; }
         public Nullable<int> TrainerId { get; set; }

@@ -16,7 +16,7 @@ namespace SIS.Models
     {
         public int Id { get; set; }
         public Nullable<int> ClassStudentId { get; set; }
-        public Nullable<int> TestType { get; set; }
+        public Nullable<int> TestTypeId { get; set; }
         public Nullable<int> WrittenTest { get; set; }
         public Nullable<int> OralTest { get; set; }
         public Nullable<int> Presentation { get; set; }
@@ -26,5 +26,6 @@ namespace SIS.Models
         public Nullable<bool> Lab { get; set; }
     
         public virtual ClassStudent ClassStudent { get; set; }
+        public virtual TestType TestType { get; set; }
     }
 }
