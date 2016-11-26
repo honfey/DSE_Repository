@@ -78,6 +78,8 @@ namespace SIS
                 "~/Scripts/Examples/Register-menu.js"));
         }
 
+       
+
         private static void RegisterMailbox(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/Scripts/Mailbox/Inbox").Include(
@@ -374,7 +376,9 @@ namespace SIS
 
             // plugins | jquery-validate
             bundles.Add(new ScriptBundle("~/Content/plugins/jquery-validate/js").Include(
-                                         "~/Content/plugins/jquery-validate/js/jquery.validate*"));
+                                         "~/Content/plugins/jquery-validate/js/jquery.validate*",
+                                         "~/Content/Plugins/bootstrap-multiselect/css/bootstrap-multiselect.css",
+                                         "~/Content/Plugins/bootstrap-multiselect/js/bootstrap-multiselect.js"));
 
             // plugins | jquery-ui
             bundles.Add(new ScriptBundle("~/Content/plugins/jquery-ui/js").Include(
@@ -437,6 +441,12 @@ namespace SIS
             bundles.Add(new ScriptBundle("~/Content/plugins/morris/js").Include(
                                          "~/AdminLTE/plugins/morris/js/morris.min.js"));
 
+            // plugins | Multiselect
+            bundles.Add(new ScriptBundle("~/Content/plugins/bootstrap-multiselect").Include(
+                 "~/Content/plugins/bootstrap-multiselect/js/bootstrap-multiselect.js"));
+
+            bundles.Add(new StyleBundle("~/Content/plugins/bootstrap-multiselect").Include(
+                "~/Content/plugins/bootstrap-multiselect/css/bootstrap-multiselect.css"));
         }
     }
 }

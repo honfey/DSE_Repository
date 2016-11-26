@@ -1,0 +1,108 @@
+﻿@model SIS.Models.CourseWork
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>CourseWork</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ClassStudent.Student.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClassStudent.Student.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TestType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TestType.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WrittenTest)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WrittenTest)%
+        </dd>
+
+        @if (Model.OralTest == null)
+        {
+
+        }
+        else
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.OralTest)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.OralTest)%
+            </dd>
+        }
+
+        @if (Model.Presentation == null)
+        {
+
+        }
+        else
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Presentation)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Presentation)%
+            </dd>
+        }
+
+        @if (Model.Presentation == null)
+        {
+
+        }
+        else
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Assignment)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Assignment)%
+            </dd>
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.Project)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Project)%
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total)%
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

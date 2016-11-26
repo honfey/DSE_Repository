@@ -12,6 +12,12 @@ namespace SIS.Models
         public string Name { get; set; }
     }
 
+    public class ClassStudentMetadata
+    {
+        [Display(Name = "Student Name")]
+        public int StudentId { get; set; }
+    }
+
     public class TestTypeMetadata
     {
         [Display(Name = "TestType")]
@@ -28,6 +34,12 @@ namespace SIS.Models
 
     [MetadataType(typeof(StudentMetadata))]
     public partial class Student { }
+
+    [MetadataType(typeof(ClassStudentMetadata))]
+    public partial class ClassStudent
+    {
+        public List<int?> StudentList { get; set; }
+    }
 
     [MetadataType(typeof(TestTypeMetadata))]
     public partial class TestType { }

@@ -49,7 +49,7 @@ namespace SIS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ClassStudentId,MarkTypeId,Marks")] ModuleStandard moduleStandard)
+        public ActionResult Create([Bind(Include = "Id,ClassStudentId,MarkTypeId,Mark")] ModuleStandard moduleStandard)
         {
             if (ModelState.IsValid)
             {
@@ -145,6 +145,41 @@ namespace SIS.Controllers
             return View(moduleStandard);
         }
 
+        public ActionResult Add()
+        {
+            List<ModuleStandard> ms = new List<ModuleStandard> { new ModuleStandard { ClassStudentId = 0, MarkTypeId = 0, Mark = 0 } };
+            var classname = from cs in db.ClassStudents
+                            join cm in db.Course_Module on cs.Course_ModuleId equals cm.Id
+                            join c in db.Courses on cm.CourseId equals c.CourseCode
+                            join ml in db.Modules on cm.ModuleId equals ml.ModuleCode
+                            select new { cs.Id, Name = c.Name + "(" + ml.Name + ")" };
+            ViewBag.ClassStudentId = new SelectList(classname, "Id", "Name");
+            ViewBag.MarkTypeId = new SelectList(db.MarkTypes, "Id", "Name");
+            return View(ms);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(List<ModuleStandard> mss)
+        {
+            if (ModelState.IsValid)
+            {
+                    foreach (var i in mss)
+                    {
+                        db.ModuleStandards.Add(i);
+                    }
+                    db.SaveChanges();
+                    ViewBag.Message = "Data successfully saved!";
+                    ModelState.Clear();
+                mss = new List<ModuleStandard> { new ModuleStandard { ClassStudentId = 0, MarkTypeId = 0, Mark = 0 } };
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.ClassStudentId = new SelectList(db.ClassStudents, "Id", "Id");
+            ViewBag.MarkTypeId = new SelectList(db.MarkTypes, "Id", "Name");
+
+            return View(mss);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

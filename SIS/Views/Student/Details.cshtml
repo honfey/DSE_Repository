@@ -1,0 +1,308 @@
+﻿@model SIS.Models.Student
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <hr />
+    <h4>Student</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Insurence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Insurence)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nationality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nationality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherPhoneNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherPhoneNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Religion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Religion)
+        </dd>
+
+        @foreach (var i in Model.Addresses)
+        {
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Addresses)
+            </dt>
+            <dd>
+                @if (!String.IsNullOrWhiteSpace(i.StreetLine1))
+                {@Html.DisplayFor(modelItem => i.StreetLine1)<span>, <br /></span>}
+
+                @if (!String.IsNullOrWhiteSpace(i.StreetLine2))
+                {@Html.DisplayFor(modelItem => i.StreetLine2)<span>, <br /></span>}
+
+                @if (!String.IsNullOrWhiteSpace(i.PostCode))
+                {@Html.DisplayFor(modelItem => i.PostCode)}
+
+                @if (!String.IsNullOrWhiteSpace(i.City))
+                {@Html.DisplayFor(modelItem => i.City)<span>, <br /></span>}
+                                
+                @if (!String.IsNullOrWhiteSpace(i.State))
+                {@Html.DisplayFor(modelItem => i.State)<span>, <br /></span>}
+
+                @if (!String.IsNullOrWhiteSpace(i.Country))
+                {@Html.DisplayFor(modelItem => i.Country)<span>.</span>}
+
+            </dd>
+
+        }
+
+        <hr />
+        <h4>Parent</h4>
+        <hr />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SingleParent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SingleParent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomEdu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomEdu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomWorkStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomWorkStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomJob)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomJob)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomFeildWork)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomFeildWork)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomSectorJob)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomSectorJob)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MomSalary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MomSalary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FatherName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FatherName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FatherEdu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FatherEdu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FatherWorkStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FatherWorkStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FatherJob)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FatherJob)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FatherFeildWork)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FatherFeildWork)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FatherSectorJob)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FatherSectorJob)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FatherSalary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FatherSalary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumSibling)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumSibling)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BirthOrd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BirthOrd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Intake.CourseCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Intake.CourseCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SPMResult.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SPMResult.Id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

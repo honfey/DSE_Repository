@@ -56,7 +56,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>WebApplication</title>
+    <title>SbitManagement</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     @Styles.Render("~/Content/plugins/font-awesome/css")
@@ -69,7 +69,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
         <header class="main-header">
-            <a href="@Url.Action("Home", "Home")" class="logo">
+            <a href="#" class="logo">
                 <span class="logo-mini"><b>SBIT</b></span>
                 <span class="logo-lg"><b>Sbit</b>Management</span>
             </a>
@@ -84,63 +84,76 @@
             <section class="sidebar">
                 <ul class="sidebar-menu">
                     <li class="header">MAIN NAVIGATION</li>
-                    <li class="treeview">
+                    @*<li class="treeview">
                         <a href="#">
                             <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu"></ul>
-                    </li>
+                    </li>*@
                     <li class="treeview">
-                        <a href="#">
+                        <a href="@Url.Action("Index","Student")">
                             <i class="fa fa-users"></i>
                             <span>Student</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
-                        <ul class="treeview-menu">
+                        @*<ul class="treeview-menu">
                             <li><a href=""><i class="fa fa-circle-o"></i> Register Student</a></li>
                             <li><a href=""><i class="fa fa-circle-o"></i> Student Details</a></li>
-                        </ul>
+                        </ul>*@
                     </li>
                     <li class="treeview">
-                        <a href="#">
+                        <a href="@Url.Action("ClassAvailable","Attendances")">
                             <i class="fa fa-check-circle"></i>
                             <span>Attendance</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
-                        <ul class="treeview-menu">
+                        @*<ul class="treeview-menu">
                             <li><a href="#"><i class="fa fa-circle-o"></i> Mark Attendance</a></li>
                             <li><a href="#"><i class="fa fa-circle-o"></i> Check Attendance</a></li>
-                        </ul>
+                        </ul>*@
                     </li>
                     <li class="treeview">
-                        <a href="#">
+                        <a href="@Url.Action("Index","Trainers")">
                             <i class="fa fa-user"></i>
                             <span>Trainers</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
-                        <ul class="treeview-menu">
+                        @*<ul class="treeview-menu">
                             <li><a href="#"><i class="fa fa-circle-o"></i> Trainers Detail</a></li>
                             <li><a href="#"><i class="fa fa-circle-o"></i> Register Trainer</a></li>
-                        </ul>
+                        </ul>*@
                     </li>
                     <li class="treeview">
-                        <a href="#">
+                        <a href="@Url.Action("Index","Courses")">
                             <i class="fa fa-file"></i>
                             <span>Course</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
-                        <ul class="treeview-menu">
+                        @*<ul class="treeview-menu">
                             <li><a href=""><i class="fa fa-circle-o"></i> Diploma IT Support</a></li>
                             <li><a href=""><i class="fa fa-circle-o"></i> Diploma Software Engineer</a></li>
-                        </ul>
+                        </ul>*@
                     </li>
-                    <li id="left-sidebar-menu-calendar">
+
+                    <li class="treeview">
+                        <a href="@Url.Action("Index","Package_Course")">
+                            <i class="fa fa-file-text"></i>
+                            <span>Package</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        @*<ul class="treeview-menu">
+                            <li><a href=""><i class="fa fa-circle-o"></i> Diploma IT Support</a></li>
+                            <li><a href=""><i class="fa fa-circle-o"></i> Diploma Software Engineer</a></li>
+                        </ul>*@
+                    </li>
+
+                    @*<li id="left-sidebar-menu-calendar">
                         <a href="@Url.Action("Index", "Calendar")">
                             <i class="fa fa-table"></i>
                             <span>TimeTable</span>
                         </a>
-                    </li>
-                    <li class="treeview">
+                    </li>*@
+                    @*<li class="treeview">
                         <a href="#">
                             <i class="fa fa-share"></i> <span>Multilevel</span>
                             <i class="fa fa-angle-left pull-right"></i>
@@ -162,7 +175,7 @@
                             </li>
                             <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
                         </ul>
-                    </li>
+                    </li>*@
                 </ul>
             </section>
         </aside>

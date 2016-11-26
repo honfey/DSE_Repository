@@ -12,17 +12,18 @@
 
 <br>
 
-@using (Html.BeginForm())
+
+@using (Html.BeginForm("ClassAvailable", "Attendances", FormMethod.Get))
 {
-@Html.DropDownList("Search", new List<SelectListItem>
+    @Html.DropDownList("Search", new List<SelectListItem>
 
                     {
-                        new SelectListItem{ Text="--Select", Value = "" },
-                        new SelectListItem{ Text="True", Value = "1" },
-                        new SelectListItem{ Text="False", Value = "0" },
-                    }, htmlAttributes: new { @class = "form-control" })
+                        new SelectListItem{ Text="-- Select Class Status --", Value = ""},
+                        new SelectListItem{ Text="Active", Value = "1" },
+                        new SelectListItem{ Text="Deactive", Value = "0" },
+                    }, htmlAttributes: new { @class = "" })
 
-    <input type="submit" class="btn btn-default" value="Search"/>
+    <input type="submit" class="btn btn-default" value="Search" />
 }
 
 <br>
@@ -32,6 +33,24 @@
 
 
 <table class="table">
+
+@{
+    int count = Model.Count();
+}
+
+@if (count == 0)
+{
+
+    <tr>
+        <th>
+            <br>
+            <bold>Does Not Have Class Available !<br>
+            </bold>
+        <th>
+    </tr>
+}
+else
+{
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Status)
@@ -48,34 +67,47 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
-            {
+    foreach (var item in Model)
+    {
         <tr>
-            @{
-                if (item.Status == true)
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Module.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Trainer.Name)
+            </td>
+            
+                @if (item.Status == true)
                 {
                     <td>
-                        @Html.DisplayFor(modelItem => item.Status)
-                    </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Course.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Module.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Trainer.Name)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Check Attendance", "CheckChoise", new { id = item.Id }) |
-                                @Html.ActionLink("Mark Attendance", "MarkAttendance", new { id = item.Id })
-                                @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
-                            </td>
-                }
-            }
-        </tr>
+                        @Html.ActionLink("Check Attendance", "CheckChoise", new { id = item.Id }) |
+                        @Html.ActionLink("Mark Attendance", "MarkAttendance", new { id = item.Id }, new { onclick = "return confirm('Are you sure mark this class attendance ?');" }) |
+                        @Html.ActionLink("Mark Back Attendance", "MarkBack", new { id = item.Id }, new { onclick = "return confirm('Are you sure mark back this class attendance ?');" })
 
+
+                        @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                    </td>
                 }
+                else
+                {
+                    <td>
+                        @Html.ActionLink("Check Attendance", "CheckChoise", new { id = item.Id })
+                    </td>
+                }
+
+
+
+</tr>
+        }
+
+    }
 
 </table>

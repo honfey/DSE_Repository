@@ -132,7 +132,7 @@ namespace SIS.Controllers
                     package_Course.MonthlyPayment = ((package_Course.TotalPrice / 100 * Convert.ToDecimal(package_Course.InterestRate)) - package_Course.FirstPay) / Convert.ToDecimal(package_Course.MonthlyInterest);
                 }
 
-                db.Package_Course.Add(package_Course);
+                db.Entry(package_Course).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

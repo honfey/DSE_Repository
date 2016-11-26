@@ -170,10 +170,22 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\ClassStudentsController.cs" />
+    <Compile Include="Controllers\CoursesController.cs" />
+    <Compile Include="Controllers\CourseWorksController.cs" />
+    <Compile Include="Controllers\Course_ModuleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImagesController.cs" />
+    <Compile Include="Controllers\IntakeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MarkTypesController.cs" />
+    <Compile Include="Controllers\ModulesController.cs" />
+    <Compile Include="Controllers\ModuleStandardsController.cs" />
+    <Compile Include="Controllers\Package_CourseController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TrainersController.cs" />
     <Compile Include="Extensions\ClaimsExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -198,14 +210,18 @@
     <Compile Include="Models\Course_Module.cs">
       <DependentUpon>SIS.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Family.cs">
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Image.cs">
       <DependentUpon>SIS.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Intake.cs">
       <DependentUpon>SIS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MarkType.cs">
+      <DependentUpon>SIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\Module.cs">
       <DependentUpon>SIS.tt</DependentUpon>
     </Compile>
@@ -251,6 +267,9 @@
     <Compile Include="Models\Subject.cs">
       <DependentUpon>SIS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TestType.cs">
+      <DependentUpon>SIS.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Trainer.cs">
       <DependentUpon>SIS.tt</DependentUpon>
     </Compile>
@@ -261,6 +280,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\123asd.jpg" />
+    <Content Include="Content\plugins\bootstrap-multiselect\js\bootstrap-multiselect.js" />
+    <Content Include="Content\plugins\bootstrap-multiselect\css\bootstrap-multiselect.css" />
     <Content Include="Content\plugins\bootstrap-slider\css\slider.css" />
     <Content Include="Content\plugins\bootstrap-slider\js\bootstrap-slider.js" />
     <Content Include="Content\plugins\bootstrap-wysihtml5\css\bootstrap3-wysihtml5.css" />
@@ -291,6 +313,59 @@
     <Content Include="Content\dist\css\admin-lte.min.css" />
     <Content Include="Content\dist\js\app.js" />
     <Content Include="Content\dist\js\app.min.js" />
+    <Content Include="Content\plugins\datepicker\css\datepicker3.css" />
+    <Content Include="Content\plugins\datepicker\js\bootstrap-datepicker.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.ar.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.az.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.bg.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.ca.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.cs.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.cy.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.da.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.de.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.el.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.es.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.et.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.fa.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.fi.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.fr.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.gl.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.he.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.hr.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.hu.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.id.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.is.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.it.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.ja.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.ka.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.kk.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.kr.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.lt.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.lv.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.mk.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.ms.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.nb.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.nl-BE.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.nl.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.no.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.pl.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.pt-BR.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.pt.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.ro.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.rs-latin.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.rs.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.ru.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.sk.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.sl.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.sq.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.sv.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.sw.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.th.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.tr.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.ua.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.vi.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.zh-CN.js" />
+    <Content Include="Content\plugins\datepicker\js\locales\bootstrap-datepicker.zh-TW.js" />
     <Content Include="Content\plugins\daterangepicker\css\daterangepicker-bs3.css" />
     <Content Include="Content\plugins\daterangepicker\js\daterangepicker.js" />
     <Content Include="Content\plugins\daterangepicker\js\moment.js" />
@@ -474,10 +549,10 @@
     <Content Include="Content\plugins\jquery-validate\js\jquery.validate.unobtrusive.js" />
     <Content Include="Content\plugins\jquery-validate\js\jquery.validate.unobtrusive.min.js" />
     <Content Include="Content\plugins\jquery\js\jQuery-2.1.4.min.js" />
-    <Content Include="Content\plugins\jvectormap\css\jquery-jvectormap-1.2.2.css" />
-    <Content Include="Content\plugins\jvectormap\js\jquery-jvectormap-1.2.2.min.js" />
-    <Content Include="Content\plugins\jvectormap\js\jquery-jvectormap-usa-en.js" />
-    <Content Include="Content\plugins\jvectormap\js\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="Content\plugins\pace\jvectormap\css\jquery-jvectormap-1.2.2.css" />
+    <Content Include="Content\plugins\pace\jvectormap\js\jquery-jvectormap-1.2.2.min.js" />
+    <Content Include="Content\plugins\pace\jvectormap\js\jquery-jvectormap-usa-en.js" />
+    <Content Include="Content\plugins\pace\jvectormap\js\jquery-jvectormap-world-mill-en.js" />
     <Content Include="Content\plugins\momentjs\js\moment.min.js" />
     <Content Include="Content\plugins\morris\css\morris.css" />
     <Content Include="Content\plugins\morris\js\morris.js" />
@@ -686,6 +761,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.maskedinput.js" />
+    <Content Include="Scripts\jquery.maskedinput.min.js" />
     <Content Include="Scripts\jquery.slimscroll.js" />
     <Content Include="Scripts\jquery.slimscroll.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -849,6 +926,9 @@
     <Content Include="Scripts\Tables\Simple-menu.js" />
     <Content Include="Scripts\Widgets\Widgets-menu.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Content\UploadedFiles\UploadedImages\20161114033219PM_19a0975310c9ae8a68cf566513c098e9.jpg" />
+    <Content Include="Content\UploadedFiles\UploadedImages\20161114101939AM_11.jpg" />
+    <Content Include="Content\UploadedFiles\UploadedImages\20161114101939AM_88B93E47-1627-438C-85A1-4E4FEF09B028-2810-000002363534CB75.JPG" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -893,15 +973,85 @@
     <Content Include="Views\Attendances\MarkAttendance.cshtml" />
     <Content Include="Views\Attendances\CheckAttendance.cshtml" />
     <Content Include="Views\Attendances\ClassAvailable.cshtml" />
+    <Content Include="Views\Calendar\Index.cshtml" />
+    <Content Include="Views\Images\Create.cshtml" />
+    <Content Include="Views\Images\Delete.cshtml" />
+    <Content Include="Views\Images\Details.cshtml" />
+    <Content Include="Views\Images\Edit.cshtml" />
+    <Content Include="Views\Images\Index.cshtml" />
+    <Content Include="Views\ModuleStandards\Create.cshtml" />
+    <Content Include="Views\ModuleStandards\Delete.cshtml" />
+    <Content Include="Views\ModuleStandards\Details.cshtml" />
+    <Content Include="Views\ModuleStandards\Edit.cshtml" />
+    <Content Include="Views\ModuleStandards\EditList.cshtml" />
+    <Content Include="Views\ModuleStandards\Index.cshtml" />
+    <Content Include="Views\MarkTypes\Create.cshtml" />
+    <Content Include="Views\MarkTypes\Delete.cshtml" />
+    <Content Include="Views\MarkTypes\Details.cshtml" />
+    <Content Include="Views\MarkTypes\Edit.cshtml" />
+    <Content Include="Views\MarkTypes\Index.cshtml" />
+    <Content Include="Views\CourseWorks\Create.cshtml" />
+    <Content Include="Views\CourseWorks\Delete.cshtml" />
+    <Content Include="Views\CourseWorks\Details.cshtml" />
+    <Content Include="Views\CourseWorks\Edit.cshtml" />
+    <Content Include="Views\CourseWorks\Index.cshtml" />
+    <Content Include="Views\Attendances\CheckChoise.cshtml" />
+    <Content Include="Views\Attendances\CheckIndividual.cshtml" />
+    <Content Include="Views\Attendances\CheckIndividualAttendance.cshtml" />
+    <Content Include="Views\CourseWorks\EditList.cshtml" />
+    <Content Include="Views\ClassStudents\Index.cshtml" />
+    <Content Include="Views\ClassStudents\Details.cshtml" />
+    <Content Include="Views\ClassStudents\Create.cshtml" />
+    <Content Include="Views\ClassStudents\Edit.cshtml" />
+    <Content Include="Views\ClassStudents\Delete.cshtml" />
+    <Content Include="Views\Courses\Index.cshtml" />
+    <Content Include="Views\Courses\Details.cshtml" />
+    <Content Include="Views\Courses\Create.cshtml" />
+    <Content Include="Views\Courses\Edit.cshtml" />
+    <Content Include="Views\Courses\Delete.cshtml" />
+    <Content Include="Views\Modules\Index.cshtml" />
+    <Content Include="Views\Modules\Details.cshtml" />
+    <Content Include="Views\Modules\Create.cshtml" />
+    <Content Include="Views\Modules\Edit.cshtml" />
+    <Content Include="Views\Modules\Delete.cshtml" />
+    <Content Include="Views\Package_Course\Create.cshtml" />
+    <Content Include="Views\Package_Course\Delete.cshtml" />
+    <Content Include="Views\Package_Course\Details.cshtml" />
+    <Content Include="Views\Package_Course\Edit.cshtml" />
+    <Content Include="Views\Package_Course\Index.cshtml" />
+    <Content Include="Views\ModuleStandards\Add.cshtml" />
+    <Content Include="Views\Course_Module\Create.cshtml" />
+    <Content Include="Views\Course_Module\Delete.cshtml" />
+    <Content Include="Views\Course_Module\Details.cshtml" />
+    <Content Include="Views\Course_Module\Edit.cshtml" />
+    <Content Include="Views\Course_Module\Index.cshtml" />
+    <Content Include="Views\Addresses\Create.cshtml" />
+    <Content Include="Views\Addresses\Delete.cshtml" />
+    <Content Include="Views\Addresses\Details.cshtml" />
+    <Content Include="Views\Addresses\Edit.cshtml" />
+    <Content Include="Views\Addresses\Index.cshtml" />
+    <Content Include="Views\Intake\Create.cshtml" />
+    <Content Include="Views\Intake\Delete.cshtml" />
+    <Content Include="Views\Intake\Details.cshtml" />
+    <Content Include="Views\Intake\Edit.cshtml" />
+    <Content Include="Views\Intake\Index.cshtml" />
+    <Content Include="Views\Student\Create.cshtml" />
+    <Content Include="Views\Student\Delete.cshtml" />
+    <Content Include="Views\Student\Details.cshtml" />
+    <Content Include="Views\Student\Edit.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Attendances\CSS.cshtml" />
+    <Content Include="Views\Attendances\CSSM.cshtml" />
+    <Content Include="Views\Attendances\MarkBack.cshtml" />
     <Content Include="Views\Trainers\Create.cshtml" />
     <Content Include="Views\Trainers\Delete.cshtml" />
     <Content Include="Views\Trainers\Details.cshtml" />
     <Content Include="Views\Trainers\Edit.cshtml" />
     <Content Include="Views\Trainers\Index.cshtml" />
-    <Content Include="Views\Calendar\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\UploadedFiles\TrainerPhoto\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff" />

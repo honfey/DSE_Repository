@@ -17,7 +17,7 @@ namespace SIS.Models
         public int Id { get; set; }
         public Nullable<int> ClassStudentId { get; set; }
         public Nullable<int> MarkTypeId { get; set; }
-        public Nullable<int> Marks { get; set; }
+        public Nullable<int> Mark { get; set; }
     
         public virtual ClassStudent ClassStudent { get; set; }
         public virtual MarkType MarkType { get; set; }

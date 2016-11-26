@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 using SIS.Models;
 
@@ -13,6 +15,7 @@ namespace SIS.Controllers
     public class TrainersController : Controller
     {
         private SISEntities db = new SISEntities();
+        private string webConfigPath = "~/" + WebConfigurationManager.AppSettings["UploadImage"];
 
         // GET: Trainers
         public ActionResult Index()
@@ -46,10 +49,24 @@ namespace SIS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,IC,Name,FirstName,LastName,Email,PhoneNum,Address1,Address2,Postcode,City,State,Country,Gender,Religion")] Trainer trainer)
+        public ActionResult Create([Bind(Include = "Id,IC,Name,FirstName,LastName,Email,PhoneNum,Address1,Address2,Postcode,City,State,Country,Gender,Race,DateOfBirth,FileName")] Trainer trainer)
         {
             if (ModelState.IsValid)
             {
+                //List<Image> imgs = new List<Image>();
+                //foreach (var obj in Image)
+                //{
+                //    if (obj.ContentLength != 0 && obj.FileName != "")
+                //    {
+                //        string fDate = string.Format("{0:yyyyMMddhhmmsstt}", DateTime.Now);
+                //        string documentName = obj.FileName.Trim().Replace(" ", "_");
+                //        string pathToSave = Server.MapPath("~/Content/UploadedFiles/TrainerPhoto");
+                //        string filename = fDate + '_' + documentName;
+                //        obj.SaveAs(Path.Combine(pathToSave, filename));
+
+                //        imgs.Add(new Image { FileName = filename });
+                //    }
+                //}
                 db.Trainers.Add(trainer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -78,10 +95,26 @@ namespace SIS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,IC,Name,FirstName,LastName,Email,PhoneNum,Address1,Address2,Postcode,City,State,Country,Gender,Religion")] Trainer trainer)
+        public ActionResult Edit([Bind(Include = "Id,IC,Name,FirstName,LastName,Email,PhoneNum,Address1,Address2,Postcode,City,State,Country,Gender,Race,DateOfBirth,FileName")] Trainer trainer)
         {
             if (ModelState.IsValid)
             {
+                //HttpPostedFileBase obj = Request.Files["Filename"];
+                //if (obj != null && obj.ContentLength != 0 && obj.FileName != "")
+                //{
+                //    string fDate = string.Format("{0:yyyyMMddhhmmsstt}", DateTime.Now);
+                //    string documentName = obj.FileName.Trim().Replace(" ", "_");
+
+                //    string fullPath = trainer.FilePath + trainer.Filename;
+                //    if (System.IO.File.Exists(fullPath))
+                //    {
+                //        System.IO.File.Delete(fullPath);
+                //    }
+
+                //    string filename = fDate + '_' + documentName;
+                //    obj.SaveAs(Path.Combine(trainer.FilePath, filename));
+                //    trainer.Filename = filename;
+                //}
                 db.Entry(trainer).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

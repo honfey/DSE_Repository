@@ -31,12 +31,10 @@
         @for (var i = 0; i < Model.Count(); i++)
         {
             <tr>
-                <td>
                     @Html.Hidden("moduleStandard[" + (@i) + "].Id", Model.ElementAtOrDefault(i).Id)
-                    @Html.DisplayFor(p => Model.ElementAt(i).Id)
-                </td>
+                    @*@Html.DisplayFor(p => Model.ElementAt(i).Id)*@
                 <td>
-                    @Html.TextBox("moduleStandard[" + (@i) + "].ClassStudentId", Model.ElementAtOrDefault(i).ClassStudent.Course_ModuleId, new { @class = "form-control" })
+                    @Html.TextBox("moduleStandard[" + (@i) + "].ClassStudentId", Model.ElementAtOrDefault(i).ClassStudentId, new { @class = "form-control" })
                 </td>
                 @*<td>
                         @Html.TextBox("moduleStandard[" + (@i) + "].MarkTypeId", Model.ElementAtOrDefault(i).MarkTypeId, new { @class = "form-control" })
@@ -44,9 +42,10 @@
                 <td>
                     @Html.Hidden("moduleStandard[" + (@i) + "].MarkTypeId", Model.ElementAtOrDefault(i).MarkTypeId)
                     @Html.DropDownListFor(m => Model.ElementAt(i).MarkTypeId, (SelectList)ViewBag.mat, new { @class = "form-control" })
+                  
                 </td>
                 <td>
-                    @Html.TextBox("moduleStandard[" + (@i) + "].Marks", Model.ElementAtOrDefault(i).Marks, new { @class = "form-control" })
+                    @Html.TextBox("moduleStandard[" + (@i) + "].Mark", Model.ElementAtOrDefault(i).Mark, new { @class = "form-control" })
                 </td>
 
                 <td>
