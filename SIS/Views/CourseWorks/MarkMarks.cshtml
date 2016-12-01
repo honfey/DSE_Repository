@@ -1,0 +1,77 @@
+﻿@model IEnumerable<SIS.Models.CourseWork>
+
+@{
+    ViewBag.Title = "MarkMarks";
+}
+
+<h2>MarkMarks</h2>
+
+@using (Html.BeginForm("MarkMarks", "CourseWorks", FormMethod.Post))
+{
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassStudent.Student.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course_Module.Module.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TestType.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModuleStandard.MarkType.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModuleStandard.LabName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Marks)
+            </th>
+            <th></th>
+        </tr>
+
+        @for (var i = 0; i < Model.Count(); i++)
+        {
+            <tr>
+                <td>
+                    @Html.Hidden("courseWork[" + (@i) + "].Id", Model.ElementAtOrDefault(i).Id)
+                    @Html.Hidden("courseWork[" + (@i) + "].ClassStudentId", Model.ElementAtOrDefault(i).ClassStudentId)
+                    @Html.DisplayFor(p => Model.ElementAt(i).ClassStudent.Student.Name)
+                </td>
+                <td>
+                    @Html.Hidden("courseWork[" + (@i) + "].Course_ModuleId", Model.ElementAtOrDefault(i).Course_ModuleId)
+                    @Html.DisplayFor(p => Model.ElementAt(i).Course_Module.Module.ModuleCode)
+                </td>
+                <td>
+                    @Html.Hidden("courseWork[" + (@i) + "].TestTypeId", Model.ElementAtOrDefault(i).TestTypeId)
+                    @Html.DropDownListFor(m => Model.ElementAt(i).TestType.Name, (SelectList)ViewBag.TT, new { @class = "form-control" })
+                </td>
+                <td>
+                    @Html.Hidden("courseWork[" + (@i) + "].ModuleStandardId", Model.ElementAtOrDefault(i).ModuleStandardId)
+                    @Html.DisplayFor(p => Model.ElementAt(i).ModuleStandard.MarkType.Name)
+                </td>
+                <td>
+                    @Html.Hidden("courseWork[" + (@i) + "].ModuleStandard.LabName", Model.ElementAtOrDefault(i).ModuleStandard.LabName)
+                    @Html.DisplayFor(p => Model.ElementAt(i).ModuleStandard.LabName)
+                </td>
+                <td>
+                    @Html.TextBox("courseWork[" + (@i) + "].Marks", Model.ElementAtOrDefault(i).Marks, new { @class = "form-control" })
+                </td>
+                <td>
+                    @Html.ActionLink("UploadedLab", "Pass")
+                </td>
+                <td>
+                    @Html.ActionLink("X", "Delete", new { id = Model.ElementAtOrDefault(i).Id }, new { @class = "btn btn-danger" })
+                </td>
+
+            </tr>
+
+        }
+
+    </table>
+    <input type="submit" value="Submit" class="btn btn-primary" />
+    @Html.ActionLink("Back", "ShowClass");
+
+}

@@ -14,12 +14,21 @@ namespace SIS.Models
     
     public partial class ModuleStandard
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ModuleStandard()
+        {
+            this.CourseWorks = new HashSet<CourseWork>();
+        }
+    
         public int Id { get; set; }
-        public Nullable<int> ClassStudentId { get; set; }
+        public Nullable<int> Course_ModuleId { get; set; }
         public Nullable<int> MarkTypeId { get; set; }
+        public string LabName { get; set; }
         public Nullable<int> Marks { get; set; }
     
-        public virtual ClassStudent ClassStudent { get; set; }
+        public virtual Course_Module Course_Module { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CourseWork> CourseWorks { get; set; }
         public virtual MarkType MarkType { get; set; }
     }
 }

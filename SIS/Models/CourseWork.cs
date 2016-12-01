@@ -16,16 +16,14 @@ namespace SIS.Models
     {
         public int Id { get; set; }
         public Nullable<int> ClassStudentId { get; set; }
+        public Nullable<int> Course_ModuleId { get; set; }
         public Nullable<int> TestTypeId { get; set; }
-        public Nullable<int> WrittenTest { get; set; }
-        public Nullable<int> OralTest { get; set; }
-        public Nullable<int> Presentation { get; set; }
-        public Nullable<int> Assignment { get; set; }
-        public Nullable<int> Project { get; set; }
-        public Nullable<int> Total { get; set; }
-        public Nullable<bool> Lab { get; set; }
+        public Nullable<int> ModuleStandardId { get; set; }
+        public Nullable<int> Marks { get; set; }
     
         public virtual ClassStudent ClassStudent { get; set; }
+        public virtual Course_Module Course_Module { get; set; }
         public virtual TestType TestType { get; set; }
+        public virtual ModuleStandard ModuleStandard { get; set; }
     }
 }

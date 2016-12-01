@@ -19,20 +19,21 @@ namespace SIS.Models
         {
             this.Attendances = new HashSet<Attendance>();
             this.CourseWorks = new HashSet<CourseWork>();
-            this.ModuleStandards = new HashSet<ModuleStandard>();
         }
     
         public int Id { get; set; }
         public Nullable<int> Course_ModuleId { get; set; }
         public Nullable<int> StudentId { get; set; }
+        public Nullable<int> Day { get; set; }
+        public Nullable<int> Exam_Day { get; set; }
+        public Nullable<int> Trial_Day { get; set; }
+        public Nullable<int> Project_Day { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
         public virtual Course_Module Course_Module { get; set; }
-        public virtual Student Student { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CourseWork> CourseWorks { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ModuleStandard> ModuleStandards { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

@@ -23,7 +23,6 @@ namespace SIS.Models
         public int Id { get; set; }
         public string ModuleCode { get; set; }
         public string Name { get; set; }
-        public Nullable<int> Day { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Course_Module> Course_Module { get; set; }

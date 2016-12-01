@@ -1,55 +1,4 @@
-﻿@*<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("SetStandard","Create","ModuleStandards")</li>
-                    <li>@Html.ActionLink("Intake","Index","Intakes")</li>
-                    <li>@Html.ActionLink("UploadFile","Create","Images")</li>
-                    <li>@Html.ActionLink("CourseWork","Index","CourseWorks")</li>
-                    <li>@Html.ActionLink("Attendance", "ClassAvailable", "Attendances")</li>
-                    <li>@Html.ActionLink("Package", "Index", "Package_Course")</li>
-
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-</body>
-</html>*@
-
+﻿
 @using SIS.Extensions
 <!DOCTYPE html>
 <html>
@@ -59,17 +8,19 @@
     <title>WebApplication</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
+
     @Styles.Render("~/Content/plugins/font-awesome/css")
     @Styles.Render("~/Content/plugins/ionicons/css")
     @Styles.Render("~/Content/bootstrap/css")
     @Styles.Render("~/Content/dist/css")
     @Styles.Render("~/Content/dist/css/skins")
 
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
         <header class="main-header">
-            <a href="@Url.Action("Home", "Home")" class="logo">
+            <a href="#" class="logo">
                 <span class="logo-mini"><b>SBIT</b></span>
                 <span class="logo-lg"><b>Sbit</b>Management</span>
             </a>
@@ -84,63 +35,84 @@
             <section class="sidebar">
                 <ul class="sidebar-menu">
                     <li class="header">MAIN NAVIGATION</li>
-                    <li class="treeview">
+                    @*<li class="treeview">
                         <a href="#">
                             <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu"></ul>
-                    </li>
+                    </li>*@
                     <li class="treeview">
-                        <a href="#">
+                        <a href="@Url.Action("Index","Student")">
                             <i class="fa fa-users"></i>
                             <span>Student</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
-                        <ul class="treeview-menu">
+                        @*<ul class="treeview-menu">
                             <li><a href=""><i class="fa fa-circle-o"></i> Register Student</a></li>
                             <li><a href=""><i class="fa fa-circle-o"></i> Student Details</a></li>
-                        </ul>
+                        </ul>*@
                     </li>
                     <li class="treeview">
-                        <a href="#">
+                        <a href="@Url.Action("ClassAvailable","Attendances")">
                             <i class="fa fa-check-circle"></i>
                             <span>Attendance</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
-                        <ul class="treeview-menu">
+                        @*<ul class="treeview-menu">
                             <li><a href="#"><i class="fa fa-circle-o"></i> Mark Attendance</a></li>
                             <li><a href="#"><i class="fa fa-circle-o"></i> Check Attendance</a></li>
-                        </ul>
+                        </ul>*@
                     </li>
                     <li class="treeview">
-                        <a href="#">
+                        <a href="@Url.Action("Index","Trainers")">
                             <i class="fa fa-user"></i>
                             <span>Trainers</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
-                        <ul class="treeview-menu">
+                        @*<ul class="treeview-menu">
                             <li><a href="#"><i class="fa fa-circle-o"></i> Trainers Detail</a></li>
                             <li><a href="#"><i class="fa fa-circle-o"></i> Register Trainer</a></li>
-                        </ul>
+                        </ul>*@
                     </li>
                     <li class="treeview">
-                        <a href="#">
+                        <a href="@Url.Action("Index","Courses")">
                             <i class="fa fa-file"></i>
                             <span>Course</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
-                        <ul class="treeview-menu">
+                        @*<ul class="treeview-menu">
                             <li><a href=""><i class="fa fa-circle-o"></i> Diploma IT Support</a></li>
                             <li><a href=""><i class="fa fa-circle-o"></i> Diploma Software Engineer</a></li>
-                        </ul>
+                        </ul>*@
                     </li>
+
+                    <li class="treeview">
+                        <a href="@Url.Action("Index","Package_Course")">
+                            <i class="fa fa-file-text"></i>
+                            <span>Package</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        @*<ul class="treeview-menu">
+                            <li><a href=""><i class="fa fa-circle-o"></i> Diploma IT Support</a></li>
+                            <li><a href=""><i class="fa fa-circle-o"></i> Diploma Software Engineer</a></li>
+                        </ul>*@
+                    </li>
+
+                    <li class="treeview">
+                        <a href="@Url.Action("Index","Invoice")">
+                            <i class="fa fa-file-text"></i>
+                            <span>Payment</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        </li>
+
                     <li id="left-sidebar-menu-calendar">
-                        <a href="@Url.Action("Index", "Calendar")">
+                        <a href="@Url.Action("Table", "TimeTable")">
                             <i class="fa fa-table"></i>
                             <span>TimeTable</span>
                         </a>
                     </li>
-                    <li class="treeview">
+                    @*<li class="treeview">
                         <a href="#">
                             <i class="fa fa-share"></i> <span>Multilevel</span>
                             <i class="fa fa-angle-left pull-right"></i>
@@ -162,7 +134,7 @@
                             </li>
                             <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
                         </ul>
-                    </li>
+                    </li>*@
                 </ul>
             </section>
         </aside>
@@ -192,6 +164,7 @@
     </div>
 
 
+    @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/Content/plugins/jquery/js")
     @RenderSection("menu", required: false)
     @Scripts.Render("~/Content/bootstrap/js")

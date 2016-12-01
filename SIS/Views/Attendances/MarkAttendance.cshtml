@@ -96,12 +96,26 @@
         });
     }
 
+
+
+    //$('#haha input[type=checkbox]').change(function () {
+    //    if (this.checked) {
+    //        $('#haha input[type=checkbox]').not(
+    //                            $(this)).prop('checked', false);
+    //    }
+    //});
+
+    function Ontime()
+    {
+        $('.status1 input:checkbox').click(function () {
+            $('.status1 input:checkbox').not(this).prop('checked', false),
+            $('.Status').attr('value', this.value)
+
+        });
+    }
+
 </script>
 
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 
 @using (Html.BeginForm("MarkAttendance", "Attendances", FormMethod.Post))
 {
@@ -130,9 +144,14 @@
             <th>
                 <input type="checkbox" onclick="CheckAOUT()" id="AO"> &nbsp; @Html.DisplayNameFor(model => model.AfternoonOut)
             </th>
-
-
+            <th class="status1">
+                <input type="checkbox" onclick="Ontime()" id="OnTime" value="Ontime"> <label>OnTime</label> &nbsp;&nbsp;
+                <input type="checkbox" onclick="Ontime()" id="Late" value="Late"> <label>Late</label> &nbsp;&nbsp;
+                <input type="checkbox" onclick="Ontime()" id="Absent" value="Absent" ><label>Absent</label>
+            </th>
         </tr>
+
+       
 
         @for (int i = 0; i < Model.Count(); i++)
         {
@@ -142,8 +161,8 @@
 
                     </td>*@
                 @*<td>
-                    @Html.DisplayFor(x => x.ElementAt(i).ClassStudentId)
-                </td>*@
+                        @Html.DisplayFor(x => x.ElementAt(i).ClassStudentId)
+                    </td>*@
 
                 <td>
                     @Html.DisplayFor(x => x.ElementAt(i).ClassStudent.StudentId)
@@ -153,38 +172,33 @@
                     @Html.DisplayFor(x => x.ElementAt(i).ClassStudent.Student.Name)
                 </td>
 
-                <td>                     
-                            @Html.Hidden("att[" + (@i) + "].Id", Model.ElementAtOrDefault(i).Id)
-                            @Html.Hidden("att[" + (@i) + "].ClassStudentID", Model.ElementAtOrDefault(i).ClassStudentId)
-                            @Html.Hidden("att[" + (@i) + "].TodayDate", Model.ElementAtOrDefault(i).TodayDate)
-                            @Html.Hidden("att[" + (@i) + "].Status", Model.ElementAtOrDefault(i).Status )
+                <td>
+                    @Html.Hidden("att[" + (@i) + "].Id", Model.ElementAtOrDefault(i).Id)
+                    @Html.Hidden("att[" + (@i) + "].ClassStudentID", Model.ElementAtOrDefault(i).ClassStudentId)
+                    @Html.Hidden("att[" + (@i) + "].TodayDate", Model.ElementAtOrDefault(i).TodayDate)
+                    @*Html.Hidden("att[" + (@i) + "].Status", Model.ElementAtOrDefault(i).Status)*@
 
-                            @Html.TextBox("att[" + (@i) + "].MorningIn", Model.ElementAtOrDefault(i).MorningIn, new { @class = "MorningInInput" })                       
+                    @Html.TextBox("att[" + (@i) + "].MorningIn", Model.ElementAtOrDefault(i).MorningIn, new { @class = "MorningInInput" })
                 </td>
 
                 <td>
-                            @Html.TextBox("att[" + (@i) + "].MorningOut", Model.ElementAtOrDefault(i).MorningOut, new { @class = "MorningOutInput" })
-                </td>
-
-
-                <td>
-                            @Html.TextBox("att[" + (@i) + "].AfternoonIn", Model.ElementAtOrDefault(i).AfternoonIn, new { @class = "AfternoonInInput" })
-                </td>
-
-                <td>
-                            @Html.TextBox("att[" + (@i) + "].AfternoonOut", Model.ElementAtOrDefault(i).AfternoonOut, new { @class = "AfternoonOutInput" })
-                </td>
-
-
-                @*<td>
                     @Html.TextBox("att[" + (@i) + "].MorningOut", Model.ElementAtOrDefault(i).MorningOut, new { @class = "MorningOutInput" })
                 </td>
+
+
                 <td>
                     @Html.TextBox("att[" + (@i) + "].AfternoonIn", Model.ElementAtOrDefault(i).AfternoonIn, new { @class = "AfternoonInInput" })
                 </td>
+
                 <td>
                     @Html.TextBox("att[" + (@i) + "].AfternoonOut", Model.ElementAtOrDefault(i).AfternoonOut, new { @class = "AfternoonOutInput" })
-                </td>*@
+                </td>
+                <td>
+                    @Html.TextBox("att[" + (@i) + "].Status", Model.ElementAtOrDefault(i).Status, new { @class = "Status"  })
+                </td>
+
+
+               
 
 
 
@@ -199,4 +213,15 @@
     </table>
 
     <input type="submit" value="Submit" class="btn btn-primary" />
+
+
+
+
+
+
+
+
+
+
+
 }

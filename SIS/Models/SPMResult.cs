@@ -21,10 +21,11 @@ namespace SIS.Models
         }
     
         public int Id { get; set; }
+        public Nullable<int> StudentId { get; set; }
         public Nullable<int> Year { get; set; }
-        public Nullable<int> SubjectId { get; set; }
+        public string SubjectName { get; set; }
+        public string Grade { get; set; }
     
-        public virtual Subject Subject { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student> Students { get; set; }
     }

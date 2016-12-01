@@ -1,0 +1,577 @@
+﻿@model SIS.Models.Student
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <h4>Student</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.StudentId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StudentId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StudentId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IntakeId, "IntakeId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("IntakeId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IntakeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Insurence, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Insurence)
+                    @Html.ValidationMessageFor(model => model.Insurence, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IC, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IC, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IC, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nationality, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nationality, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nationality, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Gender", new List<SelectListItem>
+
+             {
+                new SelectListItem{ Text="Male", Value = "Male" },
+                new SelectListItem{ Text="Female", Value = "Female" },
+             }, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Status", new List<SelectListItem>
+
+             {
+                new SelectListItem{ Text="Active", Value = "Active" },
+                new SelectListItem{ Text="DeActive", Value = "DeActive" },
+             }, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhoneNum, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PhoneNum, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PhoneNum, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OtherPhoneNum, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OtherPhoneNum, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.OtherPhoneNum, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Religion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Religion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Religion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div id="ResultList">
+            <h4>SPM Result</h4>
+
+            <div class="form-group">
+                @Html.Label("SPMResult[0].SubjectName", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Editor("SPMResult[0].SubjectName", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessage("SPMResult[0].SubjectName", "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("SPMResult[0].Grade", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Editor("SPMResult[0].Grade", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessage("SPMResult[0].Grade", "", new { @class = "text-danger" })
+                </div>
+            </div>            
+        </div>
+
+        <div id="ResultButton" class="form-group">
+            <label class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <button id="addResult" type="button" class="btn btn-primary btn-xs"><i class="fa fa-plus-circle" aria-hidden="true"></i> &nbsp; Add Subject</button>
+            </div>
+        </div>
+
+        <div id="AddressList">
+            <h4>Address</h4>
+
+            <div class="form-group">
+                @Html.Label("Addresses[0].StreetLine1", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Editor("Addresses[0].StreetLine1", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessage("Addresses[0].StreetLine1", "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Addresses[0].StreetLine2", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Editor("Addresses[0].StreetLine2", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessage("Addresses[0].StreetLine2", "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Addresses[0].PostCode", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Editor("Addresses[0].PostCode", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessage("Addresses[0].PostCode", "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Addresses[0].City", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Editor("Addresses[0].City", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessage("Addresses[0].City", "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Addresses[0].State", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Editor("Addresses[0].State", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessage("Addresses[0].State", "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Addresses[0].Country", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Editor("Addresses[0].Country", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessage("Addresses[0].Country", "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div id="addressButton" class="form-group">
+            <label class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <button id="addAddress" type="button" class="btn btn-primary btn-xs"><i class="fa fa-plus-circle" aria-hidden="true"></i> &nbsp; Add Address</button>
+            </div>
+        </div>
+
+        <hr />
+        <h4>Parents</h4>
+        <hr />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SingleParent, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("SingleParent", new List<SelectListItem>
+
+             {
+                new SelectListItem{ Text="Yes", Value = "Yes" },
+                new SelectListItem{ Text="No", Value = "No" },
+             }, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MomName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MomName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MomName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MomEdu, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MomEdu", new List<SelectListItem>
+
+             {
+                new SelectListItem{ Text="None", Value = "None" },
+                new SelectListItem{ Text="Primary", Value = "Primary" },
+                new SelectListItem{ Text="Secondary", Value = "Secondary" },
+                new SelectListItem{ Text="Form 6", Value = "Form 6" },
+                new SelectListItem{ Text="University", Value = "University" },
+             }, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MomWorkStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MomWorkStatus", new List<SelectListItem>
+
+             {
+                new SelectListItem{ Text="Yes", Value = "Yes" },
+                new SelectListItem{ Text="No", Value = "No" },
+             }, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MomJob, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MomJob, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MomJob, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MomFeildWork, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MomFeildWork, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MomFeildWork, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MomSectorJob, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MomSectorJob, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MomSectorJob, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MomSalary, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MomSalary, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MomSalary, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FatherName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FatherName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FatherName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FatherEdu, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("FatherEdu", new List<SelectListItem>
+
+             {
+                new SelectListItem{ Text="None", Value = "None" },
+                new SelectListItem{ Text="Primary", Value = "Primary" },
+                new SelectListItem{ Text="Secondary", Value = "Secondary" },
+                new SelectListItem{ Text="Form 6", Value = "Form 6" },
+                new SelectListItem{ Text="University", Value = "University" },
+             }, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FatherWorkStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("FatherWorkStatus", new List<SelectListItem>
+
+             {
+                new SelectListItem{ Text="Yes", Value = "Yes" },
+                new SelectListItem{ Text="No", Value = "No" },
+             }, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FatherJob, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FatherJob, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FatherJob, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FatherFeildWork, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FatherFeildWork, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FatherFeildWork, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FatherSectorJob, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FatherSectorJob, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FatherSectorJob, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FatherSalary, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FatherSalary, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FatherSalary, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumSibling, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NumSibling, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NumSibling, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BirthOrd, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BirthOrd, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BirthOrd, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+        
+        <div id="SiblingList">
+            <h4>Siblings</h4>
+
+            <div class="form-group">
+                @Html.Label("Sibling[0].Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Editor("Sibling[0].Name", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessage("Sibling[0].Name", "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Sibling[0].Age", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Editor("Sibling[0].Age", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessage("Sibling[0].Age", "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Sibling[0].Gender", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Sibling[0].Gender", new List<SelectListItem>
+
+             {
+                new SelectListItem{ Text="Male", Value = "Male" },
+                new SelectListItem{ Text="Female", Value = "Female" },
+             }, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Sibling[0].Relationship", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Editor("Sibling[0].Relationship", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessage("Sibling[0].Relationship", "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Sibling[0].HomePosition", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Editor("Sibling[0].HomePosition", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessage("Sibling[0].HomePosition", "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Sibling[0].Occupation", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Editor("Sibling[0].Occupation", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessage("Sibling[0].Occupation", "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div id="siblingButton" class="form-group">
+            <label class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <button id="addSibling" type="button" class="btn btn-primary btn-xs"><i class="fa fa-plus-circle" aria-hidden="true"></i> &nbsp; Add Sibling</button>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        function _deleteAddress(t) {
+            $(t).parent().parent().remove();
+            _updateAddressId();
+        }
+
+        function _updateAddressId()
+        {
+            var addressObj = $('.addressDiv');
+            var l = addressObj.length;
+            var k = 1;
+
+            addressObj.each(function () {
+                if (l > 0 && k <= l) {
+                    this.childNodes[0].childNodes[0].innerHTML = "Address(" + k + ")";
+                    this.childNodes[1].childNodes[1].childNodes[0].name = "Addresses[" + k + "].StreetLine1";
+                    this.childNodes[2].childNodes[1].childNodes[0].name = "Addresses[" + k + "].StreetLine2";
+                    this.childNodes[3].childNodes[1].childNodes[0].name = "Addresses[" + k + "].PostCode";
+                    this.childNodes[4].childNodes[1].childNodes[0].name = "Addresses[" + k + "].City";
+                    this.childNodes[5].childNodes[1].childNodes[0].name = "Addresses[" + k + "].State";
+                    this.childNodes[6].childNodes[1].childNodes[0].name = "Addresses[" + k + "].Country";
+
+                    k++;
+                }
+            });
+        }
+
+        $(document).ready(function () {
+
+            $("#addAddress").click(function () {
+                var z = $('.addressDiv').length + 1;
+
+                $("#addressButton").before("<div class='addressDiv form-group'><h4><span>Address("+z+")</span> <button type='button' onclick='return _deleteAddress(this)' class='btn btn-primary btn-xs'><i class='fa fa-times' aria-hidden='true'></i></button></h4><div class='form-group'><label class='control-label col-md-2'>StreetLine1</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].StreetLine1' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2'>StreetLine2</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].StreetLine2' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2' >PostCode</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].PostCode' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2' >City</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].City' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2' >State</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].State' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2' >Country</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].Country' type='text' value=''></div></div></div>");
+
+                });
+        });                
+    </script>
+
+        
+    <script>
+        // Add SPM Result
+        //
+        //
+        function _deleteResult(t) {
+            $(t).parent().parent().remove();
+            _updateSPMResultId();
+        }
+
+        function _updateSPMResultId() {
+            var ResultObj = $('.ResultDiv');
+            var l = ResultObj.length;
+            var k = 1;
+
+            ResultObj.each(function () {
+                if (l > 0 && k <= l) {
+                    this.childNodes[0].childNodes[0].innerHTML = "SPMResult(" + k + ")";
+                    this.childNodes[1].childNodes[0].name = "SPMResult[" + k + "].SubjectName";
+                    this.childNodes[2].childNodes[0].name = "SPMResult[" + k + "].Grade";
+
+                    k++;
+                }
+            });
+        }
+
+        $(document).ready(function () {
+
+            $("#addResult").click(function () {
+                var z = $('.ResultDiv').length + 1;
+
+                $("#ResultButton").before("<div id='ResultDiv'><h4><span>Subject(" + z + ")</span> <button type='button' onclick='return _deleteResult(this)' class='btn btn-primary btn-xs'><i class='fa fa-times' aria-hidden='true'></i></button></h4><div class='form-group'><label class='control-label col-md-2' for='SPMResult["+z+"]SubjectName'>SubjectName</label><div class='col-md-10'><input class='form-control text-box single-line' id='SPMResult["+z+"]SubjectName' name='SPMResult[0].SubjectName' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2' for='SPMResult["+z+"]Grade'>Grade</label><div class='col-md-10'><input class='form-control text-box single-line' id='SPMResult["+z+"]Grade' name='SPMResult[0].Grade' type='text' value=''></div></div></div>");
+                //$("#ResultButton").before("<div class='ResultDiv form-group'><h4><span>Address(" + z + ")</span> <button type='button' onclick='return _deleteAddress(this)' class='btn btn-primary btn-xs'><i class='fa fa-times' aria-hidden='true'></i></button></h4><div class='form-group'><label class='control-label col-md-2'>StreetLine1</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].StreetLine1' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2'>StreetLine2</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].StreetLine2' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2'>PostCode</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].PostCode' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2'>City</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].City' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2'>State</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].State' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2'>Country</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].Country' type='text' value=''></div></div></div>");
+
+            });
+        });
+    </script>
+<script>
+        // Add Sibling
+        //
+        //
+        function _deleteSibling(t) {
+            $(t).parent().parent().remove();
+            _updateSiblingId();
+        }
+
+        function _updateSiblingId() {
+            var SiblingObj = $('.SiblingDiv');
+            var l = SiblingObj.length;
+            var k = 1;
+
+            SiblingObj.each(function () {
+                if (l > 0 && k <= l) {
+                    this.childNodes[0].childNodes[0].innerHTML = "Sibling(" + k + ")";
+                    this.childNodes[1].childNodes[0].name = "Sibling[" + k + "].Name";
+                    this.childNodes[2].childNodes[0].name = "Sibling[" + k + "].Age";
+                    this.childNodes[2].childNodes[0].name = "Sibling[" + k + "].Gender";
+                    this.childNodes[2].childNodes[0].name = "Sibling[" + k + "].Relationship";
+                    this.childNodes[2].childNodes[0].name = "Sibling[" + k + "].HomePosition";
+                    this.childNodes[2].childNodes[0].name = "Sibling[" + k + "].Occupation";
+
+                    k++;
+                }
+            });
+        }
+
+        $(document).ready(function () {
+
+            $("#addSibling").click(function () {
+                var z = $('.SiblingDiv').length + 1;
+
+                $("#siblingButton").before("<div id='SiblingDiv'><h4>Siblings</h4><div class='form-group'><label class='control-label col-md-2'>Name</label><div class='col-md-10'><input class='form-control text-box single-line' id='Sibling["+z+"]Name' name='Sibling[0].Name' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2' >Age</label><div class='col-md-10'><input class='form-control text-box single-line' id='Sibling["+z+"]Age' name='Sibling[0].Age' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2' >Gender</label><div class='col-md-10'><select class='form-control valid' id='Sibling["+z+"]Gender' name='Gender'><option value='Male'>Male</option><option value='Female'>Female</option></select></div></div><div class='form-group'><label class='control-label col-md-2' >Relationship</label><div class='col-md-10'><input class='form-control text-box single-line' id='Sibling["+z+"]Relationship' name='Sibling[0].Relationship' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2' >HomePosition</label><div class='col-md-10'><input class='form-control text-box single-line' id='Sibling["+z+"]HomePosition' name='Sibling[0].HomePosition' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2' >Occupation</label><div class='col-md-10'><input class='form-control text-box single-line' id='Sibling["+z+"]Occupation' name='Sibling[0].Occupation' type='text' value=''></div></div></div>");
+                //$("#ResultButton").before("<div class='ResultDiv form-group'><h4><span>Address(" + z + ")</span> <button type='button' onclick='return _deleteAddress(this)' class='btn btn-primary btn-xs'><i class='fa fa-times' aria-hidden='true'></i></button></h4><div class='form-group'><label class='control-label col-md-2'>StreetLine1</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].StreetLine1' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2'>StreetLine2</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].StreetLine2' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2'>PostCode</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].PostCode' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2'>City</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].City' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2'>State</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].State' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2'>Country</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].Country' type='text' value=''></div></div></div>");
+
+            });
+        });
+</script>
+
+}

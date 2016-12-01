@@ -1,18 +1,56 @@
 ﻿@model IEnumerable<SIS.Models.Attendance>
 
 @{
-    ViewBag.Title = "CheckIndividualAttendance";
+    ViewBag.Title = "Check Individual Attendance";
 }
 
-<h2>CheckIndividualAttendance</h2>
+<h2>Check Individual Attendance</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<br>
+
 <table class="table">
+@{
+    int count = Model.Count();
+}
+
+@if (count == 0)
+{
+
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ClassStudent.Student.ID)
+            <br>
+            <bold>This Student Does Not Have ANY attendance on THIS Classroom or THIS Module!</bold>
+        <th>
+    </tr>
+}
+else
+{
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ClassStudent.Student.Id)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.ClassStudent.Student.Name)
+        </th>
+
+        @{
+            var tempDate = new List<DateTime>();
+        }
+
+
+        @foreach (var i in ViewData["DateList"] as List<DateTime?>)
+        {
+            <th colspan="4" align="right">
+                @i.Value.ToShortDateString()
+            </th>
+
+        }
+
+    </tr>
+    @*<tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ClassStudent.Student.Id)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ClassStudent.Student.Name)
@@ -30,34 +68,117 @@
             @Html.DisplayNameFor(model => model.AfternoonOut)
         </th>
         <th></th>
-    </tr>
+    </tr>*@
 
-@foreach (var item in Model) {
+
+int? tempClassID = 0;
+int? tempCount = 0;
+
+
+
+for (var a = 0; a < Model.Count(); a++)
+{
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ClassStudent.Student.ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ClassStudent.Student.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MorningIn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MorningOut)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AfternoonIn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AfternoonOut)
-        </td>
-        @*<td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>*@
+        @{
+
+
+            if (Model.ElementAtOrDefault(a).ClassStudentId == tempClassID)
+            {
+                tempClassID = Model.ElementAtOrDefault(a).ClassStudentId;
+                continue;
+            }
+            else
+            {
+                tempClassID = Model.ElementAtOrDefault(a).ClassStudentId;
+                tempCount = Model.Where(x => x.ClassStudentId == tempClassID).Count();
+                <td>
+                    @Html.DisplayFor(b => Model.ElementAtOrDefault(a).ClassStudent.Student.Id)
+                </td>
+                    <td>
+                        @Html.DisplayFor(b => Model.ElementAtOrDefault(a).ClassStudent.Student.Name)
+                    </td>
+
+                for (var d = 0; d < tempCount; d++)
+                {
+                    var UpzDate = (List<DateTime?>)ViewData["DateList"]; //14/11 , 15/11
+
+                    for (var e = 0; e < UpzDate.Count(); e++)
+                    {
+
+
+                        if (Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).TodayDate == UpzDate.ElementAtOrDefault(e))
+                        //if (Model.ElementAtOrDefault(d).ClassStudentId == tempClassID && Model.ElementAtOrDefault(d).TodayDate == UpzDate.ElementAtOrDefault(e))
+                        {
+                            <td>
+                                @Html.DisplayFor(b => Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).MorningIn)
+                            </td>
+                                <td>
+                                    @Html.DisplayFor(b => Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).MorningOut)
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(b => Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).AfternoonIn)
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(b => Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).AfternoonOut)
+
+
+                                </td>
+
+
+
+
+
+                        }
+
+
+                    }
+
+                }
+            }
+        }
     </tr>
-}
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+    @*@foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassStudent.Student.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassStudent.Student.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MorningIn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MorningOut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AfternoonIn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AfternoonOut)
+            </td>*
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                </td>
+        </tr>*@
+    }
 
 </table>

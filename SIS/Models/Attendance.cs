@@ -22,9 +22,7 @@ namespace SIS.Models
         public Nullable<System.TimeSpan> AfternoonOut { get; set; }
         public Nullable<System.DateTime> TodayDate { get; set; }
         public string Status { get; set; }
-
-        public List<Nullable<System.DateTime>> DateList { get; set; }
-
+    
         public virtual ClassStudent ClassStudent { get; set; }
     }
 }

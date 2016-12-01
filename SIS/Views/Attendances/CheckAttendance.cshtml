@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<SIS.Models.Attendance>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Check Student Attendance";
 }
 
 <h2>Search Student Attendance</h2>
@@ -15,92 +15,315 @@
 
 
 <table class="table">
+@{
+    int count = Model.Count();
+}
+
+@if (count == 0)
+{
+
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ClassStudent.Student.ID)
+            <br>
+            <bold>This Class Does Not Have ANY Attendance Mark Yet !<br>
+            </bold>
+        <th>
+    </tr>
+}
+else
+{
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ClassStudent.Student.Id)
         </th>
 
         <th>
             @Html.DisplayNameFor(model => model.ClassStudent.Student.Name)
         </th>
 
-        @{ 
+        <th>
+            (%)
+        </th>
+
+        @{
             var tempDate = new List<DateTime>();
         }
 
 
         @foreach (var i in ViewData["DateList"] as List<DateTime?>)
         {
-            <th>
+            <th colspan="4" align="right">
                 @i.Value.ToShortDateString()
             </th>
+
         }
+
+        
+
 
     </tr>
 
 
-    @{
-        int? tempClassID = 0;
-        int? tempCount = 0;       
-    }
 
+                int? tempClassID = 0;
+                int? tempCount = 0;
+                DateTime TodayDates = DateTime.Now.Date;
 
-    @for (var a = 0; a < Model.Count(); a++)
-    {
+                //(%)
+                int? Day = Model.ElementAtOrDefault(0).ClassStudent.Day;
+                int? Seksyen = Day * 2;
+                int ComingSeksyen = 0;
+
+                for (var a = 0; a < Model.Count(); a++)
+                {
+                ComingSeksyen = 0;
         <tr>
-            @{
+                        @{
 
 
-                if (Model.ElementAtOrDefault(a).ClassStudentId == tempClassID)
-                {
-                    tempClassID = Model.ElementAtOrDefault(a).ClassStudentId;
-                    continue;
-                }
-                else
-                {
-                    tempClassID = Model.ElementAtOrDefault(a).ClassStudentId;
-                    tempCount = Model.Where(x => x.ClassStudentId == tempClassID).Count();
+                            if (Model.ElementAtOrDefault(a).ClassStudentId == tempClassID)
+                            {
+                                tempClassID = Model.ElementAtOrDefault(a).ClassStudentId;
+                                continue;
+                            }
+                            else
+                            {
+                                tempClassID = Model.ElementAtOrDefault(a).ClassStudentId;
+                                tempCount = Model.Where(x => x.ClassStudentId == tempClassID).Count();
                     <td>
-                        @Html.DisplayFor(b => Model.ElementAtOrDefault(a).ClassStudent.Student.ID )
+                        @Html.DisplayFor(b => Model.ElementAtOrDefault(a).ClassStudent.Student.Id)
                     </td>
                     <td>
                         @Html.DisplayFor(b => Model.ElementAtOrDefault(a).ClassStudent.Student.Name)
                     </td>
+                                //start here (%)
 
-                    for (var d = 0; d < tempCount; d++)
-                    {
-                        var UpzDate = (List<DateTime?>)ViewData["DateList"]; //14/11 , 15/11
+                                for (var r = 0; r < tempCount; r++)
+                                {
+                                    if (Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(r).MorningIn != null)
+                                    {
+                                        ComingSeksyen += 1;
+                                    }
+                                    else
+                                    {
+                                        ComingSeksyen += 0;
+                                    }
 
-                        for (var e = 0; e < UpzDate.Count(); e++)
-                        {
+                                    if (Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(r).AfternoonIn != null)
+                                    {
+                                        ComingSeksyen += 1;
+                                    }
+                                    else
+                                    {
+                                        ComingSeksyen += 0;
+                                    }
+                                }
 
-
-                            if (Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).TodayDate == UpzDate.ElementAtOrDefault(e))
-                            //if (Model.ElementAtOrDefault(d).ClassStudentId == tempClassID && Model.ElementAtOrDefault(d).TodayDate == UpzDate.ElementAtOrDefault(e))
-                            {
+                                double? answer = (ComingSeksyen * 100) / Seksyen;
+                                if((ComingSeksyen * 100) % Seksyen <= Day && (ComingSeksyen * 100) % Seksyen != 0)
+                                {
+                                    answer = answer + 0.5;
+                                }
+                                else if((ComingSeksyen * 100) % Seksyen > Day)
+                                {
+                                    answer = answer + 1;
+                                }
                                 <th>
-                                    @Html.DisplayFor(b => Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).MorningIn)
-                                    
-                                    @*@Html.DisplayFor(b => Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).MorningOut)
-                                    @Html.DisplayFor(b => Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).AfternoonIn)
-                                    @Html.DisplayFor(b => Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).AfternoonOut)*@
-
-
+                                    @answer                                    
                                 </th>
 
+
+                                for (var d = 0; d < tempCount; d++)
+                                {
+                                    var UpzDate = (List<DateTime?>)ViewData["DateList"]; //14/11 , 15/11
+
+                                    for (var e = 0; e < UpzDate.Count(); e++)
+                                    {
+
+
+                                        if (Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).TodayDate == UpzDate.ElementAtOrDefault(e))
+                                        //if (Model.ElementAtOrDefault(d).ClassStudentId == tempClassID && Model.ElementAtOrDefault(d).TodayDate == UpzDate.ElementAtOrDefault(e))
+                                        {
+                                            if (Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).MorningIn == null)
+                                            {
+                                                if (UpzDate.ElementAtOrDefault(e) != TodayDates)
+                                                {
+                                                    //red
+                                                    <td>
+                                                        <label>Absent</label>
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    //red
+                                                    <td>
+                                                        <label>Not Mark</label>
+                                                    </td>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                //Start
+                                                if (Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).MorningIn.Value.Hours == 9)
+                                                {
+                                                    if (Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).MorningIn.Value.Minutes > 30)
+                                                    {
+                                                        //red
+                                                        <td>
+                                                            <mark>@Html.DisplayFor(b => Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).MorningIn)</mark>
+                                                        </td>
+                                                }
+                                                else if (Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).MorningIn.Value.Minutes <= 30)
+                                                {
+                                            <td>
+                                                @Html.DisplayFor(b => Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).MorningIn)
+                                            </td>
+                                                }
+                                            }
+                                            else if (Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).MorningIn.Value.Hours > 9)
+                                            {
+                                        //red
+                                        <td>
+                                            <mark>@Html.DisplayFor(b => Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).MorningIn)</mark>
+                                        </td>
+                                            }
+                                            else if (Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).MorningIn.Value.Hours < 9)
+                                            {
+                                        <td>
+                                            @Html.DisplayFor(b => Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).MorningIn)
+
+                                        </td>
+                                                }
+                                            }//End
+
+
+
+                                            if (Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).MorningOut == null)
+                                            {
+                                                if (UpzDate.ElementAtOrDefault(e) != TodayDates)
+                                                {
+                                                    //red
+                                                    <td>
+                                                        <label>Absent</label>
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    //red
+                                                    <td>
+                                                        <label>Not Mark</label>
+                                                    </td>
+                                                }
+                                            }
+                                            else
+                                            {
+                                <td>
+                                    @Html.DisplayFor(b => Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).MorningOut)
+                                </td>
+
+
+                                            }
+
+                                            if (Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).AfternoonIn == null)
+                                            {
+                                                if (UpzDate.ElementAtOrDefault(e) != TodayDates)
+                                                {
+                                                    //red
+                                                    <td>
+                                                        <label>Absent</label>
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    //red
+                                                    <td>
+                                                        <label>Not Mark</label>
+                                                    </td>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                //Start
+                                                if (Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).AfternoonIn.Value.Hours == (Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).MorningOut.Value.Hours + 1))
+                                                {
+                                                    if (Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).AfternoonIn.Value.Minutes > Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).MorningOut.Value.Minutes)
+                                                    {
+                                                        //red
+                                            <td>
+                                                <mark>@Html.DisplayFor(b => Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).AfternoonIn)</mark>
+                                            </td>
+                                                }
+                                                else if (Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).AfternoonIn.Value.Minutes <= Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).MorningOut.Value.Minutes)
+                                                {
+                                            <td>
+                                                @Html.DisplayFor(b => Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).AfternoonIn)
+                                            </td>
+                                                }
+                                            }
+                                            else if (Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).AfternoonIn.Value.Hours > ( Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).AfternoonIn.Value.Hours + 1))
+                                            {
+                                                    //red
+                                        <td>
+                                            <mark>@Html.DisplayFor(b => Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).AfternoonIn)</mark>
+                                        </td>
+                                                }
+                                                else if (Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).AfternoonIn.Value.Hours < (Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).AfternoonIn.Value.Hours + 1))
+                                                {
+                                        <td>
+                                            @Html.DisplayFor(b => Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).AfternoonIn)
+                                        </td>
+                                                }
+                                            }//End
+
+
+
+
+                                            if (Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).AfternoonOut == null)
+                                            {
+                                                if (UpzDate.ElementAtOrDefault(e) != TodayDates)
+                                                {
+                                                    //red
+                                                    <td>
+                                                        <label>Absent</label>
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    //red
+                                                    <td>
+                                                        <label>Not Mark</label>
+                                                    </td>
+                                                }
+                                            }
+                                            else
+                                            {
+                                    <td>
+                                        @Html.DisplayFor(b => Model.Where(x => x.ClassStudentId == tempClassID).ElementAtOrDefault(d).AfternoonOut)
+                                    </td>
+                                        }
+
+
+
+
+
+
+
+
+
+                                    }
+
+
+                                }
+
                             }
-                           
-
                         }
-
                     }
-                }
-            }
         </tr>
-    }
+                            }
 
 
-
+            }
 
 
 </table>

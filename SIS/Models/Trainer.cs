@@ -21,7 +21,7 @@ namespace SIS.Models
         }
     
         public int Id { get; set; }
-        public Nullable<long> IC { get; set; }
+        public string IC { get; set; }
         public string Name { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -34,8 +34,9 @@ namespace SIS.Models
         public string State { get; set; }
         public string Country { get; set; }
         public string Gender { get; set; }
-        public string Religion { get; set; }
+        public string Race { get; set; }
         public Nullable<System.DateTime> DateOfBirth { get; set; }
+        public string FileName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Course_Module> Course_Module { get; set; }

@@ -1,0 +1,139 @@
+﻿@model List<SIS.Models.ModuleStandard>
+
+@{
+    ViewBag.Title = "Add";
+}
+<script type="text/javascript">
+    function clickt() {
+        $(":checkbox").click(function () {
+            if ($(this).prop('checked') == true) {
+                $("#4").show();
+                $("#3").show();
+            }
+            else {
+                $("#4").hide();
+                $("#3").hide();
+            }
+        })
+    };
+
+
+    function clickt() {
+        $(":checkbox").click(function () {
+            if ($(this).prop('checked') == true) {
+                $("#4").show();
+                $("input[name='[1].LabName']").show();
+            }
+            else {
+                $("#4").hide();
+                $("input[name='[1].LabName']").hide();
+            }
+        })
+    };
+
+    
+</script>
+
+<h2>Add</h2>
+@using (Html.BeginForm("Add", "ModuleStandards", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div><a href="#" id="addNew">Add New</a></div>
+    <table id="dataTable">
+        <tr>
+            <th>
+                CourseModule&nbsp;&nbsp;&nbsp;
+            </th>
+            <th>
+                MarkType&nbsp;&nbsp;
+            </th>
+            <th>
+            </th>
+            <th id="4" style="display:none">
+                LabName&nbsp;&nbsp;&nbsp;
+            </th>        
+            <th>
+                Mark
+            </th>
+            <th></th>
+        </tr>
+        @if (Model != null && Model.Count > 0)
+        {
+            int j = 0;
+
+            foreach (var i in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.HiddenFor(a => a[j].Course_ModuleId, new { @class = "form-control" })
+                        @Html.DisplayFor(a => Model.ElementAt(j).Course_ModuleId)
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(a => a[j].MarkTypeId, (SelectList)ViewBag.MarkTypeId, new { @class = "form-control" })
+                    </td>
+                    <td id="2">
+                        <input type="checkbox" id="chck"  name="[0].Check" onclick="clickt()" class="checkbox"/>
+                    </td>
+                    <td id="3" style="display:none">
+                        @Html.TextBoxFor(a => a[j].LabName, new { @class = "form-control" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(a => a[j].Marks, new { @class = "form-control" })
+                    </td>
+                    <td>
+                        @if (j > 0)
+                        {
+                            <a href="#" class="remove">Remove</a>
+                        }
+                    </td>
+                </tr>
+
+                j++;
+            }
+        }
+
+    </table>
+    <input type="submit" value="save" />
+    @Html.ActionLink("Back", "ShowStandard");
+}
+@section Scripts {
+    @Scripts.Render("~/Content/plugins/jquery-validate/js")
+<script>
+    $(document).ready(function () {
+        $("#addNew").click(function (e) {
+            e.preventDefault();
+
+            var $tableBody = $("#dataTable");
+            var $trLast = $tableBody.find("tr:last");
+            var $trNew = $trLast.clone();
+
+
+            var suffix = $trNew.find(':input:first').attr('name').match(/\d+/);
+            $trNew.find("td:last").html('<a href="#" class="remove">Remove</a>');
+            $.each($trNew.find(':input'), function (i, val) {
+                // Replaced Name
+                var oldN = $(this).attr('name');
+                var newN = oldN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']');               
+                $(this).attr('name', newN);
+                
+                //// If you have another Type then replace with default value
+                //$(this).removeClass("input-validation-error");
+
+            });
+
+            $trLast.after($trNew);
+
+        });
+        // 2. Remove
+        $('a.remove').click( function (e) {
+            e.preventDefault();
+            $(this).parent().parent().remove();
+        });
+
+
+
+    });
+   </script>
+}

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<SIS.Models.Attendance>
+
+@{
+    ViewBag.Title = "Check Individual Attendance";
+}
+
+<h2>Select Date (Delete)</h2>
+
+<br>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TodayDate)
+        </th>
+    </tr>
+
+
+
+
+    @foreach (var item in ViewData["DateList"] as List<DateTime?>)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Value.ToShortDateString(), "DeleteConfirmed", new { id = Url.RequestContext.RouteData.Values["id"], Date = item.Value.ToShortDateString() }, new { onclick = "return confirm('Are you sure delete this date attendance ?');" })
+            </td>
+        </tr>
+    }
+
+
+</table>

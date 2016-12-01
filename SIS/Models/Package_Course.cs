@@ -20,6 +20,8 @@ namespace SIS.Models
         public Nullable<decimal> TotalPrice { get; set; }
         public Nullable<decimal> FirstPay { get; set; }
         public Nullable<int> MonthlyInterest { get; set; }
+        public Nullable<decimal> TotalMonthlyP { get; set; }
+        public Nullable<decimal> AfterPlnPay { get; set; }
         public Nullable<int> InterestRate { get; set; }
         public Nullable<decimal> MonthlyPayment { get; set; }
     

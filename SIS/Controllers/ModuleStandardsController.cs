@@ -17,7 +17,7 @@ namespace SIS.Controllers
         // GET: ModuleStandards
         public ActionResult Index()
         {
-            var moduleStandards = db.ModuleStandards.Include(m => m.ClassStudent).Include(m => m.MarkType);
+            var moduleStandards = db.ModuleStandards.Include(m => m.Course_Module).Include(m => m.MarkType);
             return View(moduleStandards.ToList());
         }
 
@@ -39,7 +39,11 @@ namespace SIS.Controllers
         // GET: ModuleStandards/Create
         public ActionResult Create()
         {
-            ViewBag.ClassStudentId = new SelectList(db.ClassStudents, "Id", "Id");
+            var CourseModuleName = from cm in db.Course_Module
+                                   join c in db.Courses on cm.CourseId equals c.CourseCode
+                                   join ml in db.Modules on cm.ModuleId equals ml.ModuleCode
+                                   select new { cm.Id, Name = c.Name + "(" + ml.Name + ")" };
+            ViewBag.CMName = new SelectList(CourseModuleName, "Id", "Name");
             ViewBag.MarkTypeId = new SelectList(db.MarkTypes, "Id", "Name");
             return View();
         }
@@ -49,7 +53,7 @@ namespace SIS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ClassStudentId,MarkTypeId,Marks")] ModuleStandard moduleStandard)
+        public ActionResult Create([Bind(Include = "Id,Course_ModuleId,MarkTypeId,LabName,Mark")] ModuleStandard moduleStandard)
         {
             if (ModelState.IsValid)
             {
@@ -58,91 +62,148 @@ namespace SIS.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ClassStudentId = new SelectList(db.ClassStudents, "Id", "Id", moduleStandard.ClassStudentId);
+            ViewBag.Course_ModuleId = new SelectList(db.Course_Module, "Id", "CourseId", moduleStandard.Course_ModuleId);
             ViewBag.MarkTypeId = new SelectList(db.MarkTypes, "Id", "Name", moduleStandard.MarkTypeId);
             return View(moduleStandard);
         }
 
-        // GET: ModuleStandards/Edit/5
-        public ActionResult Edit(int? id)
+        //// GET: ModuleStandards/Edit/5
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    ModuleStandard moduleStandard = db.ModuleStandards.Find(id);
+        //    if (moduleStandard == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    ViewBag.Course_ModuleId = new SelectList(db.Course_Module, "Id", "CourseId", moduleStandard.Course_ModuleId);
+        //    ViewBag.MarkTypeId = new SelectList(db.MarkTypes, "Id", "Name", moduleStandard.MarkTypeId);
+        //    return View(moduleStandard);
+        //}
+
+        //// POST: ModuleStandards/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Id,Course_ModuleId,MarkTypeId,LabName,Mark")] ModuleStandard moduleStandard)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(moduleStandard).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.Course_ModuleId = new SelectList(db.Course_Module, "Id", "CourseId", moduleStandard.Course_ModuleId);
+        //    ViewBag.MarkTypeId = new SelectList(db.MarkTypes, "Id", "Name", moduleStandard.MarkTypeId);
+        //    return View(moduleStandard);
+        //}
+
+        //// GET: ModuleStandards/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    ModuleStandard moduleStandard = db.ModuleStandards.Find(id);
+        //    if (moduleStandard == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(moduleStandard);
+        //}
+
+        //// POST: ModuleStandards/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    ModuleStandard moduleStandard = db.ModuleStandards.Find(id);
+        //    db.ModuleStandards.Remove(moduleStandard);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
+
+        public ActionResult Add(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ModuleStandard moduleStandard = db.ModuleStandards.Find(id);
-            if (moduleStandard == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.ClassStudentId = new SelectList(db.ClassStudents, "Id", "Id", moduleStandard.ClassStudentId);
-            ViewBag.MarkTypeId = new SelectList(db.MarkTypes, "Id", "Name", moduleStandard.MarkTypeId);
-            return View(moduleStandard);
+            List<ModuleStandard> ms = new List<ModuleStandard> { new ModuleStandard { Course_ModuleId = id, MarkTypeId = 0, Marks = 0 } };
+            var CourseModuleName = from cm in db.Course_Module
+                                   join c in db.Courses on cm.CourseId equals c.CourseCode
+                                   join ml in db.Modules on cm.ModuleId equals ml.ModuleCode
+                                   select new { cm.Id, Name = c.Name + "(" + ml.Name + ")" };
+            ViewBag.CMName = new SelectList(CourseModuleName, "Id", "Name");
+            ViewBag.MarkTypeId = new SelectList(db.MarkTypes, "Id", "Name");
+            return View(ms);
         }
 
-        // POST: ModuleStandards/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ClassStudentId,MarkTypeId,Marks")] ModuleStandard moduleStandard)
+        public ActionResult Add(List<ModuleStandard> mss)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(moduleStandard).State = EntityState.Modified;
+                
+                foreach (var i in mss)
+                {
+                    db.ModuleStandards.Add(i);
+                }
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                ViewBag.Message = "Data successfully saved!";
+                ModelState.Clear();
+                //mss = new List<ModuleStandard> { new ModuleStandard { Course_ModuleId = id, MarkTypeId = 0, Mark = 0 } };
+                return RedirectToAction("ShowStandard");
             }
-            ViewBag.ClassStudentId = new SelectList(db.ClassStudents, "Id", "Id", moduleStandard.ClassStudentId);
-            ViewBag.MarkTypeId = new SelectList(db.MarkTypes, "Id", "Name", moduleStandard.MarkTypeId);
-            return View(moduleStandard);
+            ViewBag.MarkTypeId = new SelectList(db.MarkTypes, "Id", "Name");
+
+            return View(mss);
         }
 
-        // GET: ModuleStandards/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult ShowStandard()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ModuleStandard moduleStandard = db.ModuleStandards.Find(id);
-            if (moduleStandard == null)
-            {
-                return HttpNotFound();
-            }
-            return View(moduleStandard);
+            return View(db.Course_Module.ToList());
         }
 
-        // POST: ModuleStandards/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult EditModuleStandard(int id)
         {
-            ModuleStandard moduleStandard = db.ModuleStandards.Find(id);
-            db.ModuleStandards.Remove(moduleStandard);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+            var cmName = from cm in db.Course_Module
+                         join c in db.Courses on cm.CourseId equals c.CourseCode
+                         join m in db.Modules on cm.ModuleId equals m.ModuleCode
+                         select new { cm.Id, Name = c.Name + "(" + m.Name + ")" };
+            ViewBag.CM = new SelectList(cmName, "Id", "Name");
+            ViewBag.MT = new SelectList(db.MarkTypes, "Id", "Name");
+            var CheckModuleStandard = db.ModuleStandards.Where(x => x.Course_ModuleId == id);
+            return View(CheckModuleStandard.ToList());
 
-        public ActionResult EditList()
-        {           
-            ViewBag.mat = new SelectList(db.MarkTypes, "Id", "Name");
-            return View(db.ModuleStandards.ToList());
         }
 
         [HttpPost]
-        public ActionResult EditList(List<ModuleStandard> moduleStandard)
+        public ActionResult EditModuleStandard(List<ModuleStandard> moduleStandard)
         {
             if (ModelState.IsValid)
             {
+                
                 foreach (var ms in moduleStandard)
                 {
                     db.Entry(ms).State = EntityState.Modified;
                 }
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ShowStandard");
             }
             return View(moduleStandard);
+        }
+
+        public ActionResult D(int id)
+        {
+            int rs = 0;
+            var aa = db.ModuleStandards.Find(id);
+            db.ModuleStandards.Remove(aa);
+            rs = db.SaveChanges();
+
+            return Json(new { deletedRow = rs }, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

@@ -13,14 +13,39 @@
         <th>
             <bold>Selection</bold>
         </th>
-        
+
+    </tr>
+    @if (Model.ElementAtOrDefault(0).Status == false)
+    {
+
+    }
+    else
+    {
+    <tr>
+        <td>
+            @Html.ActionLink("Mark Attendance (Today)", "MarkAttendance", new { id = Url.RequestContext.RouteData.Values["id"] }, new { onclick = "return confirm('Are you sure mark this class attendance ?');" })
+        </td>
+    </tr>
+    }
+    <tr>
+        <td>
+            @Html.ActionLink("Edit / Mark Back Attendance", "ChooseDate", new { id = Url.RequestContext.RouteData.Values["id"] })
+        </td>
     </tr>
 
     <tr>
         <td>
-            @Html.ActionLink("Check Individual Attendance", "CheckIndividual", new { id = Url.RequestContext.RouteData.Values["id"] })
+            @Html.ActionLink("Delete Attendance", "ChooseDateDelete", new { id = Url.RequestContext.RouteData.Values["id"] })
         </td>
-</tr>
+    </tr>
+
+ 
+
+    <tr>
+        <td>
+            @Html.ActionLink("Check Individual Attendance (By Name)", "CheckIndividual", new { id = Url.RequestContext.RouteData.Values["id"] })
+        </td>
+    </tr>
 
 
     <tr>

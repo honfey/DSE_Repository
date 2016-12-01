@@ -78,6 +78,8 @@ namespace SIS
                 "~/Scripts/Examples/Register-menu.js"));
         }
 
+
+
         private static void RegisterMailbox(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/Scripts/Mailbox/Inbox").Include(
@@ -230,7 +232,7 @@ namespace SIS
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="bundles"></param>
         private static void RegisterLayout(BundleCollection bundles)
@@ -272,6 +274,13 @@ namespace SIS
 
             bundles.Add(new StyleBundle("~/Content/plugins/bootstrap-wysihtml5/css").Include(
                                         "~/Content/plugins/bootstrap-wysihtml5/css/bootstrap3-wysihtml5.min.css"));
+
+            // plugins | custome-theme
+            bundles.Add(new ScriptBundle("~/Content/themes/CustomTheme/js").Include(
+                 "~/Content/themes/CustomeTheme/js/custom.min.js"));
+
+            bundles.Add(new StyleBundle("~/Content/themes/CustomTheme/css").Include(
+                                       "~/Content/themes/CustomTheme/css/custom.min.css"));
 
             // plugins | chartjs
             bundles.Add(new ScriptBundle("~/Content/plugins/chartjs/js").Include(
@@ -370,11 +379,15 @@ namespace SIS
 
             // plugins | jquery
             bundles.Add(new ScriptBundle("~/Content/plugins/jquery/js").Include(
-                                         "~/Content/plugins/jquery/js/jQuery-2.1.4.min.js"));
+                                         "~/Content/plugins/jquery/js/jQuery-2.1.4.min.js",
+                                         "~/Scripts/jquery-{version}.js",
+                                         "~/Scripts/jquery-ui-{version}.js"));
 
             // plugins | jquery-validate
             bundles.Add(new ScriptBundle("~/Content/plugins/jquery-validate/js").Include(
-                                         "~/Content/plugins/jquery-validate/js/jquery.validate*"));
+                                         "~/Content/plugins/jquery-validate/js/jquery.validate*",
+                                         "~/Content/Plugins/bootstrap-multiselect/css/bootstrap-multiselect.css",
+                                         "~/Content/Plugins/bootstrap-multiselect/js/bootstrap-multiselect.js"));
 
             // plugins | jquery-ui
             bundles.Add(new ScriptBundle("~/Content/plugins/jquery-ui/js").Include(
@@ -435,8 +448,22 @@ namespace SIS
 
             // plugins | morris
             bundles.Add(new ScriptBundle("~/Content/plugins/morris/js").Include(
-                                         "~/AdminLTE/plugins/morris/js/morris.min.js"));
+                                         "~/Content/plugins/morris/js/morris.min.js"));
 
+            // plugins | nprogress
+            bundles.Add(new ScriptBundle("~/Content/plugins/nprogress/js").Include(
+                                        "~/Content/plugins/nprogress/js/nprogress.js"));
+
+            // plugins | Multiselect
+            bundles.Add(new ScriptBundle("~/Content/plugins/bootstrap-multiselect").Include(
+                 "~/Content/plugins/bootstrap-multiselect/js/bootstrap-multiselect.js"));
+
+            bundles.Add(new StyleBundle("~/Content/plugins/bootstrap-multiselect").Include(
+                "~/Content/plugins/bootstrap-multiselect/css/bootstrap-multiselect.css"));
+
+            // Scripts | Modernizr
+            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+                                         "~/Scripts/modernizr-*"));
         }
     }
 }

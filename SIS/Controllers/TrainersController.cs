@@ -46,7 +46,7 @@ namespace SIS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,IC,Name,FirstName,LastName,Email,PhoneNum,Address1,Address2,Postcode,City,State,Country,Gender,Religion")] Trainer trainer)
+        public ActionResult Create([Bind(Include = "Id,IC,Name,FirstName,LastName,Email,PhoneNum,Address1,Address2,Postcode,City,State,Country,Gender,Race")] Trainer trainer)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace SIS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,IC,Name,FirstName,LastName,Email,PhoneNum,Address1,Address2,Postcode,City,State,Country,Gender,Religion")] Trainer trainer)
+        public ActionResult Edit([Bind(Include = "Id,IC,Name,FirstName,LastName,Email,PhoneNum,Address1,Address2,Postcode,City,State,Country,Gender,Race")] Trainer trainer)
         {
             if (ModelState.IsValid)
             {
