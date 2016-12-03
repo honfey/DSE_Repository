@@ -174,7 +174,7 @@ namespace SIS.Controllers
                          join m in db.Modules on cm.ModuleId equals m.ModuleCode
                          select new { cm.Id, Name = c.Name + "(" + m.Name + ")" };
 
-            ModuleStandard mS = db.ModuleStandards.Find(id);
+            
             
             ViewBag.CM = new SelectList(cmName, "Id", "Name");
             ViewBag.MT = new SelectList(db.MarkTypes, "Id", "Name");

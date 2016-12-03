@@ -4,32 +4,32 @@
     ViewBag.Title = "Add";
 }
 <script type="text/javascript">
-    function clickt() {
-        $(":checkbox").click(function () {
-            if ($(this).prop('checked') == true) {
-                $("#4").show();
-                $("#3").show();
-            }
-            else {
-                $("#4").hide();
-                $("#3").hide();
-            }
-        })
-    };
+    //function clickt() {
+    //    $(":checkbox").click(function () {
+    //        if ($(this).prop('checked') == true) {
+    //            $("#4").show();
+    //            $("#3").show();
+    //        }
+    //        else {
+    //            $("#4").hide();
+    //            $("#3").hide();
+    //        }
+    //    })
+    //};
 
 
-    function clickt() {
-        $(":checkbox").click(function () {
-            if ($(this).prop('checked') == true) {
-                $("#4").show();
-                $("input[name='[1].LabName']").show();
-            }
-            else {
-                $("#4").hide();
-                $("input[name='[1].LabName']").hide();
-            }
-        })
-    };
+    //function clickt() {
+    //    $(":checkbox").click(function () {
+    //        if ($(this).prop('checked') == true) {
+    //            $("#4").show();
+    //            $("input[name='[1].LabName']").show();
+    //        }
+    //        else {
+    //            $("#4").hide();
+    //            $("input[name='[1].LabName']").hide();
+    //        }
+    //    })
+    //};
 
     
 </script>
@@ -51,8 +51,8 @@
             </th>
             <th>
             </th>
-            <th id="4" style="display:none">
-                LabName&nbsp;&nbsp;&nbsp;
+            <th id="4" @*style="display:none"*@>
+                @*LabName&nbsp;&nbsp;&nbsp;*@
             </th>        
             <th>
                 Mark
@@ -65,7 +65,7 @@
 
             foreach (var i in Model)
             {
-                <tr>
+                <tr class="abc">
                     <td>
                         @Html.HiddenFor(a => a[j].Course_ModuleId, new { @class = "form-control" })
                         @Html.DisplayFor(a => Model.ElementAt(j).Course_ModuleId)
@@ -74,10 +74,10 @@
                         @Html.DropDownListFor(a => a[j].MarkTypeId, (SelectList)ViewBag.MarkTypeId,"Select MarkType", new { @class = "form-control" })
                     </td>
                     <td id="2">
-                        <input type="checkbox" id="chck"  name="[0].Check" onclick="clickt()" class="checkbox"/>
+                        <input type="checkbox" id="chck"  name="[0].Check" onclick="clickt(this)" class="checkbox"/>
                     </td>
-                    <td id="3" style="display:none">
-                        @Html.TextBoxFor(a => a[j].LabName, new { @class = "form-control" })
+                    <td id="3" @*style="display:none"*@>
+                        @Html.TextBoxFor(a => a[j].LabName, new { @class = "form-control", style = "display:none", placeholder="Lab Name" })
                     </td>
                     <td>
                         @Html.TextBoxFor(a => a[j].Marks, new { @class = "form-control" })
@@ -100,40 +100,54 @@
 }
 @section Scripts {
     @Scripts.Render("~/Content/plugins/jquery-validate/js")
-<script>
-    $(document).ready(function () {
-        $("#addNew").click(function (e) {
-            e.preventDefault();
+    <script>
+        $(document).ready(function () {
+            $("#addNew").click(function (e) {
+                e.preventDefault();
 
-            var $tableBody = $("#dataTable");
-            var $trLast = $tableBody.find("tr:last");
-            var $trNew = $trLast.clone();
+                var $tableBody = $("#dataTable");
+                var $trLast = $tableBody.find("tr:last");
+                var $trNew = $trLast.clone();
+
+                $trNew[0].children[2].children[0].checked = false;
+                $trNew[0].children[3].children[0].style.display = 'none';
+                $trNew[0].children[3].children[0].value = "";
+                $trNew[0].children[4].children[0].value = "";
 
 
-            var suffix = $trNew.find(':input:first').attr('name').match(/\d+/);
-            $trNew.find("td:last").html('<a href="#" class="remove">Remove</a>');
-            $.each($trNew.find(':input'), function (i, val) {
-                // Replaced Name
-                var oldN = $(this).attr('name');
-                var newN = oldN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']');               
-                $(this).attr('name', newN);
-                
-                //// If you have another Type then replace with default value
-                //$(this).removeClass("input-validation-error");
+                var suffix = $trNew.find(':input:first').attr('name').match(/\d+/);
+                $trNew.find("td:last").html('<a href="#" class="remove" onclick="removet(this)">Remove</a>');
+                $.each($trNew.find(':input'), function (i, val) {
+                    // Replaced Name
+
+                    var oldN = $(this).attr('name');
+                    var newN = oldN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']');               
+                    $(this).attr('name', newN);
+
+                });
+
+                $trLast.after($trNew);
+
+
 
             });
-
-            $trLast.after($trNew);
-
-        });
-        // 2. Remove
-        $('a.remove').click( function (e) {
-            e.preventDefault();
-            $(this).parent().parent().remove();
+        
         });
 
+        function removet(t) {
+            $(t).parent().parent().remove();
+        };
 
 
-    });
-   </script>
+        function clickt(t) {
+            var numk = t.name.match(/\d+/);
+            if ($(t).prop('checked') == true) {
+                $("input[name='[" + numk + "].LabName']").show();
+            }
+            else {
+                $("input[name='[" + numk + "].LabName']").hide();
+            }
+    
+        };
+       </script>
 }

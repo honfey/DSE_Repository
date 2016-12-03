@@ -29,8 +29,12 @@
             <tr>
                 <td id="DDL">
                     @Html.Hidden("moduleStandard[" + (@i) + "].Id", Model.ElementAtOrDefault(i).Id)
-                    @*@Html.Hidden("moduleStandard[" + (@i) + "].Course_ModuleId",Model.ElementAtOrDefault(i).Course_ModuleId)*@
-                    @Html.DropDownList("moduleStandard[" + (@i) + "].MarkTypeId", (SelectList)ViewBag.MT, new { @class = "form-control" })
+                    @Html.Hidden("moduleStandard[" + (@i) + "].Course_ModuleId",Model.ElementAtOrDefault(i).Course_ModuleId)
+                    @*@Html.DropDownList("moduleStandard[" + (@i) + "].MarkTypeId", (SelectList)ViewBag.MT, new { @class = "form-control" })*@
+
+                    @Html.DropDownList("moduleStandard[" + (@i) + "].MarkTypeId", new SelectList(ViewBag.MT, "Value", "Text", Model.ElementAtOrDefault(i).MarkTypeId), new { @class = "form-control" })
+
+
                 </td>
                 <td>
                     @Html.TextBox("moduleStandard[" + (@i) + "].LabName", Model.ElementAtOrDefault(i).LabName, new { @class = "form-control", id = "tb", @readonly = "true" })
