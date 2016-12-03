@@ -4,16 +4,13 @@
     ViewBag.Title = "EditModuleStandard";
 }
 
-<h2>EditModuleStandard</h2>
+<h2>@Html.DisplayFor(model => model.ElementAtOrDefault(0).Course_Module.Module.Name)</h2>
 
 @using (Html.BeginForm("EditModuleStandard", "ModuleStandards", FormMethod.Post))
 {
 
     <table class="table">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Course_Module.Module.Name)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.MarkType.Name)
             </th>
@@ -28,19 +25,15 @@
 
         @for (var i = 0; i < Model.Count(); i++)
         {
+
             <tr>
-                <td>
+                <td id="DDL">
                     @Html.Hidden("moduleStandard[" + (@i) + "].Id", Model.ElementAtOrDefault(i).Id)
-                    @*@Html.DropDownListFor(m => Model.ElementAt(i).Course_ModuleId, (SelectList)ViewBag.CM, new { @class = "form-control" })*@
-                    @Html.Hidden("moduleStandard[" + (@i) + "].Course_ModuleId",Model.ElementAtOrDefault(i).Course_ModuleId)
-                    @Html.DisplayFor(m => Model.ElementAt(i).Course_Module.Module.Name)
+                    @*@Html.Hidden("moduleStandard[" + (@i) + "].Course_ModuleId",Model.ElementAtOrDefault(i).Course_ModuleId)*@
+                    @Html.DropDownList("moduleStandard[" + (@i) + "].MarkTypeId", (SelectList)ViewBag.MT, new { @class = "form-control" })
                 </td>
                 <td>
-                    @*@Html.Hidden("moduleStandard[" + (@i) + "].MarkTypeId", Model.ElementAtOrDefault(i).MarkTypeId)*@
-                    @Html.DropDownListFor(m => Model.ElementAt(i).MarkTypeId, (SelectList)ViewBag.MT, new { @class = "form-control" })
-                </td>
-                <td>
-                    @Html.TextBox("moduleStandard[" + (@i) + "].LabName", Model.ElementAtOrDefault(i).LabName, new { @class = "form-control" })
+                    @Html.TextBox("moduleStandard[" + (@i) + "].LabName", Model.ElementAtOrDefault(i).LabName, new { @class = "form-control", id = "tb", @readonly = "true" })
                 </td>
                 <td>
                     @Html.TextBox("moduleStandard[" + (@i) + "].Marks", Model.ElementAtOrDefault(i).Marks, new { @class = "form-control" })
@@ -58,16 +51,18 @@
 
 }
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+@Scripts.Render("~/Content/plugins/jquery-validate/js")
 <script>
-    function _delete(id) {
+    function _delete(id)
+    {
         var cf = confirm("Are You Sure?");
         if (cf) {
             $.ajax({
                 url: "/ModuleStandards/D/" + id,
                 success: function (result) {
                     if (result.deletedRow > 0)
-                        $("#" + id).remove();
+                        location.reload(true);
 
                     else
                         alert("none")
@@ -76,6 +71,16 @@
                     alert("fail");
                 }
             });
+        }
+    }
+
+    function _Checking()
+    {
+        if ($("#DDL").eq(5)) {
+            $("#tb").attr("readonly", false);
+        }
+        else {
+            $("#tb").attr("readonly", true);
         }
     }
 

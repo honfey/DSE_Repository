@@ -41,7 +41,7 @@
     @Html.ValidationSummary(true)
 
     <div><a href="#" id="addNew">Add New</a></div>
-    <table id="dataTable">
+    <table id="dataTable" class="table">
         <tr>
             <th>
                 CourseModule&nbsp;&nbsp;&nbsp;
@@ -71,7 +71,7 @@
                         @Html.DisplayFor(a => Model.ElementAt(j).Course_ModuleId)
                     </td>
                     <td>
-                        @Html.DropDownListFor(a => a[j].MarkTypeId, (SelectList)ViewBag.MarkTypeId, new { @class = "form-control" })
+                        @Html.DropDownListFor(a => a[j].MarkTypeId, (SelectList)ViewBag.MarkTypeId,"Select MarkType", new { @class = "form-control" })
                     </td>
                     <td id="2">
                         <input type="checkbox" id="chck"  name="[0].Check" onclick="clickt()" class="checkbox"/>
