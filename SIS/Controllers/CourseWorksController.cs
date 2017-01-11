@@ -185,7 +185,8 @@ namespace SIS.Controllers
             var standard = db.ModuleStandards.Where(x => x.Course_ModuleId == id2);
             foreach (var item in standard)
             {
-                ViewData[item.MarkType.Name] = item.Marks;
+                string itemID = Convert.ToString(item.Id);
+                ViewData[itemID] = item.Marks;
 
                 var moduleName = item.Course_Module.Module.Name;
                 var moduleCode = item.Course_Module.Module.ModuleCode;
@@ -244,7 +245,8 @@ namespace SIS.Controllers
         public ActionResult MarkMarks(List<CourseWork> courseWork,int id,int? id2)
         {
             if (ModelState.IsValid)
-            {                
+            {
+
                 var total = (int?)0;
                 var listcw = new List<CourseWork>();
 

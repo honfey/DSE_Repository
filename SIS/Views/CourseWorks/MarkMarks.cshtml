@@ -68,11 +68,13 @@
                 <td>
                     @if (Model.ElementAtOrDefault(i).TestTypeId == 1)
                     {
-                        @Html.TextBox("courseWork[" + (@i) + "].Marks", Model.ElementAtOrDefault(i).Marks, new { @class = "form-control", type = "Number", max = ViewData[Model.ElementAtOrDefault(i).ModuleStandard.MarkType.Name], @onchange = "_readonly(this)" })
+                        string idd = Convert.ToString(Model.ElementAtOrDefault(i).ModuleStandard.Id);
+                        @Html.TextBox("courseWork[" + (@i) + "].Marks", Model.ElementAtOrDefault(i).Marks, new { @class = "form-control", type = "Number", max = ViewData[idd]})
                     }
                     else
                     {
-                        @Html.TextBox("courseWork[" + (@i) + "].Marks", Model.ElementAtOrDefault(i).Marks, new { @class = "form-control", type = "Number", max = ViewData[Model.ElementAtOrDefault(i).ModuleStandard.MarkType.Name]@*, @readonly = "readonly"*@ })
+                        string idd = Convert.ToString(Model.ElementAtOrDefault(i).ModuleStandard.Id);
+                        @Html.TextBox("courseWork[" + (@i) + "].Marks", Model.ElementAtOrDefault(i).Marks, new { @class = "form-control", type = "Number", max = ViewData[idd] }@*, @readonly = "readonly"*@ )
                     }
 
                 </td>
