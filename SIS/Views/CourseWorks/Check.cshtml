@@ -1,0 +1,101 @@
+﻿@model IEnumerable<SIS.Models.CourseWork>
+
+@{
+    ViewBag.Title = "CheckResult";
+}
+
+<h2>@ViewData["ModuleName"]</h2>
+<h3>@ViewData["StudentName"]</h3>
+
+@using (Html.BeginForm("Check", "CourseWorks", FormMethod.Get))
+{
+
+    @Html.Hidden("id", "id");
+    @Html.Hidden("id2", "id2");
+    @Html.DropDownList("TT", new List<SelectListItem>
+{
+    new SelectListItem{ Text="-- Select TestType --", Value = ""},
+                        new SelectListItem{ Text="FirstTest", Value = "1" },
+                        new SelectListItem{ Text="FirstResit", Value = "2" },
+                        new SelectListItem{ Text="SecondResit", Value = "3" },
+                        new SelectListItem{ Text="ThirdResit", Value = "4" },
+});
+<input type="submit"  class="btn btn-default" value="Search" />
+
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TestType.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModuleStandard.MarkType.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModuleStandard.LabName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Marks)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+        
+        @*@for (var i = 0; i < Model.Count(); i++)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(p => Model.ElementAt(i).TestType.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(p => Model.ElementAt(i).ModuleStandard.MarkType.Name)
+                </td>
+                <td>                  
+                    @Html.DisplayFor(p => Model.ElementAt(i).ModuleStandard.LabName)
+                </td>
+                <td>
+                   @Html.DisplayFor(p=>Model.ElementAt(i).Marks)
+                </td>
+                <td>
+                    @Html.DisplayFor(p => Model.ElementAt(i).Status)
+                </td>
+                
+                @if (Model.ElementAtOrDefault(i).ModuleStandard.MarkTypeId == 5)
+                {
+                    <td>
+                        @Html.ActionLink("UploadLab", "PassToImage",new { id = Model.ElementAtOrDefault(i).Id })
+                    </td>
+                }
+
+            </tr>
+
+        }*@
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TestType.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModuleStandard.MarkType.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModuleStandard.LabName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Marks)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+
+            </tr>
+        }
+
+</table>
+
+@Html.ActionLink("Back", "ShowClass",null,new { @class = "btn btn-primary" });
+
+}

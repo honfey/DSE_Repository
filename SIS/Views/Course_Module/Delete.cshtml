@@ -8,16 +8,8 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Course_Module</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Course.Name)
@@ -36,11 +28,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Trainer.Name)
+            Name
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Trainer.Name)
+            @Html.DisplayFor(model => model.Trainer.LastName)
         </dd>
 
     </dl>

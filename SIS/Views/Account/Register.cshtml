@@ -1,8 +1,111 @@
-﻿@model SIS.Models.RegisterViewModel
-@{
-    ViewBag.Title = "Register";
-    Layout = null;
-}
+﻿@*@model SIS.Models.RegisterViewModel
+
+    @{
+        ViewBag.Title = "Register";
+        Layout = null;
+    }
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>SBIT Management</title>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+        @Styles.Render("~/Content/bootstrap/css")
+        @Styles.Render("~/Content/plugins/font-awesome/css")
+        @Styles.Render("~/Content/themes/CustomTheme/css")
+
+    </head>
+    <body class="login">
+    <div>
+        <a class="hiddenanchor" id="signup"></a>
+        <a class="hiddenanchor" id="signin"></a>
+        <div class="login_wrapper">
+            <div class="animate form login_form">
+                <section class="login_content">
+                    <form>
+                        <h1>Register</h1>
+                        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new {role = "form"}))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                            <div>
+                                <select class="form-control">
+                                    <optgroup label="2016">
+                                        <option>Oct</option>
+                                        <option>Nov</option>
+                                        <option>Dec</option>
+                                    </optgroup>
+                                    <optgroup label="2017">
+                                        <option>Jan</option>
+                                        <option>Feb</option>
+                                        <option>Mar</option>
+                                        <option>Apr</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div>
+                                <select class="form-control">
+                                    <option>Student 1</option>
+                                    <option>Student 2</option>
+                                    <option>Student 3</option>
+                                </select>
+                            </div>
+                            <div>
+                                @Html.TextBoxFor(m => m.NameIdentifier, new { @class = "form-control", type = "Text", placeholder = "Name" })
+                            </div>
+                            <div>
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "Email", placeholder = "Email" })
+                            </div>
+                            <div>
+                                @Html.PasswordFor(m => m.Password, new {@class = "form-control", type = "Password", placeholder = "Password"})
+                            </div>
+                            <div>
+                                @Html.PasswordFor(m => m.ConfirmPassword, new {@class = "form-control", type = "Password", placeholder = "ConfirmPassword"})
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-default submit">Register</button>
+                            </div>
+                        }
+                        <div class="clearfix"></div>
+                        <div class="separator">
+
+                        <div class="clearfix"></div>
+                        <br/>
+                        <div>
+                            <h1> SBIT Management!</h1>
+                            <p>©2016 All Rights Reserved. Senior Project! Privacy and Terms</p>
+                        </div>
+                            </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+    </body>
+    </html>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@model SIS.Models.RegisterViewModel
 
 <!DOCTYPE html>
 <html>
@@ -29,7 +132,7 @@
 <body class="hold-transition register-page">
     <div class="register-box">
         <div class="register-logo">
-            <a href="@Url.Action("Index", "Home")"><b>SBIT Management</b></a>
+            <a href="@Url.Action("Index", "Home")"><b>Student Information System</b></a>
         </div>
         <div class="register-box-body">
             <p class="login-box-msg">Register a new user</p>
@@ -50,36 +153,20 @@
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
-                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", type = "ConfirmPassword", placeholder = "ConfirmPassword" })
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", type = "Password", placeholder = "ConfirmPassword" })
                     <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                 </div>
                 <div class="row">
                     <div class="col-xs-8">
-                        <div class="checkbox icheck">
-                            <label>
-                                <input type="checkbox"> I agree to the <a href="#">terms</a>
-                            </label>
-                        </div>
                     </div>
                     <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-flat center">Register</button>
                     </div>
                 </div>
             }
-            <div class="social-auth-links text-center">
-                <p>- OR -</p>
-                <a href="#" class="btn btn-block btn-social btn-facebook btn-flat">
-                    <i class="fa fa-facebook"></i> Sign up using
-                    Facebook
-                </a>
-                <a href="#" class="btn btn-block btn-social btn-google btn-flat">
-                    <i class="fa fa-google-plus"></i> Sign up using
-                    Google+
-                </a>
-                <a href="@Url.Action("Login", "Account")" class="text-center">I already register</a>
-            </div>
         </div>
     </div>
+
 
     @Scripts.Render("~/Content/plugins/jquery/js")
     @Scripts.Render("~/Content/bootstrap/js")
@@ -98,49 +185,52 @@
 
 
 
+@*@model SIS.Models.RegisterViewModel
+    @{
+        ViewBag.Title = "Register";
+    }
 
+    <h2>@ViewBag.Title.</h2>
 
-
-
-
-
-
-
-
-
-@*<h2>@ViewBag.Title.</h2>
-
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Create a new account.</h4>
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.NameIdentifier, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.NameIdentifier, new {@class = "form-control"})
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
-}
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-default" value="Register" />
+                </div>
+            </div>
+            }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}*@
+            @section Scripts {
+                @Scripts.Render("~/Content/plugins/jquery-validate/js")
+            }*@
+
+

@@ -24,6 +24,7 @@ namespace SIS.Models
         public Nullable<decimal> AfterPlnPay { get; set; }
         public Nullable<int> InterestRate { get; set; }
         public Nullable<decimal> MonthlyPayment { get; set; }
+        public Nullable<decimal> TotalLeft { get; set; }
     
         public virtual Course Course { get; set; }
         public virtual Student Student { get; set; }

@@ -11,7 +11,8 @@ namespace SIS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Student
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,39 +22,39 @@ namespace SIS.Models
             this.ClassStudents = new HashSet<ClassStudent>();
             this.Invoices = new HashSet<Invoice>();
             this.Package_Course = new HashSet<Package_Course>();
+            this.ReportCards = new HashSet<ReportCard>();
             this.Siblings = new HashSet<Sibling>();
+            this.SPMResults = new HashSet<SPMResult>();
         }
     
         public int Id { get; set; }
         public string StudentId { get; set; }
         public Nullable<int> IntakeId { get; set; }
         public Nullable<int> SPMResultId { get; set; }
-        public bool Insurence { get; set; }
+        public Nullable<bool> Insurence { get; set; }
         public string Name { get; set; }
-        public int Age { get; set; }
-        public System.DateTime DOB { get; set; }
+        public Nullable<int> Age { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public Nullable<System.DateTime> DOB { get; set; }
         public long IC { get; set; }
-        public string Nationality { get; set; }
+        public Nullable<int> NationalityId { get; set; }
         public string Gender { get; set; }
         public string Status { get; set; }
         public string PhoneNum { get; set; }
         public string OtherPhoneNum { get; set; }
         public string EmailAddress { get; set; }
         public string Religion { get; set; }
-
-        public List<string> AddressList { get; set; }
-
-        public Nullable<bool> SingleParent { get; set; }
+        public string SingleParent { get; set; }
         public string MomName { get; set; }
         public string MomEdu { get; set; }
-        public Nullable<bool> MomWorkStatus { get; set; }
+        public string MomWorkStatus { get; set; }
         public string MomJob { get; set; }
         public string MomFeildWork { get; set; }
         public string MomSectorJob { get; set; }
         public Nullable<decimal> MomSalary { get; set; }
         public string FatherName { get; set; }
         public string FatherEdu { get; set; }
-        public Nullable<bool> FatherWorkStatus { get; set; }
+        public string FatherWorkStatus { get; set; }
         public string FatherJob { get; set; }
         public string FatherFeildWork { get; set; }
         public string FatherSectorJob { get; set; }
@@ -68,10 +69,14 @@ namespace SIS.Models
         public virtual Intake Intake { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invoice> Invoices { get; set; }
+        public virtual Nationality Nationality { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Package_Course> Package_Course { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ReportCard> ReportCards { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sibling> Siblings { get; set; }
-        public virtual SPMResult SPMResult { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SPMResult> SPMResults { get; set; }
     }
 }

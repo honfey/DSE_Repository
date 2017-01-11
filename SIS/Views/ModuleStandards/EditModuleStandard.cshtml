@@ -1,15 +1,16 @@
 ﻿@model IEnumerable<SIS.Models.ModuleStandard>
 
 @{
-    ViewBag.Title = "EditModuleStandard";
+    ViewBag.Title = "ModuleStandard";
 }
 
-<h2>@Html.DisplayFor(model => model.ElementAtOrDefault(0).Course_Module.Module.Name)</h2>
 
+<h2>@ViewData["cmName"]</h2>
+<h3>Total Marks = @ViewData["int"]</h3>
 @using (Html.BeginForm("EditModuleStandard", "ModuleStandards", FormMethod.Post))
 {
-
-    <table class="table">
+    <div><a href="#" id="addNew">Add New</a></div>
+    <table id="dataTable" class="table">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.MarkType.Name)
@@ -26,23 +27,30 @@
         @for (var i = 0; i < Model.Count(); i++)
         {
 
-            <tr>
-                <td id="DDL">
-                    @Html.Hidden("moduleStandard[" + (@i) + "].Id", Model.ElementAtOrDefault(i).Id)
-                    @*@Html.Hidden("moduleStandard[" + (@i) + "].Course_ModuleId",Model.ElementAtOrDefault(i).Course_ModuleId)*@
-                    @Html.DropDownList("moduleStandard[" + (@i) + "].MarkTypeId", (SelectList)ViewBag.MT, new { @class = "form-control" })
+            <tr class="abc">
+                @Html.Hidden("moduleStandard[" + (@i) + "].Id", Model.ElementAtOrDefault(i).Id)
+                <td>
+                    @Html.Hidden("moduleStandard[" + (@i) + "].Course_ModuleId", Model.ElementAtOrDefault(i).Course_ModuleId)
+                    @Html.DropDownList("moduleStandard[" + (@i) + "].MarkTypeId", new SelectList(ViewBag.MT, "Value", "Text", Model.ElementAtOrDefault(i).MarkTypeId), new { @class = "form-control", @onchange = "_readonly(this)", @name = "ddl" })
                 </td>
                 <td>
-                    @Html.TextBox("moduleStandard[" + (@i) + "].LabName", Model.ElementAtOrDefault(i).LabName, new { @class = "form-control", id = "tb", @readonly = "true" })
+                    @if (Model.ElementAtOrDefault(i).MarkTypeId == 5)
+                    {
+                        @Html.TextBox("moduleStandard[" + (@i) + "].LabName", Model.ElementAtOrDefault(i).LabName, new { @class = "form-control" })
+                    }
+                    else
+                    {
+                        @Html.TextBox("moduleStandard[" + (@i) + "].LabName", Model.ElementAtOrDefault(i).LabName, new { @class = "form-control", @readonly = "readonly" })
+                    }
                 </td>
                 <td>
                     @Html.TextBox("moduleStandard[" + (@i) + "].Marks", Model.ElementAtOrDefault(i).Marks, new { @class = "form-control" })
                 </td>
                 <td>
-                    <a onclick="return _delete('@Model.ElementAtOrDefault(i).Id')">
+                    <a onclick="return _delete('@Model.ElementAtOrDefault(i).Id',this)">
                         <i class="fa fa-trash fa-2x" aria-hidden="true" title="delete"></i>
                     </a>
-                </td>
+                </td>                              
             </tr>
         }
     </table>
@@ -50,20 +58,57 @@
     @Html.ActionLink("Back", "ShowStandard");
 
 }
+    @if (ViewBag.alert != null)
+{
+        <script>
+            alert('@ViewBag.alert');
+            </script>
+}
+
 @section Scripts {
-    @*@Scripts.Render("~/bundles/jqueryval")*@
 @Scripts.Render("~/Content/plugins/jquery-validate/js")
 <script>
-    function _delete(id)
-    {
+    $(document).ready(function () {
+        $("#addNew").click(function (e) {
+            e.preventDefault();
+
+
+            var $tableBody = $("#dataTable");
+            var $trLast = $tableBody.find("tr:last");
+            var $trNew = $trLast.clone();
+
+            $trNew[0].firstElementChild.value = 0;
+            $trNew[0].children[2].children[0].value = "";
+            $trNew[0].children[3].children[0].value = "";
+            $trNew[0].children[4].children[0].attributes[0].nodeValue = "return _deleteNew(this)"
+
+            var suffix = $trNew.find(':input:first').attr('name').match(/\d+/);
+            //$trNew.find("td:last").html('<a href="#" class="remove" onclick="removet(this)">Remove</a>');
+            $.each($trNew.find(':input'), function (i, val) {
+                // Replaced Name
+
+                var oldN = $(this).attr('name');
+                var newN = oldN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']');
+                $(this).attr('name', newN);
+            });
+
+            $trLast.after($trNew);
+
+        });
+
+    });
+
+    //Delete With Ajax
+    function _delete(id, t) {
         var cf = confirm("Are You Sure?");
         if (cf) {
             $.ajax({
                 url: "/ModuleStandards/D/" + id,
                 success: function (result) {
-                    if (result.deletedRow > 0)
-                        location.reload(true);
-
+                    if (result.deletedRow > 0) {
+                        $(t).parent().parent().remove();
+                        _update();
+                    }
                     else
                         alert("none")
                 },
@@ -74,16 +119,48 @@
         }
     }
 
-    function _Checking()
-    {
-        if ($("#DDL").eq(5)) {
-            $("#tb").attr("readonly", false);
+    //Delete for New column
+    function _deleteNew(t) {
+        $(t).parent().parent().remove();
+        _update();
+    }
+
+    //Update the input Name and Id
+    function _update() {
+        var standard = $(".abc");
+        var l = standard.length;
+        var k = 0
+
+        standard.each(function () {
+            if (l > 0 && k <= l) {
+                this.firstElementChild.name = "moduleStandard[" + k + "].Id";
+                this.children[1].children[0].name = "moduleStandard[" + k + "].Course_ModuleId";
+                this.children[1].children[1].name = "moduleStandard[" + k + "].MarkTypeId";
+                this.children[2].children[0].name = "moduleStandard[" + k + "].LabName";
+                this.children[3].children[0].name = "moduleStandard[" + k + "].Marks";
+
+
+                this.firstElementChild.id = "moduleStandard_" + k + "__Id";
+                this.children[1].children[0].id = "moduleStandard_" + k + "__Course_ModuleId";
+                this.children[1].children[1].id = "moduleStandard_" + k + "__MarkTypeId";
+                this.children[2].children[0].id = "moduleStandard_" + k + "__LabName";
+                this.children[3].children[0].id = "moduleStandard_" + k + "__Marks";
+                k++;
+            }
+        })
+    }
+
+    //Set Readonly to LabName
+    function _readonly(t) {
+        var numk = t.name.match(/\d+/);
+        if ($(t).val() == 5) {
+            $("input[name='moduleStandard[" + numk + "].LabName'").attr("readonly", false);
         }
         else {
-            $("#tb").attr("readonly", true);
+            $("input[name='moduleStandard[" + numk + "].LabName'").attr("readonly", true);
         }
     }
 
-        
+
     </script>
 }

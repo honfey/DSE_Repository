@@ -1,53 +1,104 @@
-﻿@model IEnumerable<SIS.Models.Course_Module>
+﻿@model IEnumerable<SIS.Models.ClassStudent>
 
 @{
-    ViewBag.Title = "ShowClass";
+    ViewBag.Title = "CourseWork";
 }
 
-<h2>ShowClass</h2>
+<h2>Available Class</h2>
 
-@*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
+<br>
+
+@using (Html.BeginForm("ShowClass", "CourseWorks", FormMethod.Get))
+{
+    @Html.DropDownList("Search", new List<SelectListItem>
+
+                    {
+                        new SelectListItem{ Text="-- Select Class Status --", Value = ""},
+                        new SelectListItem{ Text="Active", Value = "1" },
+                        new SelectListItem{ Text="Deactive", Value = "0" },
+                    }, htmlAttributes: new { @class = "" })
+
+    <input type="submit" class="btn btn-default" value="Search" />
+}
+
+<br />
+
 <table class="table">
+    @{
+        int count = Model.Count();
+    }
+
+    @if (count == 0)
+    {
+
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Course.Name)
-        </th>
+            <br>
+            <bold>
+                Does Not Have Class Available !<br>
+            </bold>
         <th>
-            @Html.DisplayNameFor(model => model.Module.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Trainer.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th></th>
     </tr>
+    }
+    else
+    {
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Course_Module.Course.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course_Module.Module.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course_Module.Trainer.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Course.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Module.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Trainer.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
-            @Html.ActionLink("Student List", "ShowStudent", new { id = item.Id })
-        </td>
-    </tr>
-}
+        int? check = 0;
+        foreach (var item in Model)
+        {
+            <tr>
+                @if (item.Course_ModuleId != check)
+                {
+                    check = item.Course_ModuleId;
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course_Module.Course.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course_Module.Module.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course_Module.Trainer.Name)
+                    </td>
+                    if (item.Status == true)
+                    {
+                        <td>
+                            Active
+                        </td>
+                    }
+                    else if (item.Status == false)
+                    {
+                        <td>
+                            Deactive
+                        </td>
+                    }
+                    <td>
+                        @Html.ActionLink("StudentList", "ShowStudent", new { id = item.Course_ModuleId })
+                    </td>
+                }
+                else
+                {
+                    continue;
+                }
 
+
+            </tr>
+
+        }
+    }
 </table>
-@Html.ActionLink("Set ModuleStandard", "PassToMS")
+@*@Html.ActionLink("Set ModuleStandard", "PassToMS")*@

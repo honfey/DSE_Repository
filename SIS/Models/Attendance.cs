@@ -21,7 +21,11 @@ namespace SIS.Models
         public Nullable<System.TimeSpan> AfternoonIn { get; set; }
         public Nullable<System.TimeSpan> AfternoonOut { get; set; }
         public Nullable<System.DateTime> TodayDate { get; set; }
-        public string Status { get; set; }
+        public string MStatus { get; set; }
+        public string AStatus { get; set; }
+        public Nullable<bool> Status { get; set; }
+        public string EditBy { get; set; }
+        public Nullable<System.DateTime> EditDate { get; set; }
     
         public virtual ClassStudent ClassStudent { get; set; }
     }

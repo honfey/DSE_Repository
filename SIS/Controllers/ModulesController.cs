@@ -10,6 +10,7 @@ using SIS.Models;
 
 namespace MVCProject.Controllers
 {
+    [Authorize(Roles = "Admin, Trainer")]
     public class ModulesController : Controller
     {
         private SISEntities db = new SISEntities();
@@ -50,9 +51,16 @@ namespace MVCProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                var checking = db.Modules.Any(x => x.ModuleCode == module.ModuleCode);
+                if (checking)
+                {
+                    ModelState.AddModelError("", "THIS ModuleCode has been used !");
+                    return View(module);
+                }
+
                 db.Modules.Add(module);
                 db.SaveChanges();
-                return RedirectToAction("Index","Courses");
+                return RedirectToAction("Index","Modules");
             }
 
             return View(module);

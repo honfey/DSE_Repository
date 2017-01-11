@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SIS.Models.Course_Module>
+﻿@model IEnumerable<SIS.Models.ClassStudent>
 
 @{
     ViewBag.Title = "Class Available";
@@ -50,40 +50,69 @@
 }
 else
 {
-    <tr>
+    <tr>          
+              
+        <th>
+            @Html.DisplayNameFor(model => model.Course_Module.Course.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Course_Module.Module.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Course_Module.Trainer.Name)
+        </th>
+        <th>
+            Create Date
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Course.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Module.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Trainer.Name)
-        </th>
+        </th>  
+
         <th></th>
     </tr>
 
+    int? same = 0;
+    string date = "";
+
     foreach (var item in Model)
     {
+        if (item.Course_ModuleId != same || item.CreateDate.Value.ToShortDateString() != date)
+        {
+            same = item.Course_ModuleId;
+            date = item.CreateDate.Value.ToShortDateString();
+
         <tr>
 
+         
+
             <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                @Html.DisplayFor(modelItem => item.Course_Module.Course.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Course.Name)
+                @Html.DisplayFor(modelItem => item.Course_Module.Module.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Module.Name)
+                @Html.DisplayFor(modelItem => item.Course_Module.Trainer.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Trainer.Name)
+                @Html.DisplayFor(modelItem => item.CreateDate)
             </td>
+            @if (item.Status == true)
+            {
+                <td>
+                    Active
+                </td>
+            }
+            else if (item.Status == false)
+            {
+                <td>
+                    Deactive
+                </td>
+            }
+    
+
              <td>
-                 @Html.ActionLink("Option", "CheckChoise", new { id = item.Id })
+                 @Html.ActionLink("Option", "CheckChoise", new { id = item.Course_ModuleId, id2 = item.Status, id3 = item.CreateDate })
 
                         @*@Html.ActionLink("Check Attendance", "CheckChoise", new { id = item.Id }) |
                         @Html.ActionLink("Mark Attendance", "MarkAttendance", new { id = item.Id }, new { onclick = "return confirm('Are you sure mark this class attendance ?');" }) |
@@ -99,7 +128,8 @@ else
 
 </tr>
         }
-
     }
+
+}
 
 </table>

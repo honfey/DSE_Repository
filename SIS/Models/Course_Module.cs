@@ -20,22 +20,24 @@ namespace SIS.Models
             this.ClassStudents = new HashSet<ClassStudent>();
             this.CourseWorks = new HashSet<CourseWork>();
             this.ModuleStandards = new HashSet<ModuleStandard>();
+            this.ReportCards = new HashSet<ReportCard>();
         }
     
         public int Id { get; set; }
         public string CourseId { get; set; }
         public string ModuleId { get; set; }
         public Nullable<int> TrainerId { get; set; }
-        public Nullable<bool> Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClassStudent> ClassStudents { get; set; }
         public virtual Course Course { get; set; }
         public virtual Module Module { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CourseWork> CourseWorks { get; set; }
         public virtual Trainer Trainer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CourseWork> CourseWorks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ModuleStandard> ModuleStandards { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ReportCard> ReportCards { get; set; }
     }
 }

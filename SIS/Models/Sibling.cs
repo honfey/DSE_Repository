@@ -19,7 +19,6 @@ namespace SIS.Models
         public string Name { get; set; }
         public Nullable<int> Age { get; set; }
         public string Gender { get; set; }
-        public string Relationship { get; set; }
         public Nullable<int> HomePosition { get; set; }
         public string Occupation { get; set; }
     

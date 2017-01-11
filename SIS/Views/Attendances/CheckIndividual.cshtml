@@ -18,10 +18,16 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            <td>                
                 @Html.ActionLink(item.Student.Name, "CheckIndividualAttendance", new { id = item.Id })
             </td>
         </tr>
     }
+
+    <tr>
+        <th>
+            @Html.ActionLink("Back to home", "ClassAvailable")
+        </th>
+    </tr>
 
 </table>

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<SIS.Models.Attendance>
 
 @{
-    ViewBag.Title = "AttendanceList";
+    ViewBag.Title = "Attendance";
 }
 
 <h2>Mark Back Attendance</h2>
@@ -15,65 +15,44 @@
 
 
         var checkBoxMI = $('#MI');
-        $(document).ready(function () {
-            $('input').on('click', function () {
                 if (checkBoxMI.is(':checked')) {
-                    $(".MorningInInput").attr('value', '9:30');
+                    $(".MorningInInput").attr('value', '09:30:00');
                 }
                 else {
                     $(".MorningInInput").attr('value', '');
-                }
+                }           
 
-
-
-            });
-        });
     }
 
     function CheckMOUT()
-    {
-        $(document).ready(function () {
-            var checkBoxMI = $('#MO');
-            $('input').on('click', function () {
+    {    
+            var checkBoxMI = $('#MO');        
                 if (checkBoxMI.is(':checked')) {
-                    $(".MorningOutInput").attr('value', '12:15');
+                    $(".MorningOutInput").attr('value', '12:15:00');
                 }
                 else {
                     $(".MorningOutInput").attr('value', '');
                 }
-
-            });
-        });
     }
 
     function CheckAIN() {
         var checkBoxMI = $('#AI');
-        $(document).ready(function () {
-            $('input').on('click', function () {
                 if (checkBoxMI.is(':checked')) {
-                    $(".AfternoonInInput").attr('value', '13:15');
+                    $(".AfternoonInInput").attr('value', '13:15:00');
                 }
                 else {
                     $(".AfternoonInInput").attr('value', '');
                 }
-
-            });
-        });
     }
 
     function CheckAOUT() {
         var checkBoxMI = $('#AO');
-        $(document).ready(function () {
-            $('input').on('click', function () {
                 if (checkBoxMI.is(':checked')) {
-                    $(".AfternoonOutInput").attr('value', '16:00');
+                    $(".AfternoonOutInput").attr('value', '16:00:00');
                 }
                 else {
                     $(".AfternoonOutInput").attr('value', '');
                 }
-
-            });
-        });
     }
 
 
@@ -108,7 +87,7 @@
                     @Html.DisplayNameFor(model => model.ClassStudent.Id)
                 </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.ClassStudent.StudentId)
+                @Html.DisplayNameFor(model => model.ClassStudent.Student.StudentId)
 
             </th>
             <th>
@@ -127,12 +106,12 @@
             <th>
                 <input type="checkbox" onclick="CheckAOUT()" id="AO"> &nbsp; @Html.DisplayNameFor(model => model.AfternoonOut)
             </th>
-            <th class="status1">
+            @*<th class="status1">
                 @Html.DisplayNameFor(model => model.Status)<br>
                 <input type="checkbox" onclick="Ontime()" id="OnTime" value="Ontime"> <label>O</label> &nbsp;&nbsp;
                 <input type="checkbox" onclick="Ontime()" id="Late" value="Late"> <label>L</label> &nbsp;&nbsp;
                 <input type="checkbox" onclick="Ontime()" id="Absent" value="Absent"><label>A</label>
-            </th>
+            </th>*@
         </tr>
 
 
@@ -149,7 +128,7 @@
                     </td>*@
 
                 <td>
-                    @Html.DisplayFor(x => x.ElementAt(i).ClassStudent.StudentId)
+                    @Html.DisplayFor(x => x.ElementAt(i).ClassStudent.Student.StudentId)
                 </td>
 
                 <td>
@@ -162,21 +141,21 @@
 
 
 
-                    @Html.TextBox("att[" + (@i) + "].MorningIn", Model.ElementAtOrDefault(i).MorningIn, new { @class = "MorningInInput" })
+                    @Html.TextBox("att[" + (@i) + "].MorningIn", Model.ElementAtOrDefault(i).MorningIn, new { @class = "MorningInInput", @type = "time" })
                 </td>
 
                 <td>
-                    @Html.TextBox("att[" + (@i) + "].MorningOut", Model.ElementAtOrDefault(i).MorningOut, new { @class = "MorningOutInput" })
+                    @Html.TextBox("att[" + (@i) + "].MorningOut", Model.ElementAtOrDefault(i).MorningOut, new { @class = "MorningOutInput", @type = "time" })
                 </td>
                 <td>
-                    @Html.TextBox("att[" + (@i) + "].AfternoonIn", Model.ElementAtOrDefault(i).AfternoonIn, new { @class = "AfternoonInInput" })
+                    @Html.TextBox("att[" + (@i) + "].AfternoonIn", Model.ElementAtOrDefault(i).AfternoonIn, new { @class = "AfternoonInInput", @type = "time" })
                 </td>
                 <td>
-                    @Html.TextBox("att[" + (@i) + "].AfternoonOut", Model.ElementAtOrDefault(i).AfternoonOut, new { @class = "AfternoonOutInput" })
+                    @Html.TextBox("att[" + (@i) + "].AfternoonOut", Model.ElementAtOrDefault(i).AfternoonOut, new { @class = "AfternoonOutInput", @type = "time" })
                 </td>
-                <td>
+                @*<td>
                     @Html.TextBox("att[" + (@i) + "].Status", Model.ElementAtOrDefault(i).Status, new { @class = "Status" })
-                </td>
+                </td>*@
 
 
 
@@ -194,6 +173,7 @@
     </table>
 
     <input type="submit" value="Submit" class="btn btn-primary" />
+   
 }
 @section Scripts {
     <script type="text/javascript">

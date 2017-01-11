@@ -4,7 +4,7 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<br />
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
@@ -260,14 +260,20 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SPMResult.Id)
+            @Html.DisplayNameFor(model => model.SPMResults)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SPMResult.Id)
+            @Html.DisplayFor(model => model.SPMResults)
         </dd>
 
-    </dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.Siblings)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Siblings)
+        </dd></dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()

@@ -10,6 +10,7 @@ using SIS.Models;
 
 namespace SIS.Controllers
 {
+    [Authorize(Roles = "Admin, Trainer")]
     public class MarkTypesController : Controller
     {
         private SISEntities db = new SISEntities();

@@ -14,19 +14,11 @@ namespace SIS.Models
     
     public partial class SPMResult
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SPMResult()
-        {
-            this.Students = new HashSet<Student>();
-        }
-    
         public int Id { get; set; }
         public Nullable<int> StudentId { get; set; }
-        public Nullable<int> Year { get; set; }
         public string SubjectName { get; set; }
         public string Grade { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Student> Students { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

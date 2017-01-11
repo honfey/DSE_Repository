@@ -3,9 +3,9 @@
 @{
     ViewBag.Title = "Edit";
 }
+<br />
 
-<h2>Edit</h2>
-
+<script type="text/javascript" src="~/Content/countries2.js"></script>
 
 @using (Html.BeginForm())
 {
@@ -17,79 +17,86 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.StudentId)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.StudentId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.StudentId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.LabelFor(model => model.StudentId, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
+                @Html.EditorFor(model => model.StudentId, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
                 @Html.ValidationMessageFor(model => model.StudentId, "", new { @class = "text-danger" })
             </div>
         </div>
+  
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.StudentId, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col=xs-4">
+                @Html.DisplayFor(model => model.StudentId, new { @class = "form-control" })
+            </div>
+        </div>*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IntakeId, "IntakeId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.IntakeId, "Course & Intake", htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.DropDownList("IntakeId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.IntakeId, "", new { @class = "text-danger" })
             </div>
         </div>
-       
+
         <div class="form-group">
-            @Html.LabelFor(model => model.Insurence, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Insurence)
-                    @Html.ValidationMessageFor(model => model.Insurence, "", new { @class = "text-danger" })
-                </div>
+            @Html.LabelFor(model => model.Insurence, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
+                @Html.EditorFor(model => model.Insurence, new { htmlAttributes = new { @class = "form-control center" } })
+                @Html.ValidationMessageFor(model => model.Insurence, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IC, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.IC, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.IC, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.IC, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Nationality, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nationality, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nationality, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.NationalityId, "Nationality", htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
+                @Html.DropDownList("NationalityId", null, "---Select Nationality---", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NationalityId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.DropDownList("Gender", new List<SelectListItem>
 
                     {
+                        new SelectListItem{ Text="---Select Gender---", Value = "" },
                         new SelectListItem{ Text="Male", Value = "Male" },
                         new SelectListItem{ Text="Female", Value = "Female" },
                     }, htmlAttributes: new { @class = "form-control" })
@@ -97,198 +104,316 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.DropDownList("Status", new List<SelectListItem>
 
              {
+                new SelectListItem{ Text="---Select Status---", Value = "" },
                 new SelectListItem{ Text="Active", Value = "Active" },
-                new SelectListItem{ Text="DeActive", Value = "DeActive" },
+                new SelectListItem{ Text="InActive", Value = "InActive" },
+                new SelectListItem{ Text="Drop", Value = "Drop" },
+                new SelectListItem{ Text="Graduated", Value = "Graduated" },
              }, htmlAttributes: new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PhoneNum, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.PhoneNum, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.PhoneNum, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.PhoneNum, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.OtherPhoneNum, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.OtherPhoneNum, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.OtherPhoneNum, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.OtherPhoneNum, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Religion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Religion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Religion, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            @Html.LabelFor(model => model.Religion, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
+                @Html.DropDownList("Religion", new List<SelectListItem>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">SPM Result</label>
-            <div class="col-md-3">
-                @if (Model.SPMResults != null && Model.Addresses.Count() > 0)
-                {
-                    @Html.TextBox("SPMResultList[0]", Model.SPMResults.ElementAt(0).SubjectName, new { @class = "form-control", placeholder = "SubjectName" })
-                    @Html.TextBox("SPMResultList[0]", Model.SPMResults.ElementAt(0).Grade, new { @class = "form-control", placeholder = "Grade" })
-                }
-                else
-                {
-                    @Html.TextBox("SPMResultList[0].SubjectName", new { @class = "form-control", placeholder = "SubjectName" })
-                    @Html.TextBox("SPMResultList[0].Grade", new { @class = "form-control", placeholder = "Grade" })
-                }
+             {
+                new SelectListItem{ Text="---Select Religion---", Value = "" },
+                new SelectListItem{ Text="Christianity ", Value = "Christianity " },
+                new SelectListItem{ Text="Buddhism ", Value = "Buddhism " },
+                new SelectListItem{ Text="Hinduism ", Value = "Hinduism " },
+                new SelectListItem{ Text="Muslim", Value = "Muslim" },
+                new SelectListItem{ Text="Sikh", Value = "Sikh" },
+                new SelectListItem{ Text="Animist", Value = "Animist" },
+             }, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>      
+                
+        @if (Model.SPMResults != null && Model.SPMResults.Count() > 0)
+        {
+            <div id="ResultList">
+                <h4>SPM Result</h4>
 
+                <div class="form-group">
+                    @Html.Label("SPMResults[0].SubjectName", "Subject Name", htmlAttributes: new { @class = "control-label col-xs-2" })
+                    <div class="col-xs-4">
+                        @Html.Hidden("SPMResults[0].Id", Model.SPMResults.ElementAt(0).Id)
+                        @Html.TextBox("SPMResults[0].SubjectName", Model.SPMResults.ElementAt(0).SubjectName, new { @class = "form-control"})
+                        @Html.ValidationMessage("SPMResult[0].SubjectName", "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("SPMResults[0].Grade", htmlAttributes: new { @class = "control-label col-xs-2" })
+                    <div class="col-xs-4">
+                        @Html.DropDownList("SPMResults[0].Grade", new SelectList(ViewBag.SPMResultList, "Value", "Text", Model.SPMResults.ElementAtOrDefault(0).Grade == null ? "" : Model.SPMResults.ElementAtOrDefault(0).Grade.Trim()), "---Select Grade---", new { @class = "form-control" })
+                        
+                    </div>
+                </div>
             </div>
-            <div class="col-md-9">
+        }
+        else
+        {
+            <div id="ResultList">
+                <h4>SPM Result</h4>
+
+                <div class="form-group">
+                    @Html.Label("SPMResults[0].SubjectName", "Subject Name", htmlAttributes: new { @class = "control-label col-xs-2" })
+                    <div class="col-xs-4">
+                        @Html.Editor("SPMResults[0].SubjectName", new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessage("SPMResult[0].SubjectName", "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("SPMResults[0].Grade", htmlAttributes: new { @class = "control-label col-xs-2" })
+                    <div class="col-xs-4">
+                        @Html.DropDownList("SPMResults[0].Grade", new SelectList(ViewBag.SPMResultList, "Value", "Text"), "---Select Grade---", htmlAttributes: new { @class = "form-control" })
+                    </div>
+
+                </div>
             </div>
-        </div>
+        }        
 
         @if (Model.SPMResults != null && Model.SPMResults.Count() > 1)
         {
             for (var i = 1; i < Model.SPMResults.Count(); i++)
             {
-                <div class="addressDiv form-group">
-                    @Html.Label("SPMResultList[" + (@i) + "]", "Subject(*)", new { @class = "control-label col-md-2" })
-                    <div class="col-md-3">
-                        @Html.TextArea("SPMResultList[" + (@i) + "]", Model.SPMResults.ElementAt(i).SubjectName, new { @class = "form-control", placeholder = "SubjectName" })
-                        @Html.TextArea("SPMResultList[" + (@i) + "]", Model.SPMResults.ElementAt(i).Grade, new { @class = "form-control", placeholder = "Grade" })
+                <div id="ResultList" class="form-group" >
+                    <h4>SPM Result</h4>
 
+                    <div class="form-group">
+                        @Html.Label("SPMResults["+ @i + "].SubjectName", "Subject Name", htmlAttributes: new { @class = "control-label col-xs-2" })
+                        <div class="col-xs-4">
+                            @Html.Hidden("SPMResults[" + @i + "].Id", Model.SPMResults.ElementAt(i).Id)
+                            @Html.TextBox("SPMResults[" + @i + "].SubjectName", Model.SPMResults.ElementAt(i).SubjectName, new { @class = "form-control" })
+                            @Html.ValidationMessage("SPMResult[" + @i + "].SubjectName", "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-xs-1">
+                        <button type='button' onclick='return _deleteSubject(@Model.SPMResults.ElementAt(i).Id, this)' class='btn btn-primary btn-xs'><i class='fa fa-times' aria-hidden='true'></i></button>
                     </div>
-                    <div class="col-md-1">
-                        <button type='button' onclick='return _delete(@Model.SPMResults.ElementAt(i).Id, this)' class='btn btn-primary btn-xs'><i class='fa fa-times' aria-hidden='true'></i></button>
                     </div>
-                    <div class="col-md-8">
+                    <div class="form-group">
+                        @Html.Label("SPMResults[" + @i + "].Grade", htmlAttributes: new { @class = "control-label col-xs-2" })
+                        <div class="col-xs-4">
+                            @Html.DropDownList("SPMResults[" + @i + "].Grade", new SelectList(ViewBag.SPMResultList, "Value", "Text", Model.SPMResults.ElementAtOrDefault(i).Grade == null ? "" : Model.SPMResults.ElementAtOrDefault(i).Grade.Trim()), "---Select Grade---", new { @class = "form-control" })
+
+                        </div>
+                    </div>                   
+                    
+                    <div class="col-xs-8">
                     </div>
                 </div>
             }
         }
 
         <div id="ResultButton" class="form-group">
-            <label class="control-label col-md-2"></label>
-            <div class="col-md-10">
+            <label class="control-label col-xs-2"></label>
+            <div class="col-xs-4">
                 <button id="addResult" type="button" class="btn btn-primary btn-xs"><i class="fa fa-plus-circle" aria-hidden="true"></i> &nbsp; Add Subject</button>
             </div>
         </div>
-        
-        <div class="form-group">
-            <label class="control-label col-md-2">Address</label>
-            <div class="col-md-3">
+
+
                 @if (Model.Addresses != null && Model.Addresses.Count() > 0)
                 {
-                    @Html.TextBox("AddressList[0]", Model.Addresses.ElementAt(0).StreetLine1, new { @class = "form-control", placeholder = "StreetLine1" })
-                    @Html.TextBox("AddressList[0]", Model.Addresses.ElementAt(0).StreetLine2, new { @class = "form-control", placeholder = "StreetLine2" })
-                    @Html.TextBox("AddressList[0]", Model.Addresses.ElementAt(0).PostCode, new { @class = "form-control", placeholder = "PostCode" })
-                    @Html.TextBox("AddressList[0]", Model.Addresses.ElementAt(0).City, new { @class = "form-control", placeholder = "City" })
-                    @Html.TextBox("AddressList[0]", Model.Addresses.ElementAt(0).State, new { @class = "form-control", placeholder = "State" })
-                    @Html.TextBox("AddressList[0]", Model.Addresses.ElementAt(0).Country, new { @class = "form-control", placeholder = "Country" })
+                    <div id="AddressList">
+                        <h4>Address</h4>
+
+                        <div class="form-group">
+                            @Html.Label("Addresses[0].StreetLine1", "Street Line1", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.Hidden("Addresses[0].Id", Model.Addresses.ElementAt(0).Id)
+                                @Html.TextBox("Addresses[0].StreetLine1", Model.Addresses.ElementAt(0).StreetLine1, new { @class = "form-control" })
+                                @Html.ValidationMessage("Addresses[0].StreetLine1", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Addresses[0].StreetLine2", "Street Line 2", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.TextBox("Addresses[0].StreetLine2", Model.Addresses.ElementAt(0).StreetLine2,new { @class = "form-control" })
+                                @Html.ValidationMessage("Addresses[0].StreetLine2", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Addresses[0].PostCode", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.TextBox("Addresses[0].PostCode", Model.Addresses.ElementAt(0).PostCode, new { @class = "form-control" })
+                                @Html.ValidationMessage("Addresses[0].PostCode", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Addresses[0].City", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.TextBox("Addresses[0].City", Model.Addresses.ElementAt(0).City, new { @class = "form-control" })
+                                @Html.ValidationMessage("Addresses[0].City", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Addresses[0].State", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.TextBox("Addresses[0].State", Model.Addresses.ElementAt(0).State, new { @class = "form-control" })
+                                @Html.ValidationMessage("Addresses[0].State", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Addresses[0].Country", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.TextBox("Addresses[0].Country", Model.Addresses.ElementAt(0).Country, new { @class = "form-control" })
+                                @Html.ValidationMessage("Addresses[0].Country", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
                 }
                 else
                 {
-                    @Html.TextBox("AddressList[0].StreetLine1", new { @class = "form-control", placeholder = "StreetLine1" })
-                    @Html.TextBox("AddressList[0].StreetLine2", new { @class = "form-control", placeholder = "StreetLine2" })
-                    @Html.TextBox("AddressList[0].PostCode", new { @class = "form-control", placeholder = "PostCode" })
-                    @Html.TextBox("AddressList[0].City", new { @class = "form-control", placeholder = "City" })
-                    @Html.TextBox("AddressList[0].State", new { @class = "form-control", placeholder = "State" })
-                    @Html.TextBox("AddressList[0].Country", new { @class = "form-control", placeholder = "Country" })
+                    <div id="AddressList">
+                        <h4>Address</h4>
+
+                        <div class="form-group">
+                            @Html.Label("Addresses[0].StreetLine1", "Street Line1", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.Editor("Addresses[0].StreetLine1", new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessage("Addresses[0].StreetLine1", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Addresses[0].StreetLine2", "Street Line 2", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.Editor("Addresses[0].StreetLine2", new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessage("Addresses[0].StreetLine2", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Addresses[0].PostCode", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.Editor("Addresses[0].PostCode", new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessage("Addresses[0].PostCode", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Addresses[0].City", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.Editor("Addresses[0].City", new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessage("Addresses[0].City", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Addresses[0].State", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.Editor("Addresses[0].State", new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessage("Addresses[0].State", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Addresses[0].Country", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                <select id="country" name="Addresses[0].Country" class="form-control"></select>
+                                @Html.ValidationMessage("Addresses[0].Country", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
                 }
-
-            </div>
-            <div class="col-md-9">
-            </div>
-        </div>
-
 
         @if (Model.Addresses != null && Model.Addresses.Count() > 1)
         {
             for (var i = 1; i < Model.Addresses.Count(); i++)
             {
-                <div class="addressDiv form-group">
-                    @Html.Label("AddressList[" + (@i) + "]", "Address(*)", new { @class = "control-label col-md-2" })
-                    <div class="col-md-3">
-                        @Html.TextArea("AddressList[" + (@i) + "]", Model.Addresses.ElementAt(i).StreetLine1, new { @class = "form-control", placeholder = "StreetLine1" })
-                        @Html.TextArea("AddressList[" + (@i) + "]", Model.Addresses.ElementAt(i).StreetLine2, new { @class = "form-control", placeholder = "StreetLine2" })
-                        @Html.TextArea("AddressList[" + (@i) + "]", Model.Addresses.ElementAt(i).PostCode, new { @class = "form-control", placeholder = "PostCode" })
-                        @Html.TextArea("AddressList[" + (@i) + "]", Model.Addresses.ElementAt(i).City, new { @class = "form-control", placeholder = "City" })
-                        @Html.TextArea("AddressList[" + (@i) + "]", Model.Addresses.ElementAt(i).State, new { @class = "form-control", placeholder = "State" })
-                        @Html.TextArea("AddressList[" + (@i) + "]", Model.Addresses.ElementAt(i).Country, new { @class = "form-control", placeholder = "Country" })
+                    <div id="addressDiv" class="form-group">
 
+                        <div id="AddressList">
+                            <h4>Address</h4>
 
+                            <div class="form-group">
+                                @Html.Label("Addresses[" + @i + "].StreetLine1", "Street Line1", htmlAttributes: new { @class = "control-label col-xs-2" })
+                                <div class="col-xs-4">
+                                    @Html.Hidden("Addresses[" + @i + "].Id", Model.Addresses.ElementAt(i).Id)
+                                    @Html.TextBox("Addresses[" + @i + "].StreetLine1", Model.Addresses.ElementAt(i).StreetLine1, new { @class = "form-control" })
+                                    @Html.ValidationMessage("Addresses[" + @i + "].StreetLine1", "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-xs-1">
+                                    <button type='button' onclick='return _deleteAdd(@Model.Addresses.ElementAt(i).Id, this)' class='btn btn-primary btn-xs'><i class='fa fa-times' aria-hidden='true'></i></button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Addresses[" + @i + "].StreetLine2", "Street Line 2", htmlAttributes: new { @class = "control-label col-xs-2" })
+                                <div class="col-xs-4">
+                                    @Html.TextBox("Addresses[" + @i + "].StreetLine2", Model.Addresses.ElementAt(i).StreetLine2, new { @class = "form-control" })
+                                    @Html.ValidationMessage("Addresses[" + @i + "].StreetLine2", "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Addresses[" + @i + "].PostCode", htmlAttributes: new { @class = "control-label col-xs-2" })
+                                <div class="col-xs-4">
+                                    @Html.TextBox("Addresses[" + @i + "].PostCode", Model.Addresses.ElementAt(i).PostCode, new { @class = "form-control" })
+                                    @Html.ValidationMessage("Addresses[" + @i + "].PostCode", "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Addresses[" + @i + "].City", htmlAttributes: new { @class = "control-label col-xs-2" })
+                                <div class="col-xs-4">
+                                    @Html.TextBox("Addresses[" + @i + "].City", Model.Addresses.ElementAt(i).City, new { @class = "form-control" })
+                                    @Html.ValidationMessage("Addresses[" + @i + "].City", "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Addresses[" + @i + "].State", htmlAttributes: new { @class = "control-label col-xs-2" })
+                                <div class="col-xs-4">
+                                    @Html.TextBox("Addresses[" + @i + "].State", Model.Addresses.ElementAt(i).State, new { @class = "form-control" })
+                                    @Html.ValidationMessage("Addresses[" + @i + "].State", "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Addresses[" + @i + "].Country", htmlAttributes: new { @class = "control-label col-xs-2" })
+                                <div class="col-xs-4">
+                                    @Html.TextBox("Addresses[" + @i + "].Country", Model.Addresses.ElementAt(i).Country, new { @class = "form-control" })
+                                    @Html.ValidationMessage("Addresses[" + @i + "].Country", "", new { @class = "text-danger" })
+                                </div>
+                            </div>
 
-                        @*<div id="AddressList">
-                                <h4>Address</h4>
-
-                                <div class="form-group">
-                                    @Html.Label("Addresses[0].StreetLine1", htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.Editor("Addresses[" + (@i) + "].StreetLine1", Model.Addresses.ElementAt(i).StreetLine1, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessage("Addresses[0].StreetLine1", "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.Label("Addresses[0].StreetLine2", htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.Editor("Addresses[" + (@i) + "].StreetLine2", Model.Addresses.ElementAt(i).StreetLine2, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessage("Addresses[0].StreetLine2", "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.Label("Addresses[" + (@i) + "].PostCode", htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.Editor("Addresses[" + (@i) + "].PostCode", Model.Addresses.ElementAt(i).PostCode, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessage("Addresses[0].PostCode", "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.Label("Addresses[" + (@i) + "].City", htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.Editor("Addresses[" + (@i) + "].City", Model.Addresses.ElementAt(i).City, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessage("Addresses[0].City", "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.Label("Addresses[0].State", htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.Editor("Addresses[" + (@i) + "].State", Model.Addresses.ElementAt(i).State, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessage("Addresses[0].State", "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.Label("Addresses[0].Country", htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.Editor("Addresses[" + (@i) + "].Country", Model.Addresses.ElementAt(i).Country, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessage("Addresses[0].Country", "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>*@
+                        </div>
+                        
+                        <div class="col-xs-8">
+                        </div>
                     </div>
-                    <div class="col-md-1">
-                        <button type='button' onclick='return _delete(@Model.Addresses.ElementAt(i).Id, this)' class='btn btn-primary btn-xs'><i class='fa fa-times' aria-hidden='true'></i></button>
-                    </div>
-                    <div class="col-md-8">
-                    </div>
-                </div>
             }
         }
 
         <div id="addressButton" class="form-group">
-            <label class="control-label col-md-2"></label>
-            <div class="col-md-10">
+            <label class="control-label col-xs-2"></label>
+            <div class="col-xs-4">
                 <button id="addAddress" type="button" class="btn btn-primary btn-xs"><i class="fa fa-plus-circle" aria-hidden="true"></i> &nbsp; Add Address</button>
             </div>
         </div>
@@ -299,11 +424,12 @@
 
         <div class="form-group">
 
-            @Html.LabelFor(model => model.SingleParent, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.SingleParent, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.DropDownList("SingleParent", new List<SelectListItem>
 
              {
+                new SelectListItem{ Text="---Select---", Value = "" },
                 new SelectListItem{ Text="Yes", Value = "Yes" },
                 new SelectListItem{ Text="No", Value = "No" },
              }, htmlAttributes: new { @class = "form-control" })
@@ -311,34 +437,40 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MomName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.MomName, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.MomName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.MomName, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MomEdu, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.MomEdu, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.DropDownList("MomEdu", new List<SelectListItem>
 
              {
+                new SelectListItem{ Text="---Select Education Level---", Value = "" },
                 new SelectListItem{ Text="None", Value = "None" },
                 new SelectListItem{ Text="Primary", Value = "Primary" },
                 new SelectListItem{ Text="Secondary", Value = "Secondary" },
                 new SelectListItem{ Text="Form 6", Value = "Form 6" },
-                new SelectListItem{ Text="University", Value = "University" },
+                new SelectListItem{ Text="Certificate", Value = "Certificate" },
+                new SelectListItem{ Text="Diploma", Value = "Diploma" },
+                new SelectListItem{ Text="Degree", Value = "Degree" },
+                new SelectListItem{ Text="Master", Value = "Master" },
+                new SelectListItem{ Text="PhD", Value = "PhD" },
              }, htmlAttributes: new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MomWorkStatus, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.MomWorkStatus, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.DropDownList("MomWorkStatus", new List<SelectListItem>
 
              {
+                new SelectListItem{ Text="---Select Work Status---", Value = "" },
                 new SelectListItem{ Text="Yes", Value = "Yes" },
                 new SelectListItem{ Text="No", Value = "No" },
              }, htmlAttributes: new { @class = "form-control" })
@@ -346,66 +478,74 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MomJob, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.MomJob, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.MomJob, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.MomJob, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MomFeildWork, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.MomFeildWork, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.MomFeildWork, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.MomFeildWork, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MomSectorJob, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.MomSectorJob, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.MomSectorJob, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.MomSectorJob, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MomSalary, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.MomSalary, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.MomSalary, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.MomSalary, "", new { @class = "text-danger" })
             </div>
         </div>
 
+        <hr />
+
         <div class="form-group">
-            @Html.LabelFor(model => model.FatherName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.FatherName, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.FatherName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FatherName, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FatherEdu, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.FatherEdu, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.DropDownList("FatherEdu", new List<SelectListItem>
 
              {
+                new SelectListItem{ Text="---Select Education Level---", Value = "" },
                 new SelectListItem{ Text="None", Value = "None" },
                 new SelectListItem{ Text="Primary", Value = "Primary" },
                 new SelectListItem{ Text="Secondary", Value = "Secondary" },
                 new SelectListItem{ Text="Form 6", Value = "Form 6" },
-                new SelectListItem{ Text="University", Value = "University" },
+                new SelectListItem{ Text="Certificate", Value = "Certificate" },
+                new SelectListItem{ Text="Diploma", Value = "Diploma" },
+                new SelectListItem{ Text="Degree", Value = "Degree" },
+                new SelectListItem{ Text="Master", Value = "Master" },
+                new SelectListItem{ Text="PhD", Value = "PhD" },
              }, htmlAttributes: new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FatherWorkStatus, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.FatherWorkStatus, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.DropDownList("FatherWorkStatus", new List<SelectListItem>
 
              {
+                new SelectListItem{ Text="---Select Work Status---", Value = "" },
                 new SelectListItem{ Text="Yes", Value = "Yes" },
                 new SelectListItem{ Text="No", Value = "No" },
              }, htmlAttributes: new { @class = "form-control" })
@@ -413,110 +553,215 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FatherJob, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.FatherJob, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.FatherJob, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FatherJob, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FatherFeildWork, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.FatherFeildWork, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.FatherFeildWork, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FatherFeildWork, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FatherSectorJob, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.FatherSectorJob, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.FatherSectorJob, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FatherSectorJob, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FatherSalary, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.FatherSalary, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.FatherSalary, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FatherSalary, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.NumSibling, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.NumSibling, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.NumSibling, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.NumSibling, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BirthOrd, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.BirthOrd, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.BirthOrd, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.BirthOrd, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">Sibling</label>
-            <div class="col-md-3">
+        <hr />
+
+
                 @if (Model.Siblings != null && Model.Siblings.Count() > 0)
-                {
-                    @Html.TextBox("SiblingList[0]", Model.Siblings.ElementAt(0).Name, new { @class = "form-control", placeholder = "Name" })
-                    @Html.TextBox("SiblingList[0]", Model.Siblings.ElementAt(0).Age, new { @class = "form-control", placeholder = "Age" })
-                    @Html.DropDownList("Sibling[0]", new List<SelectListItem>{new SelectListItem{ Text="Male", Value = "Male" },new SelectListItem{ Text="Female", Value = "Female" },}, htmlAttributes: new { @class = "form-control" })
-                    @Html.TextBox("SiblingList[0]", Model.Siblings.ElementAt(0).Relationship, new { @class = "form-control", placeholder = "Relationship" })
-                    @Html.TextBox("SiblingList[0]", Model.Siblings.ElementAt(0).HomePosition, new { @class = "form-control", placeholder = "HomePosition" })
-                    @Html.TextBox("SiblingList[0]", Model.Siblings.ElementAt(0).Occupation, new { @class = "form-control", placeholder = "Occupation" })
+                {                    
+                    <div id="SiblingList">
+                        <h4>Siblings</h4>
+
+                        <div class="form-group">
+                            @Html.Label("Siblings[0].Name", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.Hidden("Siblings[0].Id", Model.Siblings.ElementAt(0).Id)
+                                @Html.TextBox("Siblings[0].Name", Model.Siblings.ElementAt(0).Name, new { @class = "form-control" })
+                                @Html.ValidationMessage("Siblings[0].Name", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Siblings[0].Age", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.TextBox("Siblings[0].Age", Model.Siblings.ElementAt(0).Age, new { @class = "form-control" })
+                                @Html.ValidationMessage("Siblings[0].Age", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Siblings[0].Gender", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.DropDownList("Siblings[0].Gender", new SelectList(ViewBag.SiblingGender, "Value", "Text", Model.Siblings.ElementAtOrDefault(0).Gender), "---Select Gender---", new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Siblings[0].HomePosition", "Home Position", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.TextBox("Siblings[0].HomePosition", Model.Siblings.ElementAt(0).HomePosition, new { @class = "form-control" })
+                                @Html.ValidationMessage("Siblings[0].HomePosition", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Siblings[0].Occupation", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.TextBox("Siblings[0].Occupation", Model.Siblings.ElementAt(0).Occupation, new { @class = "form-control" })
+                                @Html.ValidationMessage("Siblings[0].Occupation", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
                 }
                 else
                 {
-                    @Html.TextBox("SPMResultList[0].SubjectName", new { @class = "form-control", placeholder = "SubjectName" })
-                    @Html.TextBox("SPMResultList[0].Grade", new { @class = "form-control", placeholder = "Grade" })
-                }
+                    <div id="SiblingList">
+                        <h4>Siblings</h4>
 
-            </div>
-            <div class="col-md-9">
-            </div>
-        </div>
+                        <div class="form-group">
+                            @Html.Label("Siblings[0].Name", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.Editor("Siblings[0].Name", new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessage("Siblings[0].Name", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Siblings[0].Age", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.Editor("Siblings[0].Age", new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessage("Siblings[0].Age", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Siblings[0].Gender", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.DropDownList("Siblings[0].Gender", new List<SelectListItem>
+
+                                {
+                                   new SelectListItem{ Text="---Select Gender---", Value = "" },
+                                   new SelectListItem{ Text="Male", Value = "Male" },
+                                   new SelectListItem{ Text="Female", Value = "Female" },
+                                }, htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Siblings[0].HomePosition", "Home Position", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.Editor("Siblings[0].HomePosition", new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessage("Siblings[0].HomePosition", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Siblings[0].Occupation", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.Editor("Siblings[0].Occupation", new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessage("Siblings[0].Occupation", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                }
+                
 
         @if (Model.Siblings != null && Model.Siblings.Count() > 1)
         {
             for (var i = 1; i < Model.Siblings.Count(); i++)
             {
-                <div class="addressDiv form-group">
-                    @Html.Label("SPMResultList[" + (@i) + "]", "Subject(*)", new { @class = "control-label col-md-2" })
-                    <div class="col-md-3">
-                        @Html.TextBox("SiblingList[0]", Model.Siblings.ElementAt(0).Name, new { @class = "form-control", placeholder = "Name" })
-                        @Html.TextBox("SiblingList[0]", Model.Siblings.ElementAt(0).Age, new { @class = "form-control", placeholder = "Age" })
-                        @Html.DropDownList("Sibling[0]", new List<SelectListItem> { new SelectListItem { Text = "Male", Value = "Male" }, new SelectListItem { Text = "Female", Value = "Female" }, }, htmlAttributes: new { @class = "form-control" })
-                        @Html.TextBox("SiblingList[0]", Model.Siblings.ElementAt(0).Relationship, new { @class = "form-control", placeholder = "Relationship" })
-                        @Html.TextBox("SiblingList[0]", Model.Siblings.ElementAt(0).HomePosition, new { @class = "form-control", placeholder = "HomePosition" })
-                        @Html.TextBox("SiblingList[0]", Model.Siblings.ElementAt(0).Occupation, new { @class = "form-control", placeholder = "Occupation" })
+                <div id="SiblingDiv" class="form-group" >
 
+                    <div id="SiblingList">
+                        <h4>Siblings</h4>
 
+                        <div class="form-group">
+                            @Html.Label("Siblings[" + (@i) + "].Name", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.Hidden("Siblings[" + (@i) + "].Id", Model.Siblings.ElementAt(i).Id)
+                                @Html.TextBox("Siblings[" + (@i) + "].Name", Model.Siblings.ElementAt(i).Name, new { @class = "form-control" })
+                                @Html.ValidationMessage("Siblings[" + (@i) + "].Name", "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-xs-1">
+                                <button type='button' onclick='return _delete(@Model.Siblings.ElementAt(i).Id, this)' class='btn btn-primary btn-xs'><i class='fa fa-times' aria-hidden='true'></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Siblings[" + (@i) + "].Age", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.TextBox("Siblings[" + (@i) + "].Age", Model.Siblings.ElementAt(i).Age, new { @class = "form-control" })
+                                @Html.ValidationMessage("Siblings[" + (@i) + "].Age", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Siblings[" + (@i) + "].Gender", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.DropDownList("Siblings[" + (@i) + "].Gender", new SelectList(ViewBag.SiblingGender, "Value", "Text", Model.Siblings.ElementAtOrDefault(0).Gender), "---Select Gender---", new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Siblings[" + (@i) + "].HomePosition", "Home Position", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.TextBox("Siblings[" + (@i) + "].HomePosition", Model.Siblings.ElementAt(i).HomePosition, new { @class = "form-control" })
+                                @Html.ValidationMessage("Siblings[" + (@i) + "].HomePosition", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Siblings[" + (@i) + "].Occupation", htmlAttributes: new { @class = "control-label col-xs-2" })
+                            <div class="col-xs-4">
+                                @Html.TextBox("Siblings[" + (@i) + "].Occupation", Model.Siblings.ElementAt(i).Occupation, new { @class = "form-control" })
+                                @Html.ValidationMessage("Siblings[" + (@i) + "].Occupation", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        
+                        <div class="col-xs-8">
+                        </div>
+                        </div>
                     </div>
-                    <div class="col-md-1">
-                        <button type='button' onclick='return _delete(@Model.Siblings.ElementAt(i).Id, this)' class='btn btn-primary btn-xs'><i class='fa fa-times' aria-hidden='true'></i></button>
-                    </div>
-                    <div class="col-md-8">
-                    </div>
-                </div>
             }
         }
 
         <div id="siblingButton" class="form-group">
-            <label class="control-label col-md-2"></label>
-            <div class="col-md-10">
+            <label class="control-label col-xs-2"></label>
+            <div class="col-xs-4">
                 <button id="addSibling" type="button" class="btn btn-primary btn-xs"><i class="fa fa-plus-circle" aria-hidden="true"></i> &nbsp; Add Sibling</button>
             </div>
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-xs-offset-2 col-xs-4">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
@@ -528,14 +773,28 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/jquerymask")
+@Scripts.Render("~/Content/plugins/input-mask/js")
+@Scripts.Render("~/Content/plugins/momentjs/js")
+
+<script language="javascript">print_country("country");</script>
+<script src="~/Scripts/jquery.maskedinput.js" type="text/javascript"></script>
+
+<script>
+        $(document).ready(function() {
+            //$("#IC").inputmask("mask", { "mask": "999999-99-9999" });
+            $("#PhoneNum").inputmask("mask", { "mask": "999-999 9999" });
+            //$("#DOB").inputmask("date");
+        });
+</script>
 
     <script>
         // Add Address
         //
         //
 
-        function _delete(id, t) {
+        function _deleteAdd(id, t) {
             var cf = confirm("Are you confirm to delete this address?");
             if (cf) {
                 $.ajax({
@@ -569,7 +828,7 @@
 
             addressObj.each(function () {
                 if (l > 0 && k <= l) {
-                    this.childNodes[0].childNodes[0].innerHTML = "Address(" + k + ")";
+                    this.childNodes[0].childNodes[0].innerHTML = "Address(" + (k + 1) + ")";
                     this.childNodes[1].childNodes[1].childNodes[0].name = "Addresses[" + k + "].StreetLine1";
                     this.childNodes[2].childNodes[1].childNodes[0].name = "Addresses[" + k + "].StreetLine2";
                     this.childNodes[3].childNodes[1].childNodes[0].name = "Addresses[" + k + "].PostCode";
@@ -587,9 +846,8 @@
             $("#addAddress").click(function () {
                 var z = $('.addressDiv').length + 1;
 
-                $("#addressButton").before("<div class='addressDiv form-group'><h4><span>Address("+z+")</span> <button type='button' onclick='return _deleteAddress(this)' class='btn btn-primary btn-xs'><i class='fa fa-times' aria-hidden='true'></i></button></h4><div class='form-group'><label class='control-label col-md-2'>StreetLine1</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].StreetLine1' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2'>StreetLine2</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].StreetLine2' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2' >PostCode</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].PostCode' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2' >City</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].City' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2' >State</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].State' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2' >Country</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].Country' type='text' value=''></div></div></div>");
-
-                });
+                $("#addressButton").before("<div class='addressDiv form-group'><h4><span>Address("+(z+1) +")</span> <button type='button' onclick='return _deleteAddress(this)' class='btn btn-primary btn-xs'><i class='fa fa-times' aria-hidden='true'></i></button></h4><div class='form-group'><label class='control-label col-xs-2'>Street Line1</label><div class='col-xs-4'><input class='form-control text-box single-line'name='Addresses[" + z + "].StreetLine1' type='text' value=''></div></div><div class='form-group'><label class='control-label col-xs-2'>Street Line 2</label><div class='col-xs-4'><input class='form-control text-box single-line' name='Addresses[" + z + "].StreetLine2' type='text' value=''></div></div><div class='form-group'><label class='control-label col-xs-2'>PostCode</label><div class='col-xs-4'><input class='form-control text-box single-line' name='Addresses[" + z + "].PostCode' type='text' value=''></div></div><div class='form-group'><label class='control-label col-xs-2'>City</label><div class='col-xs-4'><input class='form-control text-box single-line' name='Addresses[" + z + "].City' type='text' value=''></div></div><div class='form-group'><label class='control-label col-xs-2'>State</label><div class='col-xs-4'><input class='form-control text-box single-line' name='Addresses[" + z + "].State' type='text' value=''></div></div><div class='form-group'><label class='control-label col-xs-2'>Country</label><div class='col-xs-4'><select name='Addresses[" + z + "].Country' class='form-control'><option value='Afghanistan'>Afghanistan</option><option value='Albania'>Albania</option><option value='Algeria'>Algeria</option><option value='American Samoa'>American Samoa</option><option value='Angola'>Angola</option><option value='Anguilla'>Anguilla</option><option value='Antartica'>Antartica</option><option value='Antigua and Barbuda'>Antigua and Barbuda</option><option value='Argentina'>Argentina</option><option value='Armenia'>Armenia</option><option value='Aruba'>Aruba</option><option value='Ashmore and Cartier Island'>Ashmore and Cartier Island</option><option value='Australia'>Australia</option><option value='Austria'>Austria</option><option value='Azerbaijan'>Azerbaijan</option><option value='Bahamas'>Bahamas</option><option value='Bahrain'>Bahrain</option><option value='Bangladesh'>Bangladesh</option><option value='Barbados'>Barbados</option><option value='Belarus'>Belarus</option><option value='Belgium'>Belgium</option><option value='Belize'>Belize</option><option value='Benin'>Benin</option><option value='Bermuda'>Bermuda</option><option value='Bhutan'>Bhutan</option><option value='Bolivia'>Bolivia</option><option value='Bosnia and Herzegovina'>Bosnia and Herzegovina</option><option value='Botswana'>Botswana</option><option value='Brazil'>Brazil</option><option value='British Virgin Islands'>British Virgin Islands</option><option value='Brunei'>Brunei</option><option value='Bulgaria'>Bulgaria</option><option value='Burkina Faso'>Burkina Faso</option><option value='Burma'>Burma</option><option value='Burundi'>Burundi</option><option value='Cambodia'>Cambodia</option><option value='Cameroon'>Cameroon</option><option value='Canada'>Canada</option><option value='Cape Verde'>Cape Verde</option><option value='Cayman Islands'>Cayman Islands</option><option value='Central African Republic'>Central African Republic</option><option value='Chad'>Chad</option><option value='Chile'>Chile</option><option value='China'>China</option><option value='Christmas Island'>Christmas Island</option><option value='Clipperton Island'>Clipperton Island</option><option value='Cocos (Keeling) Islands'>Cocos (Keeling) Islands</option><option value='Colombia'>Colombia</option><option value='Comoros'>Comoros</option><option value='Congo, Democratic Republic of the'>Congo, Democratic Republic of the</option><option value='Congo, Republic of the'>Congo, Republic of the</option><option value='Cook Islands'>Cook Islands</option><option value='Costa Rica'>Costa Rica</option><option value='Cote d'Ivoire'>Cote d'Ivoire</option><option value='Croatia'>Croatia</option><option value='Cuba'>Cuba</option><option value='Cyprus'>Cyprus</option><option value='Czeck Republic'>Czeck Republic</option><option value='Denmark'>Denmark</option><option value='Djibouti'>Djibouti</option><option value='Dominica'>Dominica</option><option value='Dominican Republic'>Dominican Republic</option><option value='Ecuador'>Ecuador</option><option value='Egypt'>Egypt</option><option value='El Salvador'>El Salvador</option><option value='Equatorial Guinea'>Equatorial Guinea</option><option value='Eritrea'>Eritrea</option><option value='Estonia'>Estonia</option><option value='Ethiopia'>Ethiopia</option><option value='Europa Island'>Europa Island</option><option value='Falkland Islands (Islas Malvinas)'>Falkland Islands (Islas Malvinas)</option><option value='Faroe Islands'>Faroe Islands</option><option value='Fiji'>Fiji</option><option value='Finland'>Finland</option><option value='France'>France</option><option value='French Guiana'>French Guiana</option><option value='French Polynesia'>French Polynesia</option><option value='French Southern and Antarctic Lands'>French Southern and Antarctic Lands</option><option value='Gabon'>Gabon</option><option value='Gambia, The'>Gambia, The</option><option value='Gaza Strip'>Gaza Strip</option><option value='Georgia'>Georgia</option><option value='Germany'>Germany</option><option value='Ghana'>Ghana</option><option value='Gibraltar'>Gibraltar</option><option value='Glorioso Islands'>Glorioso Islands</option><option value='Greece'>Greece</option><option value='Greenland'>Greenland</option><option value='Grenada'>Grenada</option><option value='Guadeloupe'>Guadeloupe</option><option value='Guam'>Guam</option><option value='Guatemala'>Guatemala</option><option value='Guernsey'>Guernsey</option><option value='Guinea'>Guinea</option><option value='Guinea-Bissau'>Guinea-Bissau</option><option value='Guyana'>Guyana</option><option value='Haiti'>Haiti</option><option value='Heard Island and McDonald Islands'>Heard Island and McDonald Islands</option><option value='Holy See (Vatican City)'>Holy See (Vatican City)</option><option value='Honduras'>Honduras</option><option value='Hong Kong'>Hong Kong</option><option value='Howland Island'>Howland Island</option><option value='Hungary'>Hungary</option><option value='Iceland'>Iceland</option><option value='India'>India</option><option value='Indonesia'>Indonesia</option><option value='Iran'>Iran</option><option value='Iraq'>Iraq</option><option value='Ireland'>Ireland</option><option value='Ireland, Northern'>Ireland, Northern</option><option value='Israel'>Israel</option><option value='Italy'>Italy</option><option value='Jamaica'>Jamaica</option><option value='Jan Mayen'>Jan Mayen</option><option value='Japan'>Japan</option><option value='Jarvis Island'>Jarvis Island</option><option value='Jersey'>Jersey</option><option value='Johnston Atoll'>Johnston Atoll</option><option value='Jordan'>Jordan</option><option value='Juan de Nova Island'>Juan de Nova Island</option><option value='Kazakhstan'>Kazakhstan</option><option value='Kenya'>Kenya</option><option value='Kiribati'>Kiribati</option><option value='Korea, North'>Korea, North</option><option value='Korea, South'>Korea, South</option><option value='Kuwait'>Kuwait</option><option value='Kyrgyzstan'>Kyrgyzstan</option><option value='Laos'>Laos</option><option value='Latvia'>Latvia</option><option value='Lebanon'>Lebanon</option><option value='Lesotho'>Lesotho</option><option value='Liberia'>Liberia</option><option value='Libya'>Libya</option><option value='Liechtenstein'>Liechtenstein</option><option value='Lithuania'>Lithuania</option><option value='Luxembourg'>Luxembourg</option><option value='Macau'>Macau</option><option value='Macedonia, Former Yugoslav Republic of'>Macedonia, Former Yugoslav Republic of</option><option value='Madagascar'>Madagascar</option><option value='Malawi'>Malawi</option><option value='Malaysia'>Malaysia</option><option value='Maldives'>Maldives</option><option value='Mali'>Mali</option><option value='Malta'>Malta</option><option value='Man, Isle of'>Man, Isle of</option><option value='Marshall Islands'>Marshall Islands</option><option value='Martinique'>Martinique</option><option value='Mauritania'>Mauritania</option><option value='Mauritius'>Mauritius</option><option value='Mayotte'>Mayotte</option><option value='Mexico'>Mexico</option><option value='Micronesia, Federated States of'>Micronesia, Federated States of</option><option value='Midway Islands'>Midway Islands</option><option value='Moldova'>Moldova</option><option value='Monaco'>Monaco</option><option value='Mongolia'>Mongolia</option><option value='Montserrat'>Montserrat</option><option value='Morocco'>Morocco</option><option value='Mozambique'>Mozambique</option><option value='Namibia'>Namibia</option><option value='Nauru'>Nauru</option><option value='Nepal'>Nepal</option><option value='Netherlands'>Netherlands</option><option value='Netherlands Antilles'>Netherlands Antilles</option><option value='New Caledonia'>New Caledonia</option><option value='New Zealand'>New Zealand</option><option value='Nicaragua'>Nicaragua</option><option value='Niger'>Niger</option><option value='Nigeria'>Nigeria</option><option value='Niue'>Niue</option><option value='Norfolk Island'>Norfolk Island</option><option value='Northern Mariana Islands'>Northern Mariana Islands</option><option value='Norway'>Norway</option><option value='Oman'>Oman</option><option value='Pakistan'>Pakistan</option><option value='Palau'>Palau</option><option value='Panama'>Panama</option><option value='Papua New Guinea'>Papua New Guinea</option><option value='Paraguay'>Paraguay</option><option value='Peru'>Peru</option><option value='Philippines'>Philippines</option><option value='Pitcaim Islands'>Pitcaim Islands</option><option value='Poland'>Poland</option><option value='Portugal'>Portugal</option><option value='Puerto Rico'>Puerto Rico</option><option value='Qatar'>Qatar</option><option value='Reunion'>Reunion</option><option value='Romainia'>Romainia</option><option value='Russia'>Russia</option><option value='Rwanda'>Rwanda</option><option value='Saint Helena'>Saint Helena</option><option value='Saint Kitts and Nevis'>Saint Kitts and Nevis</option><option value='Saint Lucia'>Saint Lucia</option><option value='Saint Pierre and Miquelon'>Saint Pierre and Miquelon</option><option value='Saint Vincent and the Grenadines'>Saint Vincent and the Grenadines</option><option value='Samoa'>Samoa</option><option value='San Marino'>San Marino</option><option value='Sao Tome and Principe'>Sao Tome and Principe</option><option value='Saudi Arabia'>Saudi Arabia</option><option value='Scotland'>Scotland</option><option value='Senegal'>Senegal</option><option value='Seychelles'>Seychelles</option><option value='Sierra Leone'>Sierra Leone</option><option value='Singapore'>Singapore</option><option value='Slovakia'>Slovakia</option><option value='Slovenia'>Slovenia</option><option value='Solomon Islands'>Solomon Islands</option><option value='Somalia'>Somalia</option><option value='South Africa'>South Africa</option><option value='South Georgia and South Sandwich Islands'>South Georgia and South Sandwich Islands</option><option value='Spain'>Spain</option><option value='Spratly Islands'>Spratly Islands</option><option value='Sri Lanka'>Sri Lanka</option><option value='Sudan'>Sudan</option><option value='Suriname'>Suriname</option><option value='Svalbard'>Svalbard</option><option value='Swaziland'>Swaziland</option><option value='Sweden'>Sweden</option><option value='Switzerland'>Switzerland</option><option value='Syria'>Syria</option><option value='Taiwan'>Taiwan</option><option value='Tajikistan'>Tajikistan</option><option value='Tanzania'>Tanzania</option><option value='Thailand'>Thailand</option><option value='Tobago'>Tobago</option><option value='Toga'>Toga</option><option value='Tokelau'>Tokelau</option><option value='Tonga'>Tonga</option><option value='Trinidad'>Trinidad</option><option value='Tunisia'>Tunisia</option><option value='Turkey'>Turkey</option><option value='Turkmenistan'>Turkmenistan</option><option value='Tuvalu'>Tuvalu</option><option value='Uganda'>Uganda</option><option value='Ukraine'>Ukraine</option><option value='United Arab Emirates'>United Arab Emirates</option><option value='United Kingdom'>United Kingdom</option><option value='Uruguay'>Uruguay</option><option value='USA'>USA</option><option value='Uzbekistan'>Uzbekistan</option><option value='Vanuatu'>Vanuatu</option><option value='Venezuela'>Venezuela</option><option value='Vietnam'>Vietnam</option><option value='Virgin Islands'>Virgin Islands</option><option value='Wales'>Wales</option><option value='Wallis and Futuna'>Wallis and Futuna</option><option value='West Bank'>West Bank</option><option value='Western Sahara'>Western Sahara</option><option value='Yemen'>Yemen</option><option value='Yugoslavia'>Yugoslavia</option><option value='Zambia'>Zambia</option><option value='Zimbabwe'>Zimbabwe</option></select></div></div></div>");
+            });
         });
 </script>
 
@@ -597,7 +855,7 @@
         // Add SPM Result
         //
         //
-        function _delete(id, t) {
+        function _deleteSubject(id, t) {
             var cf = confirm("Are you confirm to delete this subject?");
             if (cf) {
                 $.ajax({
@@ -625,16 +883,16 @@
 
         function _updateSPMResultId() {
             var ResultObj = $('.ResultDiv');
-            var l = ResultObj.length;
-            var k = 1;
+            var le = ResultObj.length;
+            var a = 1;
 
             ResultObj.each(function () {
-                if (l > 0 && k <= l) {
-                    this.childNodes[0].childNodes[0].innerHTML = "SPMResult(" + k + ")";
-                    this.childNodes[1].childNodes[1].childNodes[0].name = "SPMResult[" + k + "].SubjectName";
-                    this.childNodes[2].childNodes[1].childNodes[0].name = "SPMResult[" + k + "].Grade";
+                if (le > 0 && a <= le) {
+                    this.childNodes[0].childNodes[0].innerHTML = "Subject(" + (a + 1) + ")";
+                    this.childNodes[1].childNodes[1].childNodes[0].name = "SPMResult[" + a + "].SubjectName";
+                    this.childNodes[2].childNodes[1].childNodes[0].name = "SPMResult[" + a + "].Grade";
 
-                    k++;
+                    a++;
                 }
             });
         }
@@ -642,10 +900,10 @@
         $(document).ready(function () {
 
             $("#addResult").click(function () {
-                var z = $('.ResultDiv').length + 1;
+                var b = $('.ResultDiv').length + 1;
 
-                $("#ResultButton").before("<div id='ResultDiv'><h4><span>Subject(" + z + ")</span> <button type='button' onclick='return _deleteResult(this)' class='btn btn-primary btn-xs'><i class='fa fa-times' aria-hidden='true'></i></button></h4><div class='form-group'><label class='control-label col-md-2' for='SPMResult[" + z + "]SubjectName'>SubjectName</label><div class='col-md-10'><input class='form-control text-box single-line' id='SPMResult[" + z + "]SubjectName' name='SPMResult[0].SubjectName' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2' for='SPMResult[" + z + "]Grade'>Grade</label><div class='col-md-10'><input class='form-control text-box single-line' id='SPMResult[" + z + "]Grade' name='SPMResult[0].Grade' type='text' value=''></div></div></div>");
-                //$("#ResultButton").before("<div class='ResultDiv form-group'><h4><span>Address(" + z + ")</span> <button type='button' onclick='return _deleteAddress(this)' class='btn btn-primary btn-xs'><i class='fa fa-times' aria-hidden='true'></i></button></h4><div class='form-group'><label class='control-label col-md-2'>StreetLine1</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].StreetLine1' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2'>StreetLine2</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].StreetLine2' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2'>PostCode</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].PostCode' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2'>City</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].City' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2'>State</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].State' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2'>Country</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].Country' type='text' value=''></div></div></div>");
+                $("#ResultButton").before("<div class='ResultDiv'><h4><span>Subject(" + (b + 1) + ")</span><button type='button' onclick='return _deleteResult(this)' class='btn btn-primary btn-xs'><i class='fa fa-times' aria-hidden='true'></i></button></h4><div class='form-group'><label class='control-label col-xs-2'>Subject Name</label><div class='col-xs-4'><input class='form-control text-box single-line'  name='SPMResults[" + b + "].SubjectName' type='text' value=''></div></div><div class='form-group'><label class='control-label col-xs-2' >Grade</label><div class='col-xs-4'><select class='form-control' name='SPMResults[" + b + "].Grade'><option value=''>---Select Grade---</option><option value='A+'>A+</option><option value='A'>A</option><option value='A-'>A-</option><option value='B+'>B+</option><option value='B'>B</option><option value='C+'>C+</option><option value='C'>C</option><option value='D'>D</option><option value='E'>E</option><option value='G'>G</option><option value='TH'>TH</option></select></div></div></div>");
+                //$("#ResultButton").before("<div class='ResultDiv form-group'><h4><span>Address(" + z + ")</span> <button type='button' onclick='return _deleteAddress(this)' class='btn btn-primary btn-xs'><i class='fa fa-times' aria-hidden='true'></i></button></h4><div class='form-group'><label class='control-label col-xs-2'>StreetLine1</label><div class='col-xs-4'><input class='form-control text-box single-line' name='Addresses[" + z + "].StreetLine1' type='text' value=''></div></div><div class='form-group'><label class='control-label col-xs-2'>StreetLine2</label><div class='col-xs-4'><input class='form-control text-box single-line' name='Addresses[" + z + "].StreetLine2' type='text' value=''></div></div><div class='form-group'><label class='control-label col-xs-2'>PostCode</label><div class='col-xs-4'><input class='form-control text-box single-line' name='Addresses[" + z + "].PostCode' type='text' value=''></div></div><div class='form-group'><label class='control-label col-xs-2'>City</label><div class='col-xs-4'><input class='form-control text-box single-line' name='Addresses[" + z + "].City' type='text' value=''></div></div><div class='form-group'><label class='control-label col-xs-2'>State</label><div class='col-xs-4'><input class='form-control text-box single-line' name='Addresses[" + z + "].State' type='text' value=''></div></div><div class='form-group'><label class='control-label col-xs-2'>Country</label><div class='col-xs-4'><input class='form-control text-box single-line' name='Addresses[" + z + "].Country' type='text' value=''></div></div></div>");
 
             });
         });
@@ -688,7 +946,7 @@
 
             SiblingObj.each(function () {
                 if (l > 0 && k <= l) {
-                    this.childNodes[0].childNodes[0].innerHTML = "Sibling(" + k + ")";
+                    this.childNodes[0].childNodes[0].innerHTML = "Sibling(" + (k + 1) + ")";
                     this.childNodes[1].childNodes[1].childNodes[0].name = "Sibling[" + k + "].Name";
                     this.childNodes[2].childNodes[1].childNodes[0].name = "Sibling[" + k + "].Age";
                     this.childNodes[3].childNodes[1].childNodes[0].name = "Sibling[" + k + "].Gender";
@@ -706,8 +964,8 @@
             $("#addSibling").click(function () {
                 var z = $('.SiblingDiv').length + 1;
 
-                $("#siblingButton").before("<div id='SiblingDiv'><h4>Siblings</h4><div class='form-group'><label class='control-label col-md-2'>Name</label><div class='col-md-10'><input class='form-control text-box single-line' id='Sibling[" + z + "]Name' name='Sibling[0].Name' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2' >Age</label><div class='col-md-10'><input class='form-control text-box single-line' id='Sibling[" + z + "]Age' name='Sibling[0].Age' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2' >Gender</label><div class='col-md-10'><select class='form-control valid' id='Sibling[" + z + "]Gender' name='Gender'><option value='Male'>Male</option><option value='Female'>Female</option></select></div></div><div class='form-group'><label class='control-label col-md-2' >Relationship</label><div class='col-md-10'><input class='form-control text-box single-line' id='Sibling[" + z + "]Relationship' name='Sibling[0].Relationship' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2' >HomePosition</label><div class='col-md-10'><input class='form-control text-box single-line' id='Sibling[" + z + "]HomePosition' name='Sibling[0].HomePosition' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2' >Occupation</label><div class='col-md-10'><input class='form-control text-box single-line' id='Sibling[" + z + "]Occupation' name='Sibling[0].Occupation' type='text' value=''></div></div></div>");
-                //$("#ResultButton").before("<div class='ResultDiv form-group'><h4><span>Address(" + z + ")</span> <button type='button' onclick='return _deleteAddress(this)' class='btn btn-primary btn-xs'><i class='fa fa-times' aria-hidden='true'></i></button></h4><div class='form-group'><label class='control-label col-md-2'>StreetLine1</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].StreetLine1' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2'>StreetLine2</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].StreetLine2' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2'>PostCode</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].PostCode' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2'>City</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].City' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2'>State</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].State' type='text' value=''></div></div><div class='form-group'><label class='control-label col-md-2'>Country</label><div class='col-md-10'><input class='form-control text-box single-line' name='Addresses[" + z + "].Country' type='text' value=''></div></div></div>");
+                $("#siblingButton").before("<div class='SiblingDiv'><h4><span>Sibling(" + (z + 1) + ")</span><button type='button' onclick='return _deleteSibling(this)' class='btn btn-primary btn-xs'><i class='fa fa-times' aria-hidden='true'></i></button></h4><div class='form-group'><label class='control-label col-xs-2'>Name</label><div class='col-xs-4'><input class='form-control text-box single-line' name='Siblings[" + z + "].Name' type='text' value=''></div></div><div class='form-group'><label class='control-label col-xs-2' >Age</label><div class='col-xs-4'><input class='form-control text-box single-line' name='Siblings[" + z + "].Age' type='text' value=''></div></div><div class='form-group'><label class='control-label col-xs-2'>Gender</label><div class='col-xs-4'><select class='form-control' name='Siblings[" + z + "].Gender'><option value=''>---Select Gender---</option><option value='Male'>Male</option><option value='Female'>Female</option></select></div></div><div class='form-group'><label class='control-label col-xs-2'>Home Position</label><div class='col-xs-4'><input class='form-control text-box single-line' name='Siblings[" + z + "].HomePosition' type='text' value=''></div></div><div class='form-group'><label class='control-label col-xs-2'>Occupation</label><div class='col-xs-4'><input class='form-control text-box single-line' name='Siblings[" + z + "].Occupation' type='text' value=''></div></div></div>");
+                //$("#ResultButton").before("<div class='ResultDiv form-group'><h4><span>Address(" + z + ")</span> <button type='button' onclick='return _deleteAddress(this)' class='btn btn-primary btn-xs'><i class='fa fa-times' aria-hidden='true'></i></button></h4><div class='form-group'><label class='control-label col-xs-2'>StreetLine1</label><div class='col-xs-4'><input class='form-control text-box single-line' name='Addresses[" + z + "].StreetLine1' type='text' value=''></div></div><div class='form-group'><label class='control-label col-xs-2'>StreetLine2</label><div class='col-xs-4'><input class='form-control text-box single-line' name='Addresses[" + z + "].StreetLine2' type='text' value=''></div></div><div class='form-group'><label class='control-label col-xs-2'>PostCode</label><div class='col-xs-4'><input class='form-control text-box single-line' name='Addresses[" + z + "].PostCode' type='text' value=''></div></div><div class='form-group'><label class='control-label col-xs-2'>City</label><div class='col-xs-4'><input class='form-control text-box single-line' name='Addresses[" + z + "].City' type='text' value=''></div></div><div class='form-group'><label class='control-label col-xs-2'>State</label><div class='col-xs-4'><input class='form-control text-box single-line' name='Addresses[" + z + "].State' type='text' value=''></div></div><div class='form-group'><label class='control-label col-xs-2'>Country</label><div class='col-xs-4'><input class='form-control text-box single-line' name='Addresses[" + z + "].Country' type='text' value=''></div></div></div>");
 
             });
         });

@@ -16,5 +16,8 @@ namespace SIS.Models
     {
         public int Id { get; set; }
         public string FileName { get; set; }
+        public Nullable<int> CourseWorkId { get; set; }
+    
+        public virtual CourseWork CourseWork { get; set; }
     }
 }

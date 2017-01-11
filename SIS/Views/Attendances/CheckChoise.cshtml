@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SIS.Models.Course_Module>
+﻿@model IEnumerable<SIS.Models.ClassStudent>
 
 @{
     ViewBag.Title = "Check Attendance Choices";
@@ -23,19 +23,19 @@
     {
     <tr>
         <td>
-            @Html.ActionLink("Mark Attendance (Today)", "MarkAttendance", new { id = Url.RequestContext.RouteData.Values["id"] }, new { onclick = "return confirm('Are you sure mark this class attendance ?');" })
+            @Html.ActionLink("Mark Attendance (Today)", "MarkAttendance", new { id = Url.RequestContext.RouteData.Values["id"], id2 = Model.ElementAtOrDefault(0).Status, id3 = Model.ElementAtOrDefault(0).CreateDate },new { @class = "alert" })
         </td>
     </tr>
     }
     <tr>
         <td>
-            @Html.ActionLink("Edit / Mark Back Attendance", "ChooseDate", new { id = Url.RequestContext.RouteData.Values["id"] })
+            &nbsp; &nbsp; &nbsp; @Html.ActionLink("Edit / Mark Back Attendance", "ChooseDate", new { id = Url.RequestContext.RouteData.Values["id"], id2 = Model.ElementAtOrDefault(0).Status, id3 = Model.ElementAtOrDefault(0).CreateDate })
         </td>
     </tr>
 
     <tr>
         <td>
-            @Html.ActionLink("Delete Attendance", "ChooseDateDelete", new { id = Url.RequestContext.RouteData.Values["id"] })
+            &nbsp; &nbsp; &nbsp;  @Html.ActionLink("Delete Attendance", "ChooseDateDelete", new { id = Url.RequestContext.RouteData.Values["id"], id2 = Model.ElementAtOrDefault(0).Status, id3 = Model.ElementAtOrDefault(0).CreateDate })
         </td>
     </tr>
 
@@ -43,16 +43,36 @@
 
     <tr>
         <td>
-            @Html.ActionLink("Check Individual Attendance (By Name)", "CheckIndividual", new { id = Url.RequestContext.RouteData.Values["id"] })
+            &nbsp; &nbsp; &nbsp;  @Html.ActionLink("Check Individual Attendance (By Name)", "CheckIndividual", new { id = Url.RequestContext.RouteData.Values["id"], id2 = Model.ElementAtOrDefault(0).Status, id3 = Model.ElementAtOrDefault(0).CreateDate })
         </td>
     </tr>
 
 
     <tr>
         <td>
-            @Html.ActionLink("Check All Attendance", "CheckAttendance", new { id = Url.RequestContext.RouteData.Values["id"] })
+            &nbsp; &nbsp; &nbsp;  @Html.ActionLink("Check All Attendance", "CheckAttendance", new { id = Url.RequestContext.RouteData.Values["id"], id2 = Model.ElementAtOrDefault(0).Status, id3 = Model.ElementAtOrDefault(0).CreateDate })
         </td>
     </tr>
 
+    <tr>
+        <td>
+            @Html.ActionLink("Back", "ClassAvailable", null, new { @class = "btn btn-primary" })
+        </td>
+    </tr>
 
 </table>
+@section Scripts {
+    <script>
+    $(document).on("click", ".alert", function (e) {
+        var link = $(this).attr("href");
+        e.preventDefault();
+        bootbox.confirm("Are you sure mark this class attendance ?", function (result) {
+            if (result) {
+                document.location.href = link;
+            }
+        });
+    });
+    </script>
+
+}
+ @*new { onclick = "return confirm('Are you sure mark this class attendance ?');" }*@

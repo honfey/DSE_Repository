@@ -1,33 +1,35 @@
 ﻿@model IEnumerable<SIS.Models.ClassStudent>
 
 @{
-    ViewBag.Title = "ShowStudent";
+    ViewBag.Title = "StudentList";
 }
-
-<h2>ShowStudent</h2>
-
-@*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Student.Name)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model)
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Student.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Mark", "MarkMarks", new { id = item.Id, id2 = item.Course_ModuleId })
-        </td>
-
-    </tr>
+@section Menu {
+    @Scripts.Render("~/Scripts/Tables/Data/menu")
 }
+@Styles.Render("~/Content/plugins/datatables/css")
 
-</table>
+<h2>@ViewData["ModuleName"]</h2>
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Student.Name)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Student.Name)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Mark", "MarkMarks", new { id = item.Id, id2 = item.Course_ModuleId }) |
+                        @Html.ActionLink("Check", "Check", new { id = item.Id, id2 = item.Course_ModuleId })
+                    </td>
+
+                </tr>
+            }
+
+        </table>

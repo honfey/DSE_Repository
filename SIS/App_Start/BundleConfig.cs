@@ -78,8 +78,6 @@ namespace SIS
                 "~/Scripts/Examples/Register-menu.js"));
         }
 
-
-
         private static void RegisterMailbox(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/Scripts/Mailbox/Inbox").Include(
@@ -239,9 +237,11 @@ namespace SIS
         {
             // bootstrap
             bundles.Add(new ScriptBundle("~/Content/bootstrap/js").Include(
+                "~/Scripts/bootbox.js",
                 "~/Content/bootstrap/js/bootstrap.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/bootstrap/css").Include(
+                "~/Content/datatables/css/datatables.bootstrap.css",
                 "~/Content/bootstrap/css/bootstrap.min.css"));
 
             // dist
@@ -379,6 +379,8 @@ namespace SIS
 
             // plugins | jquery
             bundles.Add(new ScriptBundle("~/Content/plugins/jquery/js").Include(
+                                         "~/Scripts/datatables/jquery.datatables.js",
+                                         "~/Scripts/datatables/datatables.bootstrap.js",
                                          "~/Content/plugins/jquery/js/jQuery-2.1.4.min.js",
                                          "~/Scripts/jquery-{version}.js",
                                          "~/Scripts/jquery-ui-{version}.js"));

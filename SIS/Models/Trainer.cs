@@ -11,13 +11,15 @@ namespace SIS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Trainer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Trainer()
         {
             this.Course_Module = new HashSet<Course_Module>();
+            this.ReportCards = new HashSet<ReportCard>();
         }
     
         public int Id { get; set; }
@@ -35,10 +37,13 @@ namespace SIS.Models
         public string Country { get; set; }
         public string Gender { get; set; }
         public string Race { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         public string FileName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Course_Module> Course_Module { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ReportCard> ReportCards { get; set; }
     }
 }

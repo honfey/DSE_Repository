@@ -26,7 +26,7 @@ namespace SIS.Models
         }
     
         public virtual DbSet<TestType> TestTypes { get; set; }
-        public virtual DbSet<Package> Packages { get; set; }
+        public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<Attendance> Attendances { get; set; }
         public virtual DbSet<ClassStudent> ClassStudents { get; set; }
         public virtual DbSet<Course> Courses { get; set; }
@@ -37,15 +37,16 @@ namespace SIS.Models
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<MarkType> MarkTypes { get; set; }
         public virtual DbSet<Module> Modules { get; set; }
+        public virtual DbSet<ModuleStandard> ModuleStandards { get; set; }
         public virtual DbSet<Month> Months { get; set; }
+        public virtual DbSet<Nationality> Nationalities { get; set; }
         public virtual DbSet<Package_Course> Package_Course { get; set; }
         public virtual DbSet<ReportCard> ReportCards { get; set; }
         public virtual DbSet<Sibling> Siblings { get; set; }
-        public virtual DbSet<Year> Years { get; set; }
-        public virtual DbSet<Trainer> Trainers { get; set; }
-        public virtual DbSet<ModuleStandard> ModuleStandards { get; set; }
-        public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<SPMResult> SPMResults { get; set; }
         public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<Subject> Subjects { get; set; }
+        public virtual DbSet<Trainer> Trainers { get; set; }
+        public virtual DbSet<Year> Years { get; set; }
     }
 }

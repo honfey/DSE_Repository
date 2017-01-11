@@ -1,13 +1,21 @@
 ﻿@model IEnumerable<SIS.Models.Image>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Images";
 }
 
-<h2>Index</h2>
+<h2>UploadLab</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-dismissible alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Success!</strong> @TempData["Success"].ToString()
+    </div>
+}
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "UploadLab")
 </p>
 <table class="table">
     <tr>
@@ -23,9 +31,18 @@
             @Html.DisplayFor(modelItem => item.FileName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+            <a href="@Url.Action("DownloadLab", new { filename = item.FileName })">
+                <i class="fa fa-download fa-2x" aria-hidden="true" title="Download"></i>
+            </a>
+
+        </td>
+        <td>
+            <a href="@Url.Action("DeleteLab", new { lab = item.FileName, id =item.Id })">
+                <i class="fa fa-trash fa-2x" aria-hidden="true" title="Delete"></i>
+            </a>
         </td>
     </tr>
 }

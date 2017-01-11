@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using SIS.Models;
 using System.Web.Configuration;
 using System.IO;
+using System.Web.Hosting;
 
 namespace SIS.Controllers
 {
@@ -16,6 +17,7 @@ namespace SIS.Controllers
     {
         private SISEntities db = new SISEntities();
         private string webConfigPath = "~/" + WebConfigurationManager.AppSettings["UploadImage"];
+        private string webConfigPath2 = "~/" + WebConfigurationManager.AppSettings["UploadLab"];
 
         // GET: Images
         public ActionResult Index()
@@ -39,7 +41,43 @@ namespace SIS.Controllers
         }
 
         // GET: Images/Create
-        public ActionResult Create()
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
+
+        // POST: Images/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(List<HttpPostedFileBase> images)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        List<Image> imgs = new List<Image>();
+        //        foreach (var obj in images)
+        //        {
+        //            if (obj.ContentLength != 0 && obj.FileName != "")
+        //            {
+        //                string fDate = string.Format("{0:yyyyMMddhhmmsstt}", DateTime.Now);
+        //                string documentName = obj.FileName.Trim().Replace(" ", "_");
+        //                string pathToSave = Server.MapPath(webConfigPath);
+        //                string filename = fDate + '_' + documentName;
+        //                obj.SaveAs(Path.Combine(pathToSave, filename));
+
+        //                imgs.Add(new Image { FileName = filename });
+        //            }
+        //        }
+        //        db.Images.AddRange(imgs);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    return View("Create");
+        //}
+
+        public ActionResult UploadLab(int id)
         {
             return View();
         }
@@ -49,88 +87,133 @@ namespace SIS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(List<HttpPostedFileBase> images)
+        public ActionResult UploadLab(List<HttpPostedFileBase> Lab,int id)
         {
             if (ModelState.IsValid)
             {
-                List<Image> imgs = new List<Image>();
-                foreach (var obj in images)
+                List<Image> lb = new List<Image>();
+                foreach (var obj in Lab)
                 {
                     if (obj.ContentLength != 0 && obj.FileName != "")
                     {
                         string fDate = string.Format("{0:yyyyMMddhhmmsstt}", DateTime.Now);
                         string documentName = obj.FileName.Trim().Replace(" ", "_");
-                        string pathToSave = Server.MapPath(webConfigPath);
-                        string filename = fDate + '_' + documentName;
+
+                        var cw1 = db.CourseWorks.Find(id);
+                        string studentId = cw1.ClassStudent.Student.StudentId;
+                        string labName = cw1.ModuleStandard.LabName;
+                        string module = cw1.ClassStudent.Course_Module.Module.ModuleCode;
+
+                        string pathToSave = Server.MapPath(webConfigPath2);
+                        string filename = fDate + '_' + studentId + '_' + labName + '_' + module + '_' + documentName;
                         obj.SaveAs(Path.Combine(pathToSave, filename));
 
-                        imgs.Add(new Image { FileName = filename });
+                        lb.Add(new Image { FileName = filename });
                     }
                 }
-                db.Images.AddRange(imgs);
+                db.Images.AddRange(lb);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View("Create");
+            return View("UploadLab");
         }
 
-        // GET: Images/Edit/5
-        public ActionResult Edit(int? id)
+        //download Lab
+        public ActionResult DownloadLab(string filename)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Image image = db.Images.Find(id);
-            if (image == null)
-            {
-                return HttpNotFound();
-            }
-            return View(image);
+            return File(webConfigPath2 + filename, GetContentType(filename), Server.UrlEncode(filename));
         }
 
-        // POST: Images/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FileName")] Image image)
+        private string GetContentType(string fileName)
         {
-            if (ModelState.IsValid)
+            string contentType = "application/octetstream";
+
+            string ext = System.IO.Path.GetExtension(fileName).ToLower();
+
+            Microsoft.Win32.RegistryKey registryKey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext);
+
+            if (registryKey != null && registryKey.GetValue("Content Type") != null)
+                contentType = registryKey.GetValue("Content Type").ToString();
+
+            return contentType;
+        }
+
+        public ActionResult DeleteLab(string lab, int id)
+        {
+            string pathToSave = HostingEnvironment.MapPath("~") + WebConfigurationManager.AppSettings["UploadLab"];
+            string fullPath = pathToSave + lab;
+            if (System.IO.File.Exists(fullPath))
             {
-                db.Entry(image).State = EntityState.Modified;
+                System.IO.File.Delete(fullPath);
+                Image i = db.Images.Find(id);
+                i.FileName = null;
+                db.Images.Remove(i);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(image);
-        }
 
-        // GET: Images/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                TempData["Success"] = "You have successfully deleted an image.";
             }
-            Image image = db.Images.Find(id);
-            if (image == null)
-            {
-                return HttpNotFound();
-            }
-            return View(image);
-        }
-
-        // POST: Images/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Image image = db.Images.Find(id);
-            db.Images.Remove(image);
-            db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        //// GET: Images/Edit/5
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Image image = db.Images.Find(id);
+        //    if (image == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(image);
+        //}
+
+        //// POST: Images/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Id,FileName")] Image image)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(image).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(image);
+        //}
+
+        //// GET: Images/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Image image = db.Images.Find(id);
+        //    if (image == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(image);
+        //}
+
+        //// POST: Images/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Image image = db.Images.Find(id);
+        //    db.Images.Remove(image);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
+
+
 
         protected override void Dispose(bool disposing)
         {

@@ -10,6 +10,7 @@ using SIS.Models;
 
 namespace SIS.Controllers
 {
+    [Authorize(Roles = "Admin, Sub Admin")]
     public class Package_CourseController : Controller
     {
         private SISEntities db = new SISEntities();
@@ -61,7 +62,7 @@ namespace SIS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CourseId,StudentId,TotalPrice,FirstPay,MonthlyInterest,InterestRate,MonthlyPayment,AfterPlnPay")] Package_Course package_Course)
+        public ActionResult Create([Bind(Include = "ID,CourseId,StudentId,TotalPrice,FirstPay,MonthlyInterest,InterestRate,MonthlyPayment,AfterPlnPay,TotalLeft")] Package_Course package_Course)
         {
             if (ModelState.IsValid)
             {
@@ -70,17 +71,21 @@ namespace SIS.Controllers
                 {
                     package_Course.InterestRate = 0;
                     package_Course.MonthlyPayment = package_Course.TotalPrice - package_Course.FirstPay;
+                    package_Course.TotalLeft = package_Course.TotalPrice - package_Course.FirstPay;
+                    
                 }
                 else if (package_Course.InterestRate == 0 || package_Course.InterestRate == null)
                 {
                     package_Course.MonthlyPayment = (package_Course.TotalPrice - package_Course.FirstPay) / package_Course.MonthlyInterest;
                     package_Course.TotalMonthlyP = package_Course.MonthlyPayment * package_Course.MonthlyInterest;
+                    package_Course.TotalLeft = package_Course.TotalPrice - package_Course.FirstPay;
                 }
                 else
                 {
                     package_Course.MonthlyPayment = ((package_Course.TotalPrice / 100 * Convert.ToDecimal(package_Course.InterestRate)) - package_Course.FirstPay) / Convert.ToDecimal(package_Course.MonthlyInterest);
                     package_Course.AfterPlnPay = package_Course.TotalPrice * ((100 - Convert.ToDecimal(package_Course.InterestRate)) / 100);
                     package_Course.TotalMonthlyP = package_Course.MonthlyPayment * package_Course.MonthlyInterest;
+                    package_Course.TotalLeft = package_Course.TotalPrice - package_Course.FirstPay;
                 }
 
                 db.Package_Course.Add(package_Course);
@@ -88,7 +93,7 @@ namespace SIS.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Name", package_Course.CourseId);
+            ViewBag.CourseId = new SelectList(db.Courses, "CourseCode", "Name", package_Course.CourseId);
             ViewBag.StudentId = new SelectList(db.Students, "ID", "Name", package_Course.StudentId);
             return View(package_Course);
         }
@@ -116,7 +121,7 @@ namespace SIS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CourseId,StudentId,TotalPrice,FirstPay,MonthlyInterest,InterestRate,MonthlyPayment,AfterPlnPay,TotalMonthlyP")] Package_Course package_Course)
+        public ActionResult Edit([Bind(Include = "ID,CourseId,StudentId,TotalPrice,FirstPay,MonthlyInterest,InterestRate,MonthlyPayment,AfterPlnPay,TotalMonthlyP,TotalLeft,Amount,")] Package_Course package_Course)
         {
             if (ModelState.IsValid)
             {
@@ -125,91 +130,36 @@ namespace SIS.Controllers
                 {
                     package_Course.InterestRate = 0;
                     package_Course.MonthlyPayment = package_Course.TotalPrice - package_Course.FirstPay;
+                    package_Course.TotalLeft = package_Course.TotalLeft - package_Course.Amount;
+
                 }
                 else if (package_Course.InterestRate == 0 || package_Course.InterestRate == null)
                 {
-                    package_Course.MonthlyPayment = (package_Course.TotalPrice - package_Course.FirstPay) / package_Course.MonthlyInterest;  
+                    package_Course.MonthlyPayment = (package_Course.TotalPrice - package_Course.FirstPay) / package_Course.MonthlyInterest;
+                    package_Course.TotalMonthlyP = package_Course.MonthlyPayment * package_Course.MonthlyInterest;
+                    package_Course.TotalLeft = package_Course.TotalLeft - package_Course.Amount;
 
                 }
                 else
                 {
-                    package_Course.MonthlyPayment = ((package_Course.TotalPrice / 100 * Convert.ToDecimal(package_Course.InterestRate)) - package_Course.FirstPay) / Convert.ToDecimal(package_Course.MonthlyInterest);  
+                    package_Course.MonthlyPayment = ((package_Course.TotalPrice / 100 * Convert.ToDecimal(package_Course.InterestRate)) - package_Course.FirstPay) / Convert.ToDecimal(package_Course.MonthlyInterest);
+                    package_Course.AfterPlnPay = package_Course.TotalPrice * ((100 - Convert.ToDecimal(package_Course.InterestRate)) / 100);
+                    package_Course.TotalMonthlyP = package_Course.MonthlyPayment * package_Course.MonthlyInterest;
+                    package_Course.TotalLeft = package_Course.TotalLeft - package_Course.Amount;
 
                 }
 
-                db.Entry(package_Course).State = EntityState.Modified;     
+                db.Entry(package_Course).State = EntityState.Modified;         
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Name", package_Course.CourseId);
+            ViewBag.CourseId = new SelectList(db.Courses, "CourseCode", "Name", package_Course.CourseId);
             ViewBag.StudentId = new SelectList(db.Students, "ID", "Name", package_Course.StudentId);
             return View(package_Course);
         }
 
-        //public ActionResult Invoice(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Package_Course package_Course = db.Package_Course.Find(id);
-        //    if (package_Course == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-
-        //    return View(package_Course);
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Invoice([Bind(Include = "ID,CourseId,StudentId,TotalPrice,FirstPay,MonthlyInterest,InterestRate,MonthlyPayment")] Package_Course package_Course)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Package_Course.Add(package_Course);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    return View(package_Course);
-        //}
-
-
-
-        //public ActionResult Payment(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Package_Course package_Course = db.Package_Course.Find(id);
-        //    if (package_Course == null)
-        //    {
-        //        return HttpNotFound();
-        //    }                                          
-        //    ViewBag.CourseId = new SelectList(db.Courses, "CourseCode", "Name", package_Course.CourseId);   
-
-        //    return View(package_Course);
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Payment([Bind(Include = "ID,CourseId,StudentId,TotalPrice,FirstPay,MonthlyInterest,InterestRate,MonthlyPayment")] Package_Course package_Course)
-        //{
-        //    if (ModelState.IsValid)
-        //    {     
-        //        db.Package_Course.Add(package_Course);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    ViewBag.CourseId = new SelectList(db.Courses, "CourseId", "Name", package_Course.CourseId);
-        //    ViewBag.StudentId = new SelectList(db.Students, "ID", "Name", package_Course.StudentId);
-        //    return View(package_Course);
-        //}
-
+      
 
 
         // GET: Package_Course/Delete/5

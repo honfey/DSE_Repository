@@ -16,7 +16,7 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        <td>            
             @Html.ActionLink(item.Course_Module.Module.ModuleCode, "CheckIndividualAttendance", new { id = item.Id })
         </td>
         @*<td>

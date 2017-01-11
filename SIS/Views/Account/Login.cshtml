@@ -29,7 +29,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="@Url.Action("Index", "Home")"><b>SBIT Management</b></a>
+            <a href="@Url.Action("Index", "Home")"><b>Student Information System</b></a>
         </div>
         <div class="login-box-body">
             <p class="login-box-msg">Sign in to start</p>
@@ -49,29 +49,13 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-8">
-                        <div class="checkbox icheck">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
+                        <a href="#">I forgot my password</a><br> 
                     </div>
                     <div class="col-xs-4">
                         <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
                     </div>
                 </div>
             }
-            <div class="social-auth-links text-center">
-                <p>- OR -</p>
-                <a href="#" class="btn btn-block btn-social btn-facebook btn-flat">
-                    <i class="fa fa-facebook"></i> Sign in using
-                    Facebook
-                </a>
-                <a href="#" class="btn btn-block btn-social btn-google btn-flat">
-                    <i class="fa fa-google-plus"></i> Sign in using
-                    Google+
-                </a>
-            </div>
-            <a href="#">I forgot my password</a><br>
-            <a href="@Url.Action("Register", "Account")" class="text-center">Register as a new user</a>
         </div>
     </div>
 

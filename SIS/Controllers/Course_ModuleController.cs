@@ -10,6 +10,7 @@ using SIS.Models;
 
 namespace SIS.Controllers
 {
+    [Authorize(Roles = "Admin, Trainer")]
     public class Course_ModuleController : Controller
     {
         private SISEntities db = new SISEntities();
@@ -41,7 +42,10 @@ namespace SIS.Controllers
         {
             ViewBag.CourseId = new SelectList(db.Courses, "CourseCode", "Name");
             ViewBag.ModuleId = new SelectList(db.Modules, "ModuleCode", "Name");
-            ViewBag.TrainerId = new SelectList(db.Trainers, "Id", "Name");
+
+            var trainerName = from t in db.Trainers
+                              select new { t.Id, name = t.FirstName + " " + t.LastName };
+            ViewBag.TrainerId = new SelectList(trainerName, "Id", "Name");
             return View();
         }
 
@@ -54,14 +58,19 @@ namespace SIS.Controllers
         {
             if (ModelState.IsValid)
             {
+               
                 db.Course_Module.Add(course_Module);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+
             }
 
             ViewBag.CourseId = new SelectList(db.Courses, "CourseCode", "Name", course_Module.CourseId);
             ViewBag.ModuleId = new SelectList(db.Modules, "ModuleCode", "Name", course_Module.ModuleId);
-            ViewBag.TrainerId = new SelectList(db.Trainers, "Id", "Name", course_Module.TrainerId);
+            var trainerName = from t in db.Trainers
+                              select new { t.Id, name = t.FirstName + " " + t.LastName };
+            ViewBag.TrainerId = new SelectList(trainerName, "Id", "Name");
+            //ViewBag.TrainerId = new SelectList(db.Trainers, "Id", "Name", course_Module.TrainerId);
             return View(course_Module);
         }
 
@@ -79,7 +88,11 @@ namespace SIS.Controllers
             }
             ViewBag.CourseId = new SelectList(db.Courses, "CourseCode", "Name", course_Module.CourseId);
             ViewBag.ModuleId = new SelectList(db.Modules, "ModuleCode", "Name", course_Module.ModuleId);
-            ViewBag.TrainerId = new SelectList(db.Trainers, "Id", "Name", course_Module.TrainerId);
+
+            //ViewBag.TrainerId = new SelectList(db.Trainers, "Id", "Name", course_Module.TrainerId);
+            var trainerName = from t in db.Trainers
+                              select new { t.Id, name = t.FirstName + " " + t.LastName };
+            ViewBag.TrainerId = new SelectList(trainerName, "Id", "Name");
             return View(course_Module);
         }
 
@@ -98,7 +111,10 @@ namespace SIS.Controllers
             }
             ViewBag.CourseId = new SelectList(db.Courses, "CourseCode", "Name", course_Module.CourseId);
             ViewBag.ModuleId = new SelectList(db.Modules, "ModuleCode", "Name", course_Module.ModuleId);
-            ViewBag.TrainerId = new SelectList(db.Trainers, "Id", "Name", course_Module.TrainerId);
+            //ViewBag.TrainerId = new SelectList(db.Trainers, "Id", "Name", course_Module.TrainerId);
+            var trainerName = from t in db.Trainers
+                              select new { t.Id, name = t.FirstName + " " + t.LastName };
+            ViewBag.TrainerId = new SelectList(trainerName, "Id", "Name");
             return View(course_Module);
         }
 

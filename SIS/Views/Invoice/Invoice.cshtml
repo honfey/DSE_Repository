@@ -1,10 +1,5 @@
 ﻿@model SIS.Models.Invoice
 
-@*@{
-    ViewBag.Title = "Invoice";
-}
-
-<h2>Invoice</h2>*@
 
 @section Menu {
     @Scripts.Render("~/Scripts/Examples/Invoice/menu")
@@ -85,7 +80,7 @@
                     @*<th>Qty</th>*@
                     @*<th>Price (RM)</th>*@
                     <th>Amount (RM)</th>
-                    <th>TAX</th>
+                    @*<th>TAX</th>*@
                 </tr>
             </thead>
             <tbody>
@@ -94,8 +89,9 @@
                         @Html.DisplayFor(model => model.Description, new { htmlAttribute = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </td>
-                    <td></td>
-                    <td></td>
+
+                  <td></td>
+                  <td></td> 
                 @*<td>@Html.TextBox("simple", null, new { @class = "col-md-3" }) </td>*@
 
                 @*<td>@Html.DisplayFor(model => model.Amount, new { htmlAttribute = new { @class = "col-md-3" } })
@@ -106,8 +102,55 @@
                     @Html.DisplayFor(model => model.Amount, new { htmlAttribute = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
             </td>
-            <td>SR</td>
+                    
+            @*<td>
+                SR
+            </td>*@
         </tr>
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => model.Description2, new { htmlAttribute = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Description2, "", new { @class = "text-danger" })
+                    </td>
+                    <td></td>
+                    <td></td> 
+
+                    @*<td>@Html.TextBox("simple", null, new { @class = "col-md-3" }) </td>*@
+
+                    @*<td>@Html.DisplayFor(model => model.Amount, new { htmlAttribute = new { @class = "col-md-3" } })
+                @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger" })
+            </td>*@
+
+                    <td>
+                        @Html.DisplayFor(model => model.Amount2, new { htmlAttribute = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Amount2, "", new { @class = "text-danger" })
+                    </td>
+
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => model.Description3, new { htmlAttribute = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Description3, "", new { @class = "text-danger" })
+                    </td>
+                    <td></td>
+                    <td></td>
+
+                    @*<td>@Html.TextBox("simple", null, new { @class = "col-md-3" }) </td>*@
+
+                    @*<td>@Html.DisplayFor(model => model.Amount, new { htmlAttribute = new { @class = "col-md-3" } })
+                @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger" })
+            </td>*@
+
+                    <td>
+                        @Html.DisplayFor(model => model.Amount3, new { htmlAttribute = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Amount3, "", new { @class = "text-danger" })
+                    </td>
+
+                   <td></td>
+                </tr>
     </tbody>
 </table>
 <hr />
@@ -162,6 +205,10 @@
     <p>
         <input type="button" id="btnprint" value="Print" onclick="print_page()" />
     </p>
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 
 
 @*<div class="row no-print">

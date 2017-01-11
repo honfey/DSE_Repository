@@ -10,6 +10,7 @@ using SIS.Models;
 
 namespace SIS.Controllers
 {
+    [Authorize(Roles = "Admin, Trainer")]
     public class ModuleStandardsController : Controller
     {
         private SISEntities db = new SISEntities();
@@ -39,11 +40,11 @@ namespace SIS.Controllers
         // GET: ModuleStandards/Create
         public ActionResult Create()
         {
-            var CourseModuleName = from cm in db.Course_Module
-                                   join c in db.Courses on cm.CourseId equals c.CourseCode
-                                   join ml in db.Modules on cm.ModuleId equals ml.ModuleCode
-                                   select new { cm.Id, Name = c.Name + "(" + ml.Name + ")" };
-            ViewBag.CMName = new SelectList(CourseModuleName, "Id", "Name");
+            //var CourseModuleName = from cm in db.Course_Module
+            //                       join c in db.Courses on cm.CourseId equals c.CourseCode
+            //                       join ml in db.Modules on cm.ModuleId equals ml.ModuleCode
+            //                       select new { cm.Id, Name = c.Name + "(" + ml.Name + ")" };
+            //ViewBag.CMName = new SelectList(CourseModuleName, "Id", "Name");
             ViewBag.MarkTypeId = new SelectList(db.MarkTypes, "Id", "Name");
             return View();
         }
@@ -130,74 +131,131 @@ namespace SIS.Controllers
 
         public ActionResult Add(int? id)
         {
+
             List<ModuleStandard> ms = new List<ModuleStandard> { new ModuleStandard { Course_ModuleId = id, MarkTypeId = 0, Marks = 0 } };
-            var CourseModuleName = from cm in db.Course_Module
-                                   join c in db.Courses on cm.CourseId equals c.CourseCode
-                                   join ml in db.Modules on cm.ModuleId equals ml.ModuleCode
-                                   select new { cm.Id, Name = c.Name + "(" + ml.Name + ")" };
-            ViewBag.CMName = new SelectList(CourseModuleName, "Id", "Name");
+            var n = db.Course_Module.Find(id);
+            var c = n.Module.Name + "(" + n.Module.ModuleCode + ")";
+            ViewData["name"] = c;           
             ViewBag.MarkTypeId = new SelectList(db.MarkTypes, "Id", "Name");
             return View(ms);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(List<ModuleStandard> mss)
+        public ActionResult Add(List<ModuleStandard> mss,int? id )
         {
             if (ModelState.IsValid)
             {
-                
-                foreach (var i in mss)
+                var total = (int?)0;
+                foreach (var item in mss)
                 {
-                    db.ModuleStandards.Add(i);
+                    total += item.Marks;
                 }
-                db.SaveChanges();
-                ViewBag.Message = "Data successfully saved!";
-                ModelState.Clear();
-                //mss = new List<ModuleStandard> { new ModuleStandard { Course_ModuleId = id, MarkTypeId = 0, Mark = 0 } };
-                return RedirectToAction("ShowStandard");
+                if (total == 100)
+                {
+                    foreach (var i in mss)
+                    {
+                        db.ModuleStandards.Add(i);
+                    }
+                    db.SaveChanges();
+                    ViewBag.Message = "Data successfully saved!";
+                    return RedirectToAction("ShowStandard");
+                }
+                //ModelState.Clear();
+                ////mss = new List<ModuleStandard> { new ModuleStandard { Course_ModuleId = id, MarkTypeId = 0, Mark = 0 } };
+                else
+                {                   
+                    ViewBag.alert = "Marks must be 100%";
+                    var n = db.Course_Module.Find(id);
+                    var c = n.Module.Name;
+                    ViewData["name"] = c;
+                    ViewBag.MarkTypeId = new SelectList(db.MarkTypes, "Id", "Name");
+                    return View(mss);
+                }
             }
-            ViewBag.MarkTypeId = new SelectList(db.MarkTypes, "Id", "Name");
-
+            ViewBag.MarkTypeId = new SelectList(db.MarkTypes, "Id", "Name");           
             return View(mss);
         }
 
-        public ActionResult ShowStandard()
+        public ActionResult ShowStandard(int? Search)
         {
-            return View(db.Course_Module.ToList());
+            if(Search == null)
+            {
+                var standard = db.ClassStudents.OrderBy(x=>x.Course_ModuleId).Where(x => x.Status == true);
+                return View(standard.ToList());
+            }
+            else
+            {
+                var convert = Convert.ToBoolean(Search);
+                var resultName = db.ClassStudents.OrderBy(x => x.Course_ModuleId).Where(x => x.Status == convert);
+                return View(resultName.ToList());
+            }
+           
         }
 
         public ActionResult EditModuleStandard(int id)
-        {
-            var cmName = from cm in db.Course_Module
-                         join c in db.Courses on cm.CourseId equals c.CourseCode
-                         join m in db.Modules on cm.ModuleId equals m.ModuleCode
-                         select new { cm.Id, Name = c.Name + "(" + m.Name + ")" };
-
-            ModuleStandard mS = db.ModuleStandards.Find(id);
-            
-            ViewBag.CM = new SelectList(cmName, "Id", "Name");
+        {                    
             ViewBag.MT = new SelectList(db.MarkTypes, "Id", "Name");
             var CheckModuleStandard = db.ModuleStandards.Where(x => x.Course_ModuleId == id);
+
+            var CourseModuleName = db.Course_Module.Find(id);
+            var cmName = CourseModuleName.Module.Name + "(" + CourseModuleName.Module.ModuleCode + ")";
+
+            var total = (int?)0;
+            foreach (var item in CheckModuleStandard)
+            {
+                total += item.Marks;
+            }
+            ViewData["int"] = total;
+            ViewData["cmName"] = cmName;
             return View(CheckModuleStandard.ToList());
 
         }
 
         [HttpPost]
-        public ActionResult EditModuleStandard(List<ModuleStandard> moduleStandard)
+        public ActionResult EditModuleStandard(List<ModuleStandard> moduleStandard, int id)
         {
             if (ModelState.IsValid)
             {
-                
-                foreach (var ms in moduleStandard)
+                var total = (int?)0;
+                foreach (var item in moduleStandard)
                 {
-                    db.Entry(ms).State = EntityState.Modified;
+                    total += item.Marks;
                 }
-                db.SaveChanges();
-                return RedirectToAction("ShowStandard");
+                if (total == 100)
+                {
+                    if (moduleStandard != null && moduleStandard.Count() > 0)
+                    {
+                        foreach (var i in moduleStandard)
+                        {
+                            if (i.Id == 0)
+                            {
+                                db.Entry(i).State = EntityState.Added;
+                            }
+                            else
+                            {
+                                db.Entry(i).State = EntityState.Modified;
+                            }
+                        }
+                    }                   
+                    db.SaveChanges();
+                    return RedirectToAction("ShowStandard");
+                }
+                else
+                {
+                    ViewData["int"] = total;
+                    ViewBag.alert = "Total Marks must be 100%";
+                    ViewBag.MT = new SelectList(db.MarkTypes, "Id", "Name");
+
+                    var CourseModuleName = db.Course_Module.Find(id);
+                    var cmName = CourseModuleName.Module.Name;
+                    ViewData["cmName"] = cmName;
+                    return View(moduleStandard);
+                }
             }
             return View(moduleStandard);
         }
+                
 
         public ActionResult D(int id)
         {

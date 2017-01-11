@@ -4,7 +4,7 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<br />
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
@@ -60,13 +60,13 @@
             @Html.DisplayFor(model => model.InterestRate)
         </dd>*@
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.MonthlyPayment)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.MonthlyPayment)
-        </dd>
+        </dd>*@
 
     </dl>
 
@@ -75,7 +75,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Cancel", "Index", null,new { @class = "btn btn-primary" })
         </div>
     }
 </div>

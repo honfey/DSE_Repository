@@ -4,19 +4,31 @@
     ViewBag.Title = "MarkMarks";
 }
 
-<h2>MarkMarks</h2>
+<h2>@ViewData["ModuleName"]</h2>
+<h3>@ViewData["StudentName"]</h3>
+
+@using (Html.BeginForm("MarkMarks", "CourseWorks", FormMethod.Get ))
+{
+
+    @Html.Hidden("id", "id");
+    @Html.Hidden("id2", "id2");
+    @Html.DropDownList("TT", new List<SelectListItem>
+{
+    new SelectListItem{ Text="-- Select TestType --", Value = ""},
+                        new SelectListItem{ Text="FirstTest", Value = "1" },
+                        new SelectListItem{ Text="FirstResit", Value = "2" },
+                        new SelectListItem{ Text="SecondResit", Value = "3" },
+                        new SelectListItem{ Text="ThirdResit", Value = "4" },
+});
+    <input type="submit" class="btn btn-default" value="Search" />
+}
+
 
 @using (Html.BeginForm("MarkMarks", "CourseWorks", FormMethod.Post))
 {
-
+    @Html.Hidden("id2", "id2");
     <table class="table">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ClassStudent.Student.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Course_Module.Module.Name)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.TestType.Name)
             </th>
@@ -29,38 +41,43 @@
             <th>
                 @Html.DisplayNameFor(model => model.Marks)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
             <th></th>
         </tr>
 
         @for (var i = 0; i < Model.Count(); i++)
         {
             <tr>
-                <td>
-                    @Html.Hidden("courseWork[" + (@i) + "].Id", Model.ElementAtOrDefault(i).Id)
+                @Html.Hidden("courseWork[" + (@i) + "].Id", Model.ElementAtOrDefault(i).Id)
+                <td>                    
                     @Html.Hidden("courseWork[" + (@i) + "].ClassStudentId", Model.ElementAtOrDefault(i).ClassStudentId)
-                    @Html.DisplayFor(p => Model.ElementAt(i).ClassStudent.Student.Name)
-                </td>
-                <td>
                     @Html.Hidden("courseWork[" + (@i) + "].Course_ModuleId", Model.ElementAtOrDefault(i).Course_ModuleId)
-                    @Html.DisplayFor(p => Model.ElementAt(i).Course_Module.Module.ModuleCode)
-                </td>
-                <td>
-                    @Html.Hidden("courseWork[" + (@i) + "].TestTypeId", Model.ElementAtOrDefault(i).TestTypeId)
-                    @Html.DropDownListFor(m => Model.ElementAt(i).TestType.Name, (SelectList)ViewBag.TT, new { @class = "form-control" })
+                    @Html.Hidden("courseWork[" + (@i) + "].TestTypeId",Model.ElementAtOrDefault(i).TestTypeId)
+                    @Html.DisplayFor(p => Model.ElementAt(i).TestType.Name)                   
                 </td>
                 <td>
                     @Html.Hidden("courseWork[" + (@i) + "].ModuleStandardId", Model.ElementAtOrDefault(i).ModuleStandardId)
                     @Html.DisplayFor(p => Model.ElementAt(i).ModuleStandard.MarkType.Name)
                 </td>
                 <td>
-                    @Html.Hidden("courseWork[" + (@i) + "].ModuleStandard.LabName", Model.ElementAtOrDefault(i).ModuleStandard.LabName)
+                    @*@Html.Hidden("courseWork[" + (@i) + "].ModuleStandard.LabName", Model.ElementAtOrDefault(i).ModuleStandard.LabName)*@
                     @Html.DisplayFor(p => Model.ElementAt(i).ModuleStandard.LabName)
                 </td>
                 <td>
-                    @Html.TextBox("courseWork[" + (@i) + "].Marks", Model.ElementAtOrDefault(i).Marks, new { @class = "form-control" })
+                    @if (Model.ElementAtOrDefault(i).TestTypeId == 1)
+                    {
+                        @Html.TextBox("courseWork[" + (@i) + "].Marks", Model.ElementAtOrDefault(i).Marks, new { @class = "form-control", type = "Number", max = ViewData[Model.ElementAtOrDefault(i).ModuleStandard.MarkType.Name], @onchange = "_readonly(this)" })
+                    }
+                    else
+                    {
+                        @Html.TextBox("courseWork[" + (@i) + "].Marks", Model.ElementAtOrDefault(i).Marks, new { @class = "form-control", type = "Number", max = ViewData[Model.ElementAtOrDefault(i).ModuleStandard.MarkType.Name]@*, @readonly = "readonly"*@ })
+                    }
+
                 </td>
                 <td>
-                    @Html.ActionLink("UploadedLab", "Pass")
+                    @Html.DisplayFor(p=> Model.ElementAt(i).Status)
                 </td>
                 <td>
                     @Html.ActionLink("X", "Delete", new { id = Model.ElementAtOrDefault(i).Id }, new { @class = "btn btn-danger" })
@@ -71,7 +88,26 @@
         }
 
     </table>
-    <input type="submit" value="Submit" class="btn btn-primary" />
-    @Html.ActionLink("Back", "ShowClass");
+    <input type="submit" value="Submit" class="btn btn-default" /> 
+     @Html.ActionLink("Back", "ShowClass",null,new { @class = "btn btn-primary" });
 
+}
+@section Scripts {
+    @Scripts.Render("~/Content/plugins/jquery-validate/js")
+<script>
+    //function _readonly(t)
+    //{
+    //    var numk = 0;
+    //    if ($(t).val() != null)
+    //    {
+    //        numk += 1;
+    //        //$("input[name='courseWork[" + numk + "].Marks'").attr("readonly", true);
+    //        $("*input[name='courseWork[" + numk + "].TestTypeId").
+    //    } else
+    //    {
+    //        $("input[name='courseWork[" + numk + "].Marks'").attr("readonly", false);
+    //    }
+    //    numk++
+    //};
+</script>
 }

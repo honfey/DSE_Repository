@@ -11,7 +11,8 @@ namespace SIS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class ClassStudent
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,6 +20,7 @@ namespace SIS.Models
         {
             this.Attendances = new HashSet<Attendance>();
             this.CourseWorks = new HashSet<CourseWork>();
+            this.ReportCards = new HashSet<ReportCard>();
         }
     
         public int Id { get; set; }
@@ -28,12 +30,17 @@ namespace SIS.Models
         public Nullable<int> Exam_Day { get; set; }
         public Nullable<int> Trial_Day { get; set; }
         public Nullable<int> Project_Day { get; set; }
+        public Nullable<bool> Status { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public Nullable<System.DateTime> CreateDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
         public virtual Course_Module Course_Module { get; set; }
+        public virtual Student Student { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CourseWork> CourseWorks { get; set; }
-        public virtual Student Student { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ReportCard> ReportCards { get; set; }
     }
 }

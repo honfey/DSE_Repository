@@ -4,8 +4,15 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+@section Menu {
+    @Scripts.Render("~/Scripts/Forms/Advanced/menu")
+}
 
+@Styles.Render("~/Content/plugins/select2/css")
+@Styles.Render("~/Content/dist/css")
+@Styles.Render("~/Content/dist/css/skins")
+
+<br />
 
 @using (Html.BeginForm())
 {
@@ -16,24 +23,24 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @*<div class="form-group">
-            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-10">
                 @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
             </div>
         </div>*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.StudentId, "StudentName", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("StudentId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.LabelFor(model => model.StudentId, "StudentName", htmlAttributes: new { @class = "control-label col-xs-2 " })
+            <div class="col-xs-4">
+                @Html.DropDownList("StudentId", null, htmlAttributes: new { @class = "form-control select2" })
                 @Html.ValidationMessageFor(model => model.StudentId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Ref,"Your Ref.", htmlAttributes : new { @class="control-label col-md-2"})
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Ref,"Your Ref.", htmlAttributes : new { @class="control-label col-xs-2"})
+            <div class="col-xs-4">
                 @Html.DropDownList("Ref", new List<SelectListItem>
            {
                new SelectListItem {Text="Cash" , Value ="Cash" },
@@ -43,51 +50,104 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
 
+
         <div class="form-group">
-            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
+                <input type="checkbox" onclick="click1()" id="checkbx1" /> include 6%(GST)
+                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control", id="txt1" } })
                 @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
             </div>
         </div>
 
+
         <div class="form-group">
-            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Description2, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
+                @Html.EditorFor(model => model.Description2, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Amount2, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
+                <input type="checkbox" onclick="click2()" id="checkbx2" /> include 6%(GST)
+                @Html.EditorFor(model => model.Amount2, new { htmlAttributes = new { @class = "form-control", id = "txt2" } })
+                @Html.ValidationMessageFor(model => model.Amount2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+   
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description3, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
+                @Html.EditorFor(model => model.Description3, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description3, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Amount3, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
+                <input type="checkbox" onclick="click3()" id="checkbx3" /> include 6%(GST)
+                @Html.EditorFor(model => model.Amount3, new { htmlAttributes = new { @class = "form-control" , id = "txt3" } })
+                @Html.ValidationMessageFor(model => model.Amount3, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.GST, new { @id = "Gst1" })
+        @Html.HiddenFor(model => model.GST2, new { @id = "Gst2" })
+        @Html.HiddenFor(model => model.GST3, new { @id = "Gst3" })
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
             </div>
         </div>
 
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.Color, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-1" style="width: 10%">
+                @Html.EditorFor(model => model.Color, new { htmlAttributes = new { @class = "form-control", @type = "color" } })
+                @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
 
         @*<div class="form-group">
-            @Html.LabelFor(model => model.GSTAmt, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.GSTAmt, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.GSTAmt, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.GSTAmt, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FinalTotal, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.FinalTotal, htmlAttributes: new { @class = "control-label col-xs-2" })
+            <div class="col-xs-4">
                 @Html.EditorFor(model => model.FinalTotal, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FinalTotal, "", new { @class = "text-danger" })
             </div>
@@ -95,8 +155,8 @@
 
         
             @*<div class="input-group date" data-provide="datepicker">
-            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })  
-                <div class="col-md-10">
+            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-xs-2" })  
+                <div class="col-xs-4">
                     @Html.TextBoxFor(model => model.Date, htmlAttributes: new { @class = "form-control", id ="datepicker" })
                         <div class="input-group-addon">
                              <span class="glyphicon glyphicon-th"></span>
@@ -104,17 +164,58 @@
                </div>
         </div>*@
 
+
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-xs-offset-2 col-xs-4">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
+<script type="text/javascript">
+    function click1()
+    {     
+        var checkBoxMI = $('#checkbx1');                   
+        var x = document.getElementById("txt1").value;
+        if (checkBoxMI.is(':checked'))
+        {
+            document.getElementById("Gst1").value = x - ((x * 100) / 106)
+        }
+    }
+
+    function click2()
+    {
+        var checkBoxMI = $('#checkbx2');
+        var x = document.getElementById("txt2").value;
+        if (checkBoxMI.is(':checked'))
+        {
+            document.getElementById("Gst2").value = x - ((x * 100) / 106)
+        }
+    }
+
+    function click3() {
+        var checkBoxMI = $('#checkbx3');
+        var x = document.getElementById("txt3").value;
+        if (checkBoxMI.is(':checked'))
+        {
+            document.getElementById("Gst3").value = x - ((x * 100) / 106)
+        }
+    }
+
+
+</script>
+
+
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-primary" })
 </div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Content/plugins/select2/js")
+    @Scripts.Render("~/Scripts/Forms/Advanced")
+}
 
 @*@section Scripts {
     <script>

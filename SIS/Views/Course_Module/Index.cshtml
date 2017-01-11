@@ -1,19 +1,12 @@
 ﻿@model IEnumerable<SIS.Models.Course_Module>
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
+<h2>Assign Module to Course</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Assign Module to Course", "Create")
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.Course.Name)
         </th>
@@ -27,9 +20,6 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Course.Name)
         </td>
         <td>
@@ -38,7 +28,6 @@
         
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>

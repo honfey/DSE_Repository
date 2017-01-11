@@ -4,10 +4,10 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<br />
 
 <div>
-    <h4>Package_Course</h4>
+    <h4>Package Course</h4>
     <hr style="border-color: black" />
 
     <dl class="dl-horizontal">
@@ -81,11 +81,24 @@
 
         <dd>
             @Html.DisplayFor(model => model.AfterPlnPay)
+        </dd>    
+
+    </dl>
+
+    <hr style="border-color:black" />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalLeft)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalLeft)
         </dd>
+
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id , @class = "btn btn-default"}) |
+    @Html.ActionLink("Back to List", "Index", null,new { @class = "btn btn-primary" })
 </p>

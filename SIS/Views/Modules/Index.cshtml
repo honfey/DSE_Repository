@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<SIS.Models.Module>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Module";
 }
 
-<h2>Index</h2>
+<br />
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create a New Module", "Create")
 </p>
 <table class="table">
     <tr>
@@ -21,11 +21,10 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(model => item.Name)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.ModuleCode }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ModuleCode }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.ModuleCode })
             </td>
         </tr>

@@ -1,0 +1,2527 @@
+﻿@model  SIS.Models.CourseWork
+@{
+    ViewBag.Title = "DIP Report Card";
+
+}
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META http-equiv="X-UA-Compatible" content="IE=8">
+    <TITLE>DIP Result Slip</TITLE>
+    <META name="generator" content="BCL easyConverter SDK 5.0.08">
+    <style>
+        body {
+            margin-top: 0px;
+            margin-left: 0px;
+        }
+
+        #page_1 {
+            position: relative;
+            overflow: hidden;
+            margin: 24px 0px 39px 73px;
+            padding: 0px;
+            border: none;
+            width: 721px;
+        }
+
+            #page_1 #id_1 {
+                border: none;
+                margin: 4px 0px 0px 445px;
+                padding: 0px;
+                border: none;
+                width: 276px;
+                overflow: hidden;
+            }
+
+            #page_1 #id_2 {
+                border: none;
+                margin: 6px 0px 0px 254px;
+                padding: 0px;
+                border: none;
+                width: 467px;
+                overflow: hidden;
+            }
+
+                #page_1 #id_2 #id_2_1 {
+                    float: left;
+                    border: none;
+                    margin: 0px 0px 0px 0px;
+                    padding: 0px;
+                    border: none;
+                    width: 261px;
+                    overflow: hidden;
+                }
+
+                #page_1 #id_2 #id_2_2 {
+                    float: left;
+                    border: none;
+                    margin: 4px 0px 0px 0px;
+                    padding: 0px;
+                    border: none;
+                    width: 206px;
+                    overflow: hidden;
+                }
+
+            #page_1 #id_3 {
+                border: none;
+                margin: 2px 0px 0px 2px;
+                padding: 0px;
+                border: none;
+                width: 719px;
+                overflow: hidden;
+            }
+
+            #page_1 #id_4 {
+                border: none;
+                margin: 4px 0px 0px 5px;
+                padding: 0px;
+                border: none;
+                width: 716px;
+                overflow: hidden;
+            }
+
+                #page_1 #id_4 #id_4_1 {
+                    float: left;
+                    border: none;
+                    margin: 0px 0px 0px 0px;
+                    padding: 0px;
+                    border: none;
+                    width: 534px;
+                    overflow: hidden;
+                }
+
+                #page_1 #id_4 #id_4_2 {
+                    float: left;
+                    border: none;
+                    margin: 72px 0px 0px 86px;
+                    padding: 0px;
+                    border: none;
+                    width: 96px;
+                    overflow: hidden;
+                }
+
+            #page_1 #p1dimg1 {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                z-index: -1;
+                width: 250px;
+            }
+
+                #page_1 #p1dimg1 #p1img1 {
+                    width: 250px;
+                }
+
+
+
+
+        .dclr {
+            clear: both;
+            float: none;
+            height: 1px;
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+        }
+
+        .ft0 {
+            font: bold 16px 'Times New Roman';
+            line-height: 19px;
+        }
+
+        .ft1 {
+            font: 13px 'Times New Roman';
+            line-height: 18px;
+        }
+
+        .ft2 {
+            font: bold 19px 'Times New Roman';
+            line-height: 22px;
+        }
+
+        .ft3 {
+            font: bold 19px 'SimSun';
+            line-height: 19px;
+        }
+
+        .ft4 {
+            font: bold 16px 'SimSun';
+            line-height: 16px;
+        }
+
+        .ft5 {
+            font: 15px 'SimSun';
+            line-height: 15px;
+        }
+
+        .ft6 {
+            font: 15px 'Times New Roman';
+            line-height: 17px;
+        }
+
+        .ft7 {
+            font: 1px 'Times New Roman';
+            line-height: 1px;
+        }
+
+        .ft8 {
+            font: 1px 'Times New Roman';
+            line-height: 16px;
+        }
+
+        .ft9 {
+            font: 15px 'Times New Roman';
+            color: #ffffff;
+            line-height: 17px;
+        }
+
+        .ft10 {
+            font: 1px 'Times New Roman';
+            line-height: 10px;
+        }
+
+        .ft11 {
+            font: bold 15px 'SimSun';
+            line-height: 15px;
+        }
+
+        .ft12 {
+            font: bold 15px 'Times New Roman';
+            line-height: 17px;
+        }
+
+        .ft13 {
+            font: bold 14px 'SimSun';
+            line-height: 14px;
+        }
+
+        .ft14 {
+            font: bold 14px 'Times New Roman';
+            line-height: 17px;
+        }
+
+        .ft15 {
+            font: bold 12px 'Times New Roman';
+            line-height: 15px;
+        }
+
+        .ft16 {
+            font: 1px 'Times New Roman';
+            line-height: 12px;
+        }
+
+        .ft17 {
+            font: 1px 'Times New Roman';
+            line-height: 6px;
+        }
+
+        .ft18 {
+            font: 1px 'Times New Roman';
+            line-height: 7px;
+        }
+
+        .ft19 {
+            font: 15px 'Arial';
+            color: #333333;
+            line-height: 17px;
+        }
+
+        .ft20 {
+            font: 16px 'Times New Roman';
+            line-height: 19px;
+        }
+
+        .ft21 {
+            font: 1px 'Times New Roman';
+            line-height: 4px;
+        }
+
+        .ft22 {
+            font: 43px 'Wingdings';
+            line-height: 21px;
+        }
+
+        .ft23 {
+            font: 16px 'Times New Roman';
+            margin-left: 54px;
+            line-height: 19px;
+        }
+
+        .ft24 {
+            font: 16px 'SimSun';
+            line-height: 16px;
+        }
+
+        .ft25 {
+            font: 1px 'Times New Roman';
+            line-height: 9px;
+        }
+
+        .ft26 {
+            font: 1px 'Times New Roman';
+            line-height: 8px;
+        }
+
+        .ft27 {
+            font: 1px 'Times New Roman';
+            line-height: 3px;
+        }
+
+        .ft28 {
+            font: 1px 'Times New Roman';
+            line-height: 5px;
+        }
+
+        .ft29 {
+            font: 1px 'Times New Roman';
+            line-height: 17px;
+        }
+
+        .ft30 {
+            font: 15px 'SimSun';
+            line-height: 11px;
+        }
+
+        .ft31 {
+            font: 16px 'SimSun';
+            line-height: 11px;
+        }
+
+        .ft32 {
+            font: 1px 'Times New Roman';
+            line-height: 15px;
+        }
+
+        .ft33 {
+            font: 16px 'Times New Roman';
+            line-height: 15px;
+        }
+
+        .ft34 {
+            font: 16px 'Times New Roman';
+            line-height: 10px;
+        }
+
+        .ft35 {
+            font: 16px 'SimSun';
+            line-height: 10px;
+        }
+
+        .ft36 {
+            font: 1px 'Times New Roman';
+            line-height: 2px;
+        }
+
+        .ft37 {
+            font: 16px 'Times New Roman';
+            line-height: 17px;
+        }
+
+        .ft38 {
+            font: 11px 'Times New Roman';
+            line-height: 14px;
+        }
+
+        .p0 {
+            text-align: left;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .p1 {
+            text-align: left;
+            padding-left: 69px;
+            padding-right: 42px;
+            margin-top: 1px;
+            margin-bottom: 0px;
+            text-indent: -62px;
+        }
+
+        .p2 {
+            text-align: left;
+            padding-left: 29px;
+            margin-top: 6px;
+            margin-bottom: 0px;
+        }
+
+        .p3 {
+            text-align: right;
+            padding-right: 99px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .p4 {
+            text-align: left;
+            margin-top: 8px;
+            margin-bottom: 0px;
+        }
+
+        .p5 {
+            text-align: left;
+            padding-left: 3px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p6 {
+            text-align: left;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p7 {
+            text-align: left;
+            padding-left: 8px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p8 {
+            text-align: left;
+            padding-left: 22px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p9 {
+            text-align: right;
+            padding-right: 50px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p10 {
+            text-align: right;
+            padding-right: 14px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p11 {
+            text-align: left;
+            padding-left: 35px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p12 {
+            text-align: center;
+            padding-left: 3px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p13 {
+            text-align: left;
+            padding-left: 51px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p14 {
+            text-align: left;
+            padding-left: 17px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p15 {
+            text-align: center;
+            padding-left: 2px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p16 {
+            text-align: center;
+            padding-left: 1px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p17 {
+            text-align: left;
+            padding-left: 56px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p18 {
+            text-align: left;
+            padding-left: 20px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p19 {
+            text-align: left;
+            padding-left: 21px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p20 {
+            text-align: left;
+            padding-left: 2px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p21 {
+            text-align: left;
+            padding-left: 1px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p22 {
+            text-align: left;
+            padding-left: 18px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .p23 {
+            text-align: left;
+            padding-left: 264px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .p24 {
+            text-align: center;
+            padding-left: 72px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p25 {
+            text-align: center;
+            padding-left: 71px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p26 {
+            text-align: right;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p27 {
+            text-align: right;
+            padding-right: 20px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p28 {
+            text-align: left;
+            padding-left: 74px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p29 {
+            text-align: right;
+            padding-right: 92px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p30 {
+            text-align: right;
+            padding-right: 24px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p31 {
+            text-align: left;
+            padding-left: 3px;
+            margin-top: 9px;
+            margin-bottom: 0px;
+        }
+
+        .p32 {
+            text-align: left;
+            padding-left: 3px;
+            margin-top: 64px;
+            margin-bottom: 0px;
+        }
+
+        .p33 {
+            text-align: center;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p34 {
+            text-align: right;
+            padding-right: 9px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p35 {
+            text-align: left;
+            padding-left: 103px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p36 {
+            text-align: left;
+            padding-left: 27px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p37 {
+            text-align: left;
+            padding-left: 47px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p38 {
+            text-align: right;
+            padding-right: 7px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p39 {
+            text-align: left;
+            padding-left: 40px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .td0 {
+            padding: 0px;
+            margin: 0px;
+            width: 111px;
+            vertical-align: bottom;
+        }
+
+        .td1 {
+            padding: 0px;
+            margin: 0px;
+            width: 13px;
+            vertical-align: bottom;
+        }
+
+        .td2 {
+            padding: 0px;
+            margin: 0px;
+            width: 307px;
+            vertical-align: bottom;
+        }
+
+        .td3 {
+            padding: 0px;
+            margin: 0px;
+            width: 62px;
+            vertical-align: bottom;
+        }
+
+        .td4 {
+            padding: 0px;
+            margin: 0px;
+            width: 61px;
+            vertical-align: bottom;
+        }
+
+        .td5 {
+            padding: 0px;
+            margin: 0px;
+            width: 63px;
+            vertical-align: bottom;
+        }
+
+        .td6 {
+            padding: 0px;
+            margin: 0px;
+            width: 142px;
+            vertical-align: bottom;
+        }
+
+        .td7 {
+            padding: 0px;
+            margin: 0px;
+            width: 23px;
+            vertical-align: bottom;
+        }
+
+        .td8 {
+            padding: 0px;
+            margin: 0px;
+            width: 82px;
+            vertical-align: bottom;
+        }
+
+        .td9 {
+            padding: 0px;
+            margin: 0px;
+            width: 41px;
+            vertical-align: bottom;
+        }
+
+        .td10 {
+            padding: 0px;
+            margin: 0px;
+            width: 20px;
+            vertical-align: bottom;
+        }
+
+        .td11 {
+            padding: 0px;
+            margin: 0px;
+            width: 124px;
+            vertical-align: bottom;
+        }
+
+        .td12 {
+            padding: 0px;
+            margin: 0px;
+            width: 18px;
+            vertical-align: bottom;
+        }
+
+        .td13 {
+            padding: 0px;
+            margin: 0px;
+            width: 184px;
+            vertical-align: bottom;
+        }
+
+        .td14 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 63px;
+            vertical-align: bottom;
+        }
+
+        .td15 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 111px;
+            vertical-align: bottom;
+        }
+
+        .td16 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 13px;
+            vertical-align: bottom;
+        }
+
+        .td17 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 18px;
+            vertical-align: bottom;
+        }
+
+        .td18 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 23px;
+            vertical-align: bottom;
+        }
+
+        .td19 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 61px;
+            vertical-align: bottom;
+        }
+
+        .td20 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 82px;
+            vertical-align: bottom;
+        }
+
+        .td21 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 62px;
+            vertical-align: bottom;
+        }
+
+        .td22 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 41px;
+            vertical-align: bottom;
+        }
+
+        .td23 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 20px;
+            vertical-align: bottom;
+        }
+
+        .td24 {
+            border-left: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 110px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td25 {
+            border-right: #bfbfbf 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 114px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td26 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 81px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td27 {
+            border-right: #bfbfbf 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 61px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td28 {
+            border-right: #bfbfbf 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 40px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td29 {
+            border-right: #bfbfbf 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 19px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td30 {
+            border-right: #bfbfbf 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 122px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td31 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 62px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td32 {
+            border-left: #000000 1px solid;
+            border-right: #d9d9d9 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 122px;
+            vertical-align: bottom;
+            background: #d9d9d9;
+        }
+
+        .td33 {
+            padding: 0px;
+            margin: 0px;
+            width: 18px;
+            vertical-align: bottom;
+            background: #d9d9d9;
+        }
+
+        .td34 {
+            border-right: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 22px;
+            vertical-align: bottom;
+            background: #d9d9d9;
+        }
+
+        .td35 {
+            border-right: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 60px;
+            vertical-align: bottom;
+            background: #d9d9d9;
+        }
+
+        .td36 {
+            border-right: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 81px;
+            vertical-align: bottom;
+            background: #d9d9d9;
+        }
+
+        .td37 {
+            border-right: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 122px;
+            vertical-align: bottom;
+        }
+
+        .td38 {
+            border-right: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 124px;
+            vertical-align: bottom;
+        }
+
+        .td39 {
+            border-left: #000000 1px solid;
+            border-bottom: #d9d9d9 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 110px;
+            vertical-align: bottom;
+            background: #d9d9d9;
+        }
+
+        .td40 {
+            border-right: #d9d9d9 1px solid;
+            border-bottom: #d9d9d9 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 12px;
+            vertical-align: bottom;
+            background: #d9d9d9;
+        }
+
+        .td41 {
+            border-bottom: #d9d9d9 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 18px;
+            vertical-align: bottom;
+            background: #d9d9d9;
+        }
+
+        .td42 {
+            border-right: #000000 1px solid;
+            border-bottom: #d9d9d9 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 22px;
+            vertical-align: bottom;
+            background: #d9d9d9;
+        }
+
+        .td43 {
+            border-right: #000000 1px solid;
+            border-bottom: #d9d9d9 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 60px;
+            vertical-align: bottom;
+            background: #d9d9d9;
+        }
+
+        .td44 {
+            border-right: #000000 1px solid;
+            border-bottom: #d9d9d9 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 81px;
+            vertical-align: bottom;
+            background: #d9d9d9;
+        }
+
+        .td45 {
+            border-left: #000000 1px solid;
+            border-right: #d9d9d9 1px solid;
+            border-top: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 122px;
+            vertical-align: bottom;
+            background: #d9d9d9;
+        }
+
+        .td46 {
+            border-top: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 18px;
+            vertical-align: bottom;
+            background: #d9d9d9;
+        }
+
+        .td47 {
+            border-right: #000000 1px solid;
+            border-top: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 22px;
+            vertical-align: bottom;
+            background: #d9d9d9;
+        }
+
+        .td48 {
+            border-right: #000000 1px solid;
+            border-top: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 60px;
+            vertical-align: bottom;
+            background: #d9d9d9;
+        }
+
+        .td49 {
+            border-right: #000000 1px solid;
+            border-top: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 81px;
+            vertical-align: bottom;
+            background: #d9d9d9;
+        }
+
+        .td50 {
+            border-right: #000000 1px solid;
+            border-top: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 61px;
+            vertical-align: bottom;
+        }
+
+        .td51 {
+            border-top: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 41px;
+            vertical-align: bottom;
+        }
+
+        .td52 {
+            border-right: #000000 1px solid;
+            border-top: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 19px;
+            vertical-align: bottom;
+        }
+
+        .td53 {
+            border-right: #000000 1px solid;
+            border-top: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 60px;
+            vertical-align: bottom;
+        }
+
+        .td54 {
+            border-right: #000000 1px solid;
+            border-top: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 62px;
+            vertical-align: bottom;
+        }
+
+        .td55 {
+            border-left: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 141px;
+            vertical-align: bottom;
+            background: #d9d9d9;
+        }
+
+        .td56 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 22px;
+            vertical-align: bottom;
+            background: #d9d9d9;
+        }
+
+        .td57 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 60px;
+            vertical-align: bottom;
+            background: #d9d9d9;
+        }
+
+        .td58 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 81px;
+            vertical-align: bottom;
+            background: #d9d9d9;
+        }
+
+        .td59 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 61px;
+            vertical-align: bottom;
+        }
+
+        .td60 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 19px;
+            vertical-align: bottom;
+        }
+
+        .td61 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 60px;
+            vertical-align: bottom;
+        }
+
+        .td62 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 62px;
+            vertical-align: bottom;
+        }
+
+        .td63 {
+            border-left: #000000 1px solid;
+            border-right: #d9d9d9 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 122px;
+            vertical-align: bottom;
+            background: #d9d9d9;
+        }
+
+        .td64 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 18px;
+            vertical-align: bottom;
+            background: #d9d9d9;
+        }
+
+        .td65 {
+            border-left: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 141px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td66 {
+            border-right: #bfbfbf 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 22px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td67 {
+            border-right: #bfbfbf 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 60px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td68 {
+            border-right: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 81px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td69 {
+            border-right: #bfbfbf 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 61px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td70 {
+            border-right: #bfbfbf 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 40px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td71 {
+            border-right: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 19px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td72 {
+            border-right: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 60px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td73 {
+            border-right: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 62px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td74 {
+            border-left: #000000 1px solid;
+            border-right: #bfbfbf 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 122px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td75 {
+            border-right: #bfbfbf 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 60px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td76 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 19px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td77 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 60px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td78 {
+            border-left: #000000 1px solid;
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 163px;
+            vertical-align: bottom;
+        }
+
+        .td79 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 123px;
+            vertical-align: bottom;
+        }
+
+        .td80 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 12px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td81 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 18px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td82 {
+            border-right: #bfbfbf 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 22px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td83 {
+            border-right: #bfbfbf 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 81px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td84 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 40px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td85 {
+            border-left: #000000 1px solid;
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 122px;
+            vertical-align: bottom;
+        }
+
+        .td86 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 102px;
+            vertical-align: bottom;
+        }
+
+        .td87 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 40px;
+            vertical-align: bottom;
+        }
+
+        .td88 {
+            border-left: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 110px;
+            vertical-align: bottom;
+        }
+
+        .td89 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 12px;
+            vertical-align: bottom;
+        }
+
+        .td90 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 286px;
+            vertical-align: bottom;
+        }
+
+        .td91 {
+            padding: 0px;
+            margin: 0px;
+            width: 248px;
+            vertical-align: bottom;
+        }
+
+        .td92 {
+            padding: 0px;
+            margin: 0px;
+            width: 102px;
+            vertical-align: bottom;
+        }
+
+        .td93 {
+            padding: 0px;
+            margin: 0px;
+            width: 186px;
+            vertical-align: bottom;
+        }
+
+        .td94 {
+            padding: 0px;
+            margin: 0px;
+            width: 46px;
+            vertical-align: bottom;
+        }
+
+        .td95 {
+            padding: 0px;
+            margin: 0px;
+            width: 29px;
+            vertical-align: bottom;
+        }
+
+        .td96 {
+            padding: 0px;
+            margin: 0px;
+            width: 9px;
+            vertical-align: bottom;
+        }
+
+        .td97 {
+            padding: 0px;
+            margin: 0px;
+            width: 26px;
+            vertical-align: bottom;
+        }
+
+        .td98 {
+            padding: 0px;
+            margin: 0px;
+            width: 39px;
+            vertical-align: bottom;
+        }
+
+        .td99 {
+            padding: 0px;
+            margin: 0px;
+            width: 318px;
+            vertical-align: bottom;
+        }
+
+        .td100 {
+            padding: 0px;
+            margin: 0px;
+            width: 104px;
+            vertical-align: bottom;
+        }
+
+        .td101 {
+            border-bottom: #006ab5 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 29px;
+            vertical-align: bottom;
+        }
+
+        .td102 {
+            border-bottom: #006ab5 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 9px;
+            vertical-align: bottom;
+        }
+
+        .td103 {
+            border-bottom: #006ab5 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 26px;
+            vertical-align: bottom;
+        }
+
+        .td104 {
+            border-bottom: #006ab5 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 23px;
+            vertical-align: bottom;
+        }
+
+        .td105 {
+            border-bottom: #006ab5 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 39px;
+            vertical-align: bottom;
+        }
+
+        .td106 {
+            border-right: #006ab5 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 45px;
+            vertical-align: bottom;
+        }
+
+        .td107 {
+            border-right: #006ab5 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 28px;
+            vertical-align: bottom;
+        }
+
+        .td108 {
+            border-right: #006ab5 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 8px;
+            vertical-align: bottom;
+        }
+
+        .td109 {
+            padding: 0px;
+            margin: 0px;
+            width: 110px;
+            vertical-align: bottom;
+        }
+
+        .td110 {
+            padding: 0px;
+            margin: 0px;
+            width: 181px;
+            vertical-align: bottom;
+        }
+
+        .td111 {
+            padding: 0px;
+            margin: 0px;
+            width: 137px;
+            vertical-align: bottom;
+        }
+
+        .td112 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 104px;
+            vertical-align: bottom;
+        }
+
+        .td113 {
+            border-right: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 136px;
+            vertical-align: bottom;
+        }
+
+        .td114 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 185px;
+            vertical-align: bottom;
+            background: #bfbfbf;
+        }
+
+        .td115 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 81px;
+            vertical-align: bottom;
+        }
+
+        .td116 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 103px;
+            vertical-align: bottom;
+        }
+
+        .td117 {
+            padding: 0px;
+            margin: 0px;
+            width: 188px;
+            vertical-align: bottom;
+        }
+
+        .td118 {
+            padding: 0px;
+            margin: 0px;
+            width: 51px;
+            vertical-align: bottom;
+        }
+
+        .td119 {
+            padding: 0px;
+            margin: 0px;
+            width: 31px;
+            vertical-align: bottom;
+        }
+
+        .td120 {
+            padding: 0px;
+            margin: 0px;
+            width: 15px;
+            vertical-align: bottom;
+        }
+
+        .td121 {
+            padding: 0px;
+            margin: 0px;
+            width: 135px;
+            vertical-align: bottom;
+        }
+
+        .td122 {
+            padding: 0px;
+            margin: 0px;
+            width: 49px;
+            vertical-align: bottom;
+        }
+
+        .td123 {
+            padding: 0px;
+            margin: 0px;
+            width: 65px;
+            vertical-align: bottom;
+        }
+
+        .td124 {
+            padding: 0px;
+            margin: 0px;
+            width: 120px;
+            vertical-align: bottom;
+        }
+
+        .td125 {
+            padding: 0px;
+            margin: 0px;
+            width: 68px;
+            vertical-align: bottom;
+        }
+
+        .td126 {
+            padding: 0px;
+            margin: 0px;
+            width: 24px;
+            vertical-align: bottom;
+        }
+
+        .td127 {
+            padding: 0px;
+            margin: 0px;
+            width: 7px;
+            vertical-align: bottom;
+        }
+
+        .td128 {
+            padding: 0px;
+            margin: 0px;
+            width: 114px;
+            vertical-align: bottom;
+        }
+
+        .td129 {
+            padding: 0px;
+            margin: 0px;
+            width: 239px;
+            vertical-align: bottom;
+        }
+
+        .td130 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 7px;
+            vertical-align: bottom;
+        }
+
+        .td131 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 15px;
+            vertical-align: bottom;
+        }
+
+        .td132 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 135px;
+            vertical-align: bottom;
+        }
+
+        .td133 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 49px;
+            vertical-align: bottom;
+        }
+
+        .td134 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 68px;
+            vertical-align: bottom;
+        }
+
+        .td135 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 51px;
+            vertical-align: bottom;
+        }
+
+        .td136 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 24px;
+            vertical-align: bottom;
+        }
+
+        .tr0 {
+            height: 28px;
+        }
+
+        .tr1 {
+            height: 21px;
+        }
+
+        .tr2 {
+            height: 27px;
+        }
+
+        .tr3 {
+            height: 23px;
+        }
+
+        .tr4 {
+            height: 20px;
+        }
+
+        .tr5 {
+            height: 16px;
+        }
+
+        .tr6 {
+            height: 26px;
+        }
+
+        .tr7 {
+            height: 10px;
+        }
+
+        .tr8 {
+            height: 24px;
+        }
+
+        .tr9 {
+            height: 22px;
+        }
+
+        .tr10 {
+            height: 34px;
+        }
+
+        .tr11 {
+            height: 12px;
+        }
+
+        .tr12 {
+            height: 6px;
+        }
+
+        .tr13 {
+            height: 7px;
+        }
+
+        .tr14 {
+            height: 25px;
+        }
+
+        .tr15 {
+            height: 30px;
+        }
+
+        .tr16 {
+            height: 4px;
+        }
+
+        .tr17 {
+            height: 9px;
+        }
+
+        .tr18 {
+            height: 8px;
+        }
+
+        .tr19 {
+            height: 17px;
+        }
+
+        .tr20 {
+            height: 3px;
+        }
+
+        .tr21 {
+            height: 5px;
+        }
+
+        .tr22 {
+            height: 41px;
+        }
+
+        .tr23 {
+            height: 19px;
+        }
+
+        .tr24 {
+            height: 15px;
+        }
+
+        .tr25 {
+            height: 2px;
+        }
+
+        .t0 {
+            width: 679px;
+            font: 15px 'Times New Roman';
+        }
+
+        .t1 {
+            width: 676px;
+            margin-left: 3px;
+            margin-top: 9px;
+            font: 16px 'Times New Roman';
+        }
+
+        .t2 {
+            width: 534px;
+            font: 16px 'Times New Roman';
+        }
+    </style>
+</HEAD>
+
+<BODY>
+    <div class="box">
+        <DIV id="page_1">
+            <DIV id="p1dimg1">
+                <img width="250" src="~/Content/Companylogo.jpg" />
+            </DIV>
+
+            <DIV class="dclr"></DIV>
+            <DIV id="id_1">
+                <P class="p0 ft0">SBIT Training Academy (L02428)</P>
+                <P class="p1 ft1">No.18A, Jalan 20/16A, Taman Paramount, 46300 Petaling Jaya, Selangor.</P>
+            </DIV>
+            <DIV id="id_2">
+                <DIV id="id_2_1">
+                    <P class="p0 ft2">Student Result Slip</P>
+                    <P class="p2 ft3">学生成绩单</P>
+                </DIV>
+                <DIV id="id_2_2">
+                    <P class="p3 ft0">Score (<SPAN class="ft4">成绩</SPAN>)</P>
+                    <P class="p4 ft0">-</P>
+                </DIV>
+            </DIV>
+            <DIV id="id_3">
+                <TABLE cellpadding=0 cellspacing=0 class="t0">
+                    <TR>
+                        <TD class="tr0 td0"><P class="p5 ft6">Course (<SPAN class="ft5">课程</SPAN>)</P></TD>
+                        <TD class="tr0 td1"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD colspan=7 class="tr0 td2"><P class="p7 ft6">: @Html.DisplayFor(model => Model.Course_Module.Course.Name, new { htmlAttribute = new { @class = "form-control" } }) </P></TD>
+                        <TD class="tr0 td3"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr0 td4"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr0 td3"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr0 td5"><P class="p6 ft7">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD colspan=3 class="tr1 td6"><P class="p5 ft6">Student (<SPAN class="ft5">学生</SPAN>) :@Html.DisplayFor(model => Model.ClassStudent.Student.Name, new { htmlAttribute = new { @class = "form-control" } })</P></TD>
+                        <TD class="tr1 td7"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr1 td4"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr1 td8"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr1 td3"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr1 td9"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr1 td10"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr1 td3"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr1 td4"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr1 td3"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr1 td5"><P class="p6 ft7">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD colspan=2 class="tr2 td11"><P class="p5 ft6">Intake (<SPAN class="ft5">入学月份</SPAN>)</P></TD>
+                        <TD class="tr2 td12"><P class="p7 ft6">: @Html.DisplayFor(model => Model.ClassStudent.Student.Intake.Year.Year1, new { htmlAttribute = new { @class = "form-control" } })</P></TD>
+                        <TD class="tr2 td7"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr2 td4"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr2 td8"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr2 td3"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD colspan=4 class="tr2 td13"><P class="p8 ft6">Start Date (<SPAN class="ft5">开始日期</SPAN>)</P></TD>
+                        <TD class="tr2 td3"><P class="p9 ft6">: @Html.TextBox("sdada")</P></TD>
+                        <TD class="tr2 td5"><P class="p6 ft7">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD class="tr3 td0"><P class="p5 ft6">Student ID (<SPAN class="ft5">学号</SPAN>)</P></TD>
+                        <TD class="tr3 td1"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td12"><P class="p7 ft6">:@Html.DisplayFor(model => Model.ClassStudent.Student.StudentId, new { htmlAttribute = new { @class = "form-control" } })</P></TD>
+                        <TD class="tr3 td7"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td4"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td8"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td3"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD colspan=4 class="tr3 td13"><P class="p8 ft6">End Date (<SPAN class="ft5">结束日期</SPAN>)</P></TD>
+                        <TD class="tr3 td3"><P class="p9 ft6">:</P></TD>
+                        <TD class="tr3 td5"><P class="p6 ft7">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD class="tr3 td0"><P class="p5 ft6">Trainer (<SPAN class="ft5">导师</SPAN>)</P></TD>
+                        <TD class="tr3 td1"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td12"><P class="p7 ft6">:@Html.DisplayFor(model => Model.Course_Module.Trainer.Name, new { htmlAttribute = new { @class = "form-control" } })</P></TD>
+                        <TD class="tr3 td7"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td4"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td8"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td3"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD colspan=4 class="tr3 td13"><P class="p8 ft6">Subject Code (<SPAN class="ft5">科目码</SPAN>)</P></TD>
+                        <TD class="tr3 td3"><P class="p9 ft6">:@Html.DisplayFor(model => Model.Course_Module.Module.ModuleCode, new { htmlAttribute = new { @class = "form-control" } })</P></TD>
+                        <TD class="tr3 td5"><P class="p6 ft7">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD class="tr4 td0"><P class="p5 ft6">Subject</P></TD>
+                        <TD class="tr4 td1"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr4 td12"><P class="p7 ft6">:@Html.DisplayFor(model => Model.Course_Module.Module.Name , new { htmlAttribute = new { @class = "form-control" } })</P></TD>
+                        <TD class="tr4 td7"><P class="p10 ft6">-</P></TD>
+                        <TD class="tr4 td4"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr4 td8"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr4 td3"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr4 td9"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr4 td10"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr4 td3"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr4 td4"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr4 td3"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr4 td5"><P class="p6 ft7">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD class="tr5 td0"><P class="p5 ft5">科目</P></TD>
+                        <TD class="tr5 td1"><P class="p6 ft8">&nbsp;</P></TD>
+                        <TD class="tr5 td12"><P class="p6 ft8">&nbsp;</P></TD>
+                        <TD class="tr5 td7"><P class="p6 ft8">&nbsp;</P></TD>
+                        <TD class="tr5 td4"><P class="p6 ft8">&nbsp;</P></TD>
+                        <TD class="tr5 td8"><P class="p6 ft8">&nbsp;</P></TD>
+                        <TD class="tr5 td3"><P class="p6 ft8">&nbsp;</P></TD>
+                        <TD class="tr5 td9"><P class="p6 ft8">&nbsp;</P></TD>
+                        <TD class="tr5 td10"><P class="p6 ft8">&nbsp;</P></TD>
+                        <TD class="tr5 td3"><P class="p6 ft8">&nbsp;</P></TD>
+                        <TD class="tr5 td4"><P class="p6 ft8">&nbsp;</P></TD>
+                        <TD class="tr5 td3"><P class="p6 ft8">&nbsp;</P></TD>
+                        <TD rowspan=2 class="tr6 td14"><P class="p11 ft9">Pass</P></TD>
+                    </TR>
+                    <TR>
+                        <TD class="tr7 td15"><P class="p6 ft10">&nbsp;</P></TD>
+                        <TD class="tr7 td16"><P class="p6 ft10">&nbsp;</P></TD>
+                        <TD class="tr7 td17"><P class="p6 ft10">&nbsp;</P></TD>
+                        <TD class="tr7 td18"><P class="p6 ft10">&nbsp;</P></TD>
+                        <TD class="tr7 td19"><P class="p6 ft10">&nbsp;</P></TD>
+                        <TD class="tr7 td20"><P class="p6 ft10">&nbsp;</P></TD>
+                        <TD class="tr7 td21"><P class="p6 ft10">&nbsp;</P></TD>
+                        <TD class="tr7 td22"><P class="p6 ft10">&nbsp;</P></TD>
+                        <TD class="tr7 td23"><P class="p6 ft10">&nbsp;</P></TD>
+                        <TD class="tr7 td21"><P class="p6 ft10">&nbsp;</P></TD>
+                        <TD class="tr7 td19"><P class="p6 ft10">&nbsp;</P></TD>
+                        <TD class="tr7 td21"><P class="p6 ft10">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD class="tr3 td24"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD colspan=4 class="tr3 td25"><P class="p5 ft12">TEST (<SPAN class="ft11">测验</SPAN>)</P></TD>
+                        <TD class="tr3 td26"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td27"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td28"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td29"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD colspan=2 class="tr3 td30"><P class="p12 ft14">Score (<SPAN class="ft13">成绩</SPAN>)</P></TD>
+                        <TD class="tr3 td27"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td31"><P class="p6 ft7">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD colspan=2 class="tr8 td32"><P class="p13 ft12">Final Test</P></TD>
+                        <TD class="tr8 td33"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td34"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td35"><P class="p14 ft12">Pass</P></TD>
+                        <TD class="tr8 td36"><P class="p15 ft14">Full Mark</P></TD>
+                        <TD colspan=3 class="tr8 td37"><P class="p16 ft14">1st Test</P></TD>
+                        <TD colspan=2 class="tr8 td37"><P class="p15 ft14">First Resit</P></TD>
+                        <TD colspan=2 class="tr8 td38"><P class="p16 ft14">2nd Resit</P></TD>
+                    </TR>
+                    <TR>
+                        <TD class="tr1 td39"><P class="p17 ft13"><SPAN class="ft15">(</SPAN>期末考<SPAN class="ft15">)</SPAN></P></TD>
+                        <TD class="tr1 td40"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr1 td41"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr1 td42"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr1 td43"><P class="p16 ft15">(<SPAN class="ft13">及格</SPAN>)</P></TD>
+                        <TD class="tr1 td44"><P class="p15 ft15">(<SPAN class="ft13">满分</SPAN>)</P></TD>
+                        <TD colspan=3 class="tr9 td37"><P class="p15 ft13"><SPAN class="ft15">(</SPAN>第一次测试<SPAN class="ft15">)</SPAN></P></TD>
+                        <TD colspan=2 class="tr9 td37"><P class="p15 ft13"><SPAN class="ft15">(</SPAN>第一次重考<SPAN class="ft15">)</SPAN></P></TD>
+                        <TD colspan=2 class="tr9 td38"><P class="p16 ft13"><SPAN class="ft15">(</SPAN>第二次重考<SPAN class="ft15">)</SPAN></P></TD>
+                    </TR>
+                    <TR>
+                        <TD colspan=2 class="tr3 td45"><P class="p5 ft6">Written Test (<SPAN class="ft5">笔试</SPAN>)</P></TD>
+                        <TD class="tr3 td46"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td47"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td48"><P class="p16 ft6">10%</P></TD>
+                        <TD class="tr3 td49"><P class="p15 ft6">20%</P></TD>
+                        <TD class="tr3 td50"><P class="p6 ft7">122%</P></TD>
+                        <TD class="tr3 td51"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td52"><P class="p6 ft7">1%</P></TD>
+                        <TD class="tr3 td50"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td53"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td50"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td54"><P class="p6 ft7">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD colspan=3 class="tr9 td55"><P class="p5 ft6">Oral Test (<SPAN class="ft5">口语测试</SPAN>)</P></TD>
+                        <TD class="tr9 td56"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr9 td57"><P class="p16 ft6">10%</P></TD>
+                        <TD class="tr9 td58"><P class="p15 ft6">20%</P></TD>
+                        <TD class="tr9 td59"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr9 td22"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr9 td60"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr9 td59"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr9 td61"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr9 td59"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr9 td62"><P class="p6 ft7">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD colspan=2 class="tr3 td63"><P class="p5 ft6">Project (<SPAN class="ft5">研究项目</SPAN>)</P></TD>
+                        <TD class="tr3 td64"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td56"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td57"><P class="p16 ft6">30%</P></TD>
+                        <TD class="tr3 td58"><P class="p15 ft6">60%</P></TD>
+                        <TD class="tr3 td59"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td22"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td60"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td59"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td61"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td59"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td62"><P class="p6 ft7">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD colspan=3 class="tr10 td65"><P class="p5 ft14">Total Result (<SPAN class="ft13">总结果</SPAN>)</P></TD>
+                        <TD class="tr10 td66"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr10 td67"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr10 td68"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr10 td69"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr10 td70"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr10 td71"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr10 td69"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr10 td72"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr10 td69"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr10 td73"><P class="p6 ft7">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD colspan=2 class="tr11 td74"><P class="p6 ft16">&nbsp;</P></TD>
+                        <TD colspan=2 class="tr11 td28"><P class="p6 ft16">&nbsp;</P></TD>
+                        <TD class="tr11 td75"><P class="p6 ft16">&nbsp;</P></TD>
+                        <TD class="tr11 td26"><P class="p6 ft16">&nbsp;</P></TD>
+                        <TD class="tr11 td27"><P class="p6 ft16">&nbsp;</P></TD>
+                        <TD class="tr11 td28"><P class="p6 ft16">&nbsp;</P></TD>
+                        <TD class="tr11 td76"><P class="p6 ft16">&nbsp;</P></TD>
+                        <TD class="tr11 td27"><P class="p6 ft16">&nbsp;</P></TD>
+                        <TD class="tr11 td77"><P class="p6 ft16">&nbsp;</P></TD>
+                        <TD class="tr11 td27"><P class="p6 ft16">&nbsp;</P></TD>
+                        <TD class="tr11 td31"><P class="p6 ft16">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD colspan=4 class="tr3 td78"><P class="p5 ft6">Practical Test (<SPAN class="ft5">实践测试</SPAN>)</P></TD>
+                        <TD class="tr3 td19"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td20"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td21"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD colspan=3 class="tr3 td79"><P class="p18 ft6">Competent</P></TD>
+                        <TD class="tr3 td19"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td21"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td62"><P class="p6 ft7">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD class="tr12 td15"><P class="p6 ft17">&nbsp;</P></TD>
+                        <TD class="tr12 td16"><P class="p6 ft17">&nbsp;</P></TD>
+                        <TD class="tr12 td17"><P class="p6 ft17">&nbsp;</P></TD>
+                        <TD class="tr12 td18"><P class="p6 ft17">&nbsp;</P></TD>
+                        <TD class="tr12 td19"><P class="p6 ft17">&nbsp;</P></TD>
+                        <TD class="tr12 td20"><P class="p6 ft17">&nbsp;</P></TD>
+                        <TD class="tr12 td21"><P class="p6 ft17">&nbsp;</P></TD>
+                        <TD class="tr12 td22"><P class="p6 ft17">&nbsp;</P></TD>
+                        <TD class="tr13 td10"><P class="p6 ft18">&nbsp;</P></TD>
+                        <TD class="tr13 td3"><P class="p6 ft18">&nbsp;</P></TD>
+                        <TD class="tr13 td4"><P class="p6 ft18">&nbsp;</P></TD>
+                        <TD class="tr13 td3"><P class="p6 ft18">&nbsp;</P></TD>
+                        <TD class="tr13 td5"><P class="p6 ft18">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD class="tr3 td24"><P class="p19 ft12">Grade (<SPAN class="ft11">级别</SPAN>)</P></TD>
+                        <TD class="tr3 td80"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td81"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td82"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td75"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td83"><P class="p15 ft14">Score (<SPAN class="ft13">成绩</SPAN>)</P></TD>
+                        <TD class="tr3 td27"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td84"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td10"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td3"><P class="p20 ft6">Signed by</P></TD>
+                        <TD class="tr8 td4"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td3"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td5"><P class="p6 ft7">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD colspan=2 class="tr3 td85"><P class="p5 ft6">Distinction (<SPAN class="ft5">特优</SPAN>)</P></TD>
+                        <TD colspan=3 class="tr3 td86"><P class="p20 ft6">90% - 100%</P></TD>
+                        <TD class="tr3 td20"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td21"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td87"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td10"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td3"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td4"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td3"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td5"><P class="p6 ft7">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD class="tr9 td88"><P class="p5 ft6">Merit (<SPAN class="ft5">优越</SPAN>)</P></TD>
+                        <TD class="tr9 td89"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD colspan=3 class="tr9 td86"><P class="p20 ft6">70% - 89%</P></TD>
+                        <TD class="tr9 td20"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr9 td21"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr9 td87"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td10"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td3"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td4"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td3"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td5"><P class="p6 ft7">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD class="tr3 td88"><P class="p5 ft6">Pass (<SPAN class="ft5">及格</SPAN>)</P></TD>
+                        <TD class="tr3 td89"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD colspan=3 class="tr3 td86"><P class="p20 ft6">50% - 69%</P></TD>
+                        <TD class="tr3 td20"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td21"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr3 td87"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td10"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td3"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td4"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td3"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td5"><P class="p6 ft7">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD class="tr8 td88"><P class="p5 ft6">Fail (<SPAN class="ft5">不及格</SPAN>)</P></TD>
+                        <TD class="tr8 td89"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD colspan=3 class="tr8 td86"><P class="p20 ft6">0% - 49%</P></TD>
+                        <TD class="tr8 td20"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td21"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td87"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr14 td10"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td21"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td19"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td21"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td14"><P class="p6 ft7">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD class="tr1 td88"><P class="p5 ft6">Pass* (<SPAN class="ft5">及格</SPAN>*)</P></TD>
+                        <TD class="tr1 td89"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD colspan=6 class="tr1 td90"><P class="p20 ft6">Pass not at 1st test (<SPAN class="ft5">及格不在第一次测试</SPAN>)</P></TD>
+                        <TD class="tr9 td10"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD colspan=4 class="tr9 td91"><P class="p20 ft12">Internal Assessor (<SPAN class="ft11">内部审核员</SPAN>)</P></TD>
+                    </TR>
+                    <TR>
+                        <TD rowspan=2 class="tr15 td0"><P class="p5 ft19">Prepared by</P></TD>
+                        <TD rowspan=2 class="tr15 td1"><P class="p21 ft6">:</P></TD>
+                        <TD colspan=3 rowspan=2 class="tr15 td92"><P class="p20 ft6">JcLim</P></TD>
+                        <TD class="tr6 td8"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr6 td3"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr6 td9"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr6 td10"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr6 td3"><P class="p20 ft6">Name :</P></TD>
+                        <TD colspan=3 class="tr6 td93"><P class="p20 ft20">David Tan</P></TD>
+                    </TR>
+                    <TR>
+                        <TD class="tr16 td8"><P class="p6 ft21">&nbsp;</P></TD>
+                        <TD class="tr16 td3"><P class="p6 ft21">&nbsp;</P></TD>
+                        <TD class="tr16 td9"><P class="p6 ft21">&nbsp;</P></TD>
+                        <TD class="tr16 td10"><P class="p6 ft21">&nbsp;</P></TD>
+                        <TD class="tr16 td3"><P class="p6 ft21">&nbsp;</P></TD>
+                        <TD class="tr16 td4"><P class="p6 ft21">&nbsp;</P></TD>
+                        <TD class="tr16 td3"><P class="p6 ft21">&nbsp;</P></TD>
+                        <TD class="tr16 td5"><P class="p6 ft21">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD class="tr1 td0"><P class="p5 ft19">Date</P></TD>
+                        <TD class="tr1 td1"><P class="p21 ft6">:</P></TD>
+                        <TD colspan=3 class="tr1 td92"><P class="p20 ft6"><NOBR>00-Jan-1900</NOBR></P></TD>
+                        <TD class="tr1 td8"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr1 td3"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr1 td9"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr1 td10"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr1 td3"><P class="p20 ft6">Date :</P></TD>
+                        <TD colspan=3 class="tr1 td93"><P class="p20 ft6"><NOBR>00-Jan-1900</NOBR></P></TD>
+                    </TR>
+                </TABLE>
+                <P class="p22 ft20"><SPAN class="ft22"></SPAN><SPAN class="ft23">Please cut the following acknowledgement slip and return it to SBIT (</SPAN><SPAN class="ft24">请把</SPAN></P>
+                <P class="p23 ft24">下面的确认单归还 <SPAN class="ft20">SBIT)</SPAN></P>
+                <TABLE cellpadding=0 cellspacing=0 class="t1">
+                    <TR>
+                        <TD class="tr0 td94"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr0 td95"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr0 td96"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr0 td97"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr0 td7"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr0 td98"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD colspan=2 class="tr0 td99"><P class="p24 ft0">Acknowledgement Result Slip</P></TD>
+                        <TD class="tr0 td8"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr0 td100"><P class="p6 ft7">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD class="tr17 td94"><P class="p6 ft25">&nbsp;</P></TD>
+                        <TD class="tr18 td101"><P class="p6 ft26">&nbsp;</P></TD>
+                        <TD class="tr18 td102"><P class="p6 ft26">&nbsp;</P></TD>
+                        <TD class="tr18 td103"><P class="p6 ft26">&nbsp;</P></TD>
+                        <TD class="tr18 td104"><P class="p6 ft26">&nbsp;</P></TD>
+                        <TD class="tr18 td105"><P class="p6 ft26">&nbsp;</P></TD>
+                        <TD colspan=2 rowspan=3 class="tr19 td99"><P class="p25 ft11">确认成绩单</P></TD>
+                        <TD class="tr17 td8"><P class="p6 ft25">&nbsp;</P></TD>
+                        <TD class="tr17 td100"><P class="p6 ft25">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD class="tr20 td94"><P class="p6 ft27">&nbsp;</P></TD>
+                        <TD class="tr20 td95"><P class="p6 ft27">&nbsp;</P></TD>
+                        <TD class="tr20 td96"><P class="p6 ft27">&nbsp;</P></TD>
+                        <TD class="tr20 td97"><P class="p6 ft27">&nbsp;</P></TD>
+                        <TD class="tr20 td7"><P class="p6 ft27">&nbsp;</P></TD>
+                        <TD class="tr20 td98"><P class="p6 ft27">&nbsp;</P></TD>
+                        <TD class="tr20 td8"><P class="p6 ft27">&nbsp;</P></TD>
+                        <TD class="tr20 td100"><P class="p6 ft27">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD class="tr21 td106"><P class="p6 ft28">&nbsp;</P></TD>
+                        <TD class="tr21 td107"><P class="p6 ft28">&nbsp;</P></TD>
+                        <TD class="tr21 td108"><P class="p6 ft28">&nbsp;</P></TD>
+                        <TD class="tr21 td97"><P class="p6 ft28">&nbsp;</P></TD>
+                        <TD class="tr21 td7"><P class="p6 ft28">&nbsp;</P></TD>
+                        <TD class="tr21 td98"><P class="p6 ft28">&nbsp;</P></TD>
+                        <TD class="tr21 td8"><P class="p6 ft28">&nbsp;</P></TD>
+                        <TD class="tr21 td100"><P class="p6 ft28">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD colspan=4 rowspan=2 class="tr22 td109"><P class="p6 ft20">Student Name</P></TD>
+                        <TD rowspan=2 class="tr22 td7"><P class="p26 ft20">:</P></TD>
+                        <TD rowspan=2 class="tr22 td98"><P class="p27 ft20">0</P></TD>
+                        <TD class="tr19 td110"><P class="p6 ft29">&nbsp;</P></TD>
+                        <TD class="tr19 td111"><P class="p6 ft29">&nbsp;</P></TD>
+                        <TD class="tr5 td20"><P class="p6 ft8">&nbsp;</P></TD>
+                        <TD class="tr5 td112"><P class="p6 ft8">&nbsp;</P></TD>
+                    </TR>
+                    <TR>
+                        <TD class="tr8 td110"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD class="tr8 td113"><P class="p6 ft7">&nbsp;</P></TD>
+                        <TD colspan=2 class="tr3 td114"><P class="p28 ft0">Score</P></TD>
+                    </TR>
+                    <TR>
+                        <TD colspan=4 class="tr3 td109"><P class="p6 ft20">Student ID</P></TD>
+                        <TD class="tr3 td7"><P class="p26 ft20">:</P></TD>
+                        <TD class="tr3 td98"><P class="p27 ft20">0</P></TD>
+                        <TD class="tr3 td110"><P class="p28 ft20">Subject Code</P></TD>
+                        <TD class="tr3 td113"><P class="p29 ft20">: 0</P></TD>
+                        <TD class="tr9 td115"><P class="p30 ft20">0.0%</P></TD>
+                        <TD class="tr9 td116"><P class="p6 ft7">&nbsp;</P></TD>
+                    </TR>
+                </TABLE>
+                <P class="p31 ft20">Signed by (<SPAN class="ft24">签名</SPAN>)</P>
+                <P class="p32 ft20">Name (<SPAN class="ft24">姓名</SPAN>) :</P>
+            </DIV>
+            <DIV id="id_4">
+                <DIV id="id_4_1">
+                    <TABLE cellpadding=0 cellspacing=0 class="t2">
+                        <TR>
+                            <TD colspan=2 class="tr23 td117">
+                                <P class="p6 ft20">
+                                    Relationship (<SPAN class="ft24">关系</SPAN>) :
+                                </P>
+                            </TD>
+                            <TD rowspan=2 class="tr10 td118">
+                                <P class="p6 ft20">Father (</P>
+                            </TD>
+                            <TD colspan=2 class="tr23 td119">
+                                <P class="p33 ft30">父亲</P>
+                            </TD>
+                            <TD rowspan=2 class="tr10 td120">
+                                <P class="p34 ft20">)</P>
+                            </TD>
+                            <TD class="tr23 td121">
+                                <P class="p35 ft31">母亲</P>
+                            </TD>
+                            <TD class="tr23 td122">
+                                <P class="p6 ft7">&nbsp;</P>
+                            </TD>
+                            <TD class="tr23 td123">
+                                <P class="p36 ft31">其他</P>
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD class="tr24 td124">
+                                <P class="p6 ft32">&nbsp;</P>
+                            </TD>
+                            <TD class="tr24 td125">
+                                <P class="p6 ft32">&nbsp;</P>
+                            </TD>
+                            <TD class="tr24 td126">
+                                <P class="p6 ft32">&nbsp;</P>
+                            </TD>
+                            <TD class="tr24 td127">
+                                <P class="p6 ft32">&nbsp;</P>
+                            </TD>
+                            <TD class="tr24 td121">
+                                <P class="p37 ft33">Mother (</P>
+                            </TD>
+                            <TD colspan=2 class="tr24 td128">
+                                <P class="p6 ft33">) Other ( )</P>
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD colspan=3 class="tr14 td129">
+                                <P class="p6 ft20">
+                                    Mobile Phone No. (<SPAN class="ft24">手机号码</SPAN>)
+                                </P>
+                            </TD>
+                            <TD class="tr14 td126">
+                                <P class="p38 ft20">:</P>
+                            </TD>
+                            <TD class="tr14 td127">
+                                <P class="p6 ft7">&nbsp;</P>
+                            </TD>
+                            <TD class="tr14 td120">
+                                <P class="p6 ft7">&nbsp;</P>
+                            </TD>
+                            <TD class="tr14 td121">
+                                <P class="p6 ft7">&nbsp;</P>
+                            </TD>
+                            <TD class="tr14 td122">
+                                <P class="p6 ft7">&nbsp;</P>
+                            </TD>
+                            <TD class="tr14 td123">
+                                <P class="p6 ft7">&nbsp;</P>
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD colspan=2 rowspan=2 class="tr7 td117">
+                                <P class="p39 ft35">日期） <SPAN class="ft34">:</SPAN></P>
+                            </TD>
+                            <TD class="tr20 td118">
+                                <P class="p6 ft27">&nbsp;</P>
+                            </TD>
+                            <TD class="tr20 td126">
+                                <P class="p6 ft27">&nbsp;</P>
+                            </TD>
+                            <TD class="tr25 td130">
+                                <P class="p6 ft36">&nbsp;</P>
+                            </TD>
+                            <TD class="tr25 td131">
+                                <P class="p6 ft36">&nbsp;</P>
+                            </TD>
+                            <TD class="tr25 td132">
+                                <P class="p6 ft36">&nbsp;</P>
+                            </TD>
+                            <TD class="tr25 td133">
+                                <P class="p6 ft36">&nbsp;</P>
+                            </TD>
+                            <TD class="tr20 td123">
+                                <P class="p6 ft27">&nbsp;</P>
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD class="tr13 td118">
+                                <P class="p6 ft18">&nbsp;</P>
+                            </TD>
+                            <TD class="tr13 td126">
+                                <P class="p6 ft18">&nbsp;</P>
+                            </TD>
+                            <TD class="tr13 td127">
+                                <P class="p6 ft18">&nbsp;</P>
+                            </TD>
+                            <TD class="tr13 td120">
+                                <P class="p6 ft18">&nbsp;</P>
+                            </TD>
+                            <TD class="tr13 td121">
+                                <P class="p6 ft18">&nbsp;</P>
+                            </TD>
+                            <TD class="tr13 td122">
+                                <P class="p6 ft18">&nbsp;</P>
+                            </TD>
+                            <TD class="tr13 td123">
+                                <P class="p6 ft18">&nbsp;</P>
+                            </TD>
+                        </TR>
+                        <TR>
+                            <TD class="tr19 td124">
+                                <P class="p6 ft37">Date (</P>
+                            </TD>
+                            <TD class="tr5 td134">
+                                <P class="p6 ft8">&nbsp;</P>
+                            </TD>
+                            <TD class="tr5 td135">
+                                <P class="p6 ft8">&nbsp;</P>
+                            </TD>
+                            <TD class="tr5 td136">
+                                <P class="p6 ft8">&nbsp;</P>
+                            </TD>
+                            <TD class="tr5 td130">
+                                <P class="p6 ft8">&nbsp;</P>
+                            </TD>
+                            <TD class="tr5 td131">
+                                <P class="p6 ft8">&nbsp;</P>
+                            </TD>
+                            <TD class="tr19 td121">
+                                <P class="p6 ft29">&nbsp;</P>
+                            </TD>
+                            <TD class="tr19 td122">
+                                <P class="p6 ft29">&nbsp;</P>
+                            </TD>
+                            <TD class="tr19 td123">
+                                <P class="p6 ft29">&nbsp;</P>
+                            </TD>
+                        </TR>
+                    </TABLE>
+                </DIV>
+            </DIV>
+        </DIV>
+    </div>
+</BODY>
+</HTML>
+
+<script type="text/javascript">
+        function print_page() {
+            var ButtonControl = document.getElementById("btnprint");
+            ButtonControl.style.visibility = "hidden";
+            window.print();
+            ButtonControl.style.visibility = "visible";
+        }
+</script>
+
+<p>
+    <input type="button" id="btnprint" value="Print" onclick="print_page()" />
+</p>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
