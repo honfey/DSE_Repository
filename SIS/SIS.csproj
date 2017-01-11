@@ -256,6 +256,7 @@
     <Compile Include="Models\Nationality.cs">
       <DependentUpon>SIS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Package.cs" />
     <Compile Include="Models\Package_Course.cs">
       <DependentUpon>SIS.tt</DependentUpon>
     </Compile>
@@ -302,6 +303,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-SIS-20161025115810.mdf" />
+    <Content Include="App_Data\aspnet-SIS-20161025115810_log.ldf">
+      <DependentUpon>aspnet-SIS-20161025115810.mdf</DependentUpon>
+    </Content>
     <Content Include="Client Scripts\mvcfoolproof.unobtrusive.js" />
     <Content Include="Client Scripts\mvcfoolproof.unobtrusive.min.js" />
     <Content Include="Client Scripts\MvcFoolproofJQueryValidation.js" />
@@ -1257,7 +1262,6 @@
     <Content Include="Views\ModuleStandards\ShowStandard.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="UploadedFiles\UploadedLabs\Lab1\" />
     <Folder Include="Views\Account\UploadedFiles\UploadedLabs\" />
   </ItemGroup>
