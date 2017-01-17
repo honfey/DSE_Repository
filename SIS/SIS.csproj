@@ -764,6 +764,7 @@
     <Content Include="Content\themes\CustomTheme\js\custom.min.js" />
     <Content Include="Database\Joshua_connection.txt" />
     <Content Include="Database\Login_data.sql" />
+    <Content Include="Database\SIS_Data.sql" />
     <Content Include="Database\SIS_Schema.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Content\bootstrap\fonts\fontawesome-webfont.svg" />
