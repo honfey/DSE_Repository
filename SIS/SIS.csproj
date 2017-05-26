@@ -762,6 +762,7 @@
     <Content Include="Content\themes\CustomTheme\css\custom.min.css" />
     <Content Include="Content\themes\CustomTheme\js\custom.js" />
     <Content Include="Content\themes\CustomTheme\js\custom.min.js" />
+    <Content Include="Database\Somee.txt" />
     <Content Include="Database\Joshua_connection.txt" />
     <Content Include="Database\Login_data.sql" />
     <Content Include="Database\SIS_Data.sql" />

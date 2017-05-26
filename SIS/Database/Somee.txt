@@ -1,0 +1,6 @@
+﻿workstation id=SISdatabase.mssql.somee.com;packet size=4096;user id=honfey_SQLLogin_1;pwd=jio7c125nb;data source=SISdatabase.mssql.somee.com;persist security info=False;initial catalog=SISdatabase
+
+<connectionStrings>
+    <add name="DefaultConnection" connectionString="workstation id=SISdatabase.mssql.somee.com;packet size=4096;user id=honfey_SQLLogin_1;pwd=jio7c125nb;data source=SISdatabase.mssql.somee.com;persist security info=False;initial catalog=SISdatabase" providerName="System.Data.SqlClient" />
+    <add name="SISEntities" connectionString="metadata=res://*/Models.SIS.csdl|res://*/Models.SIS.ssdl|res://*/Models.SIS.msl;provider=System.Data.SqlClient;provider connection string=&quot;workstation id=SISdatabase.mssql.somee.com;packet size=4096;user id=honfey_SQLLogin_1;pwd=jio7c125nb;data source=SISdatabase.mssql.somee.com;persist security info=False;initial catalog=SISdatabase&quot;" providerName="System.Data.EntityClient" />
+</connectionStrings>
